@@ -1,0 +1,18 @@
+﻿@model ObjectManagementSystem.Models.Entity.CATEGORY_TABLE
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Add Category</title>
+</head>
+
+<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+    <div>
+        <label style="margin-top: 10px"> &nbsp; Category Name</label>
+        <input class="form-control" style="margin-top:20px" onkeypress="return isNumericKey(event)" type="text" name="NAME" maxlength="25" placeholder="Category Name" required />
+    </div>
+    <div style="margin-top:20px">
+        <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Category</button>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+﻿@model ObjectManagementSystem.Models.Entity.OBJECT_TABLE
+@{
+    ViewBag.Title = "GetObject";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Update Object</title>
+</head>
+
+<!--1-Which action 2-Which Controller 3-When will be on action-->
+@using (Html.BeginForm("UpdateObject", "Object", FormMethod.Post))
+{
+<div class="form-group">
+    <label>ID</label>
+    @Html.TextBoxFor(item => item.ID, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Object Name</label>
+    @Html.TextBoxFor(item => item.NAME, new { @class = "form-control", @required = "required", @maxlength = "30", @placeholder = "Name" })
+    <br />
+    <label>Category</label>
+    @Html.DropDownListFor(category => category.CATEGORY_TABLE.ID, (List<SelectListItem>)ViewBag.categoryItem, new { @class = "form-control" })
+    <br />
+    <label>Detail</label>
+    @Html.TextAreaFor(item => item.DETAIL, new { @class = "form-control", @required = "required", @maxlength = "500", @placeholder = "Detail", @id = "myTextArea" })
+</div>
+    <div>
+        <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>
+    </div>
+}
+
+
+
+

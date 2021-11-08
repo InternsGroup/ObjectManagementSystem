@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "NewMessage";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<head>
+    <title>New Message</title>
+</head>
+<h3>New Message</h3>
+<div class="container">
+    <form class="form-group" method="post">
+        <b>Receiver Username</b>
+        <input type="text" name="RECEIVER" maxlength="20" required>
+
+        <b>Topic</b>
+        <input type="text" name="TOPIC" maxlength="50" required>
+
+        <b>Message Content</b>
+        <textarea name="MESSAGECONTENT" style="height:200px" required></textarea>
+
+        <button class="btn btn-warning">Send</button>
+    </form>
+</div>
+
+
+

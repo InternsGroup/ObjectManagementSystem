@@ -1,0 +1,33 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@model List<MESSAGE_TABLE>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<head>
+    <title>My Messages</title>
+</head>
+
+<h3>My Messages</h3>
+<table class="table table-bordered" style="table-layout: fixed; background-color:rgb(242,242,242)">
+    <tr>
+        <th>Sender</th>
+        <th>Topic</th>
+        <th>Content</th>
+        <th>Date</th>
+    </tr>
+    @foreach (var message in Model)
+    {
+        <tr>
+            <td>@message.SENDER</td>
+            <td>@message.TOPIC</td>
+            <td>@message.MESSAGECONTENT</td>
+            <td>@message.DATE</td>
+        </tr>
+    }
+</table>
+
+
+
+

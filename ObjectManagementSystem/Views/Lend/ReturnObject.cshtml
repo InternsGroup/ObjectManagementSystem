@@ -1,0 +1,44 @@
+﻿@model ObjectManagementSystem.Models.Entity.ACTION_TABLE
+
+@{
+    ViewBag.Title = "ReturnObject";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Return Object</title>
+</head>
+
+<h2>Return Object</h2>
+
+@using (Html.BeginForm("UpdateReturnObject", "Lend", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Action Id</label>
+        @Html.TextBoxFor(action => action.ID, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Object Name</label>
+        @Html.TextBoxFor(action => action.OBJECT_TABLE.NAME, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Member Name</label>
+        @Html.TextBoxFor(action => action.MEMBER_TABLE.NAME, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Employee Id</label>
+        @Html.TextBoxFor(action => action.EMPLOYEE, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Borrow Date</label>
+        @Html.TextBoxFor(action => action.BORROWDATE, "{0: dd.MM.yyyy}", new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Latest Return Date</label>
+        @Html.TextBoxFor(action => action.RETURNDATE, "{0: dd.MM.yyyy}", new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Actual Return Date</label>
+        <input type="text" class="form-control" name="MEMBERRETURNDATE" readonly="readonly" value=@DateTime.Now.ToString("dd/MM/yyyy")>
+
+        <div>
+            <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Return Object</button>
+        </div>
+    </div>
+}
+
+
+

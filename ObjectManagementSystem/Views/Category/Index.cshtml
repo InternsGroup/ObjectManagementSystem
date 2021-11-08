@@ -1,0 +1,36 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@model List<CATEGORY_TABLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Categories</title>
+</head>
+
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">Categories</h2>
+</div>
+
+<table class="table table-striped" style="position:center; background-color: lightgray">
+    <tr>
+        <th>Category Id</th>
+        <th>Category Name</th>
+        <th>Delete Category</th>
+        <th>Update Category</th>
+    </tr>
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.ID</td>
+            <td>@category.NAME</td>
+            <td><a href="/Category/DeleteCategory/@category.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Category:\n @category.NAME')" style="background-color:darkred">Delete</a></td>
+            <td><a href="/Category/GetCategory/@category.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a style="margin-bottom:15px" href="/Category/AddCategory/" class="btn btn-primary">Add New Category</a>
+
+

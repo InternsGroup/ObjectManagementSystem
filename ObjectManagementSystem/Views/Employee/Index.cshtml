@@ -1,0 +1,34 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@model List<EMPLOYEE_TABLE>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Employees</title>
+</head>
+
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">Employees</h2>
+</div>
+<table class="table table-striped;" style="position: center; background-color: lightgray; table-layout: auto;">
+    <tr>
+        <th>Employee Id</th>
+        <th>Employee Name</th>
+        <th>Delete Employee</th>
+        <th>Update Employee</th>
+    </tr>
+
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.ID</td>
+            <td>@employee.EMPLOYEE</td>
+            <td><a href="/Employee/DeleteEmployee/@employee.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @employee.EMPLOYEE')" style="background-color:darkred">Delete</a></td>
+            <td><a href="/Employee/GetEmployee/@employee.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a style="margin-bottom:15px" href="/Employee/AddEmployee/" class="btn btn-primary">Add New Employee</a>
+

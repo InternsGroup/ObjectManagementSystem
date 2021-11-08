@@ -1,0 +1,48 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<MEMBER_TABLE>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Members</title>
+</head>
+
+<div>
+    <h2 id="tableTitle" style="background-color: lightyellow;">Members</h2>
+</div>
+<table class="table table-striped" style="position: center; background-color: lightgray; table-layout: auto;">
+    <tr style="background-color:greenyellow;">
+        <th>Member Id</th>
+        <th>Member Name</th>
+        <th>Member Surname</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Phone Number</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+
+    @foreach (var member in Model)
+    {
+        <tr>
+            <td>@member.ID</td>
+            <td>@member.NAME</td>
+            <td>@member.SURNAME</td>
+            <td>@member.EMAIL</td>
+            <td>@member.USERNAME</td>
+            <td>@member.PASSWORD</td>
+            <td>@member.TELNUMBER</td>
+            <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+            <td><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+<a style="margin-bottom:15px" href="/Member/AddMember/" class="btn btn-primary">Add New Member</a>
+
+
+

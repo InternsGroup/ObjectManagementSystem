@@ -1,0 +1,66 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+@model List<OBJECT_TABLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Objects</title>
+</head>
+
+@using (Html.BeginForm("Index", "Object", FormMethod.Get))
+{
+    <div class="container">
+        <div style="margin-top:15px; margin-bottom:15px; margin:auto; margin-top:15px; width:50%">
+            @Html.TextBox("searchInput", "", new { @class = "form-control", @style = "width:60%;float:left", @placeholder = "Search object name...", @id = "searchInput", @maxlength = "30" })
+            <input class="btn btn-success" style="margin-left:15px; width:20%" type="submit" value="Search">
+            <button class="btn btn-info" style="margin-left:7px" onclick="ClearFields();"><i class="glyphicon glyphicon-refresh"></i></button>
+        </div>
+    </div>
+}
+
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">Objects</h2>
+</div>
+
+
+<table class="table table-striped;" style="position:center; background-color: lightgray; table-layout: auto;">
+    <tr style="background-color:gold">
+        <th>Object Id</th>
+        <th>Object Name</th>
+        <th>Object Category</th>
+        <th>Detail</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td id="tableDataOverFlow">@item.NAME</td>
+            <td>@item.CATEGORY_TABLE.NAME</td>
+            <td id="tableDataOverFlow">@item.DETAIL</td>
+            <td>@item.STATUS</td>
+            @if (item.STATUS == false)
+            {
+                <td><a href="/Object/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert(' This object is actually loaned and can not be deleted:\n @item.NAME')">Delete</a></td>
+            }
+            else
+            {
+                <td><a href="/Object/DeleteObject/@item.ID" class="btn btn-danger " style="background-color:darkred" onclick="return confirm(' Are you sure you want to delete Object:\n @item.NAME')">Delete</a></td>
+            }
+            <td><a href="/Object/GetObject/@item.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+<br />
+<a style="margin-bottom:15px" href="/Object/AddObject/" class="btn btn-primary">Add New Object</a>
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">
+        <b>No Objects found.</b>
+    </div>
+}
+

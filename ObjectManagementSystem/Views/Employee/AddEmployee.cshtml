@@ -1,0 +1,19 @@
+﻿@model ObjectManagementSystem.Models.Entity.EMPLOYEE_TABLE
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Add Employee</title>
+</head>
+
+<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+    <div>
+        <label style="margin-top: 10px"> &nbsp;Employee Name</label>
+        <input class="form-control" style="margin-top:10px" onkeypress="return isNumericKey(event)" type="text" name="EMPLOYEE" maxlength="25" placeholder="Employee Name" required />
+    </div>
+    <div style="margin-top:20px">
+        <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Employee</button>
+    </div>
+</form>
+

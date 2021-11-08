@@ -1,0 +1,33 @@
+﻿@model ObjectManagementSystem.Models.Entity.MEMBER_TABLE
+@{
+    ViewBag.Title = "AddMember";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Add Member</title>
+</head>
+
+<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+    <div>
+        <label style="margin-top: 10px"> &nbsp;Member Name</label>
+        <input class="form-control" onkeypress="return isNumericKey(event)" type="text" name="NAME" maxlength="20" placeholder="Name" required />
+        <label style="margin-top: 10px"> &nbsp;Member Surname</label>
+        <input class="form-control" onkeypress="return isNumericKey(event)" type="text" name="SURNAME" maxlength="20" placeholder="Surname" required />
+        <label style="margin-top: 10px"> &nbsp;Member Email</label>
+        <input class="form-control" type="email" name="EMAIL" maxlength="50" placeholder="Email" required />
+        <label style="margin-top: 10px"> &nbsp;Member Username</label>
+        <input class="form-control" type="text" name="USERNAME" maxlength="20" placeholder="Username" required />
+        <label style="margin-top: 10px"> &nbsp;Member Password</label>
+        <input class="form-control" type="text" name="PASSWORD" maxlength="20" placeholder="Password" required />
+        <label style="margin-top: 10px"> &nbsp;Member Photo</label>
+        <input class="form-control" type="text" placeholder="Link" maxlength="250">
+        <label style="margin-top: 10px"> &nbsp;Member Phone Number</label>
+        <input class="form-control" onInput="this.value = phoneFormat(this.value)" type="text" name="TELNUMBER" placeholder="(123) 456 7890" pattern=".{14,14}" required />
+        <label style="margin-top: 10px"> &nbsp;Member School</label>
+        <input class="form-control" type="text" name="SCHOOL" maxlength="30" placeholder="School Info" required />
+    </div>
+    <div style="margin-top:20px">
+        <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Member</button>
+    </div>
+</form>
+

@@ -1,0 +1,48 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+@model List<ACTION_TABLE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Loaned Objects</title>
+</head>
+
+<h2>List of Loaned Objects</h2>
+
+<div>
+    <h2 id="tableTitle" style="background-color: lightyellow;">Objects</h2>
+</div>
+
+<table class="table table-striped;" style="position:center; table-layout: auto;">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Object Name</th>
+        <th>Member Name</th>
+        <th>Employee ID</th>
+        <th>Lend Date</th>
+        <th>Return Date</th>
+        <th>Return</th>
+    </tr>
+    @foreach (var action in Model)
+    {
+        <tr>
+            <td>@action.ID</td>
+            <td>@action.OBJECT_TABLE.NAME</td>
+            <td>@action.MEMBER_TABLE.NAME</td>
+            <td>@action.EMPLOYEE </td>
+            <td>@Convert.ToDateTime(action.BORROWDATE).ToString("dd/MM/yy") </td>
+            <td>@Convert.ToDateTime(action.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td><a href="/Lend/ReturnObject/@action.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Return Object</a></td>
+        </tr>
+    }
+</table>
+<br />
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">
+        <b>No item found.</b>
+    </div>
+}
+

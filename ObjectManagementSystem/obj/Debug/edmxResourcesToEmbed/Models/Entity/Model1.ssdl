@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_STOREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ACTION_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OBJECT" Type="int" />
+    <Property Name="MEMBER" Type="int" />
+    <Property Name="EMPLOYEE" Type="tinyint" />
+    <Property Name="BORROWDATE" Type="smalldatetime" />
+    <Property Name="RETURNDATE" Type="smalldatetime" />
+    <Property Name="MEMBERRETURNDATE" Type="smalldatetime" />
+    <Property Name="ACTIONSTATUS" Type="bit" />
+  </EntityType>
+  <EntityType Name="CASHBOX_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MONTH" Type="varchar" MaxLength="20" />
+    <Property Name="AMOUNT" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="CATEGORY_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="CONTACT_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="TOPIC" Type="varchar" MaxLength="50" />
+    <Property Name="MESSAGE" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EMPLOYEE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MEMBER_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="30" />
+    <Property Name="SURNAME" Type="varchar" MaxLength="30" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="20" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="20" />
+    <Property Name="PHOTO" Type="varchar" MaxLength="250" />
+    <Property Name="TELNUMBER" Type="varchar" MaxLength="20" />
+    <Property Name="SCHOOL" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="MESSAGE_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SENDER" Type="varchar" MaxLength="50" />
+    <Property Name="RECEIVER" Type="varchar" MaxLength="50" />
+    <Property Name="TOPIC" Type="varchar" MaxLength="50" />
+    <Property Name="MESSAGECONTENT" Type="varchar" MaxLength="500" />
+    <Property Name="DATE" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="OBJECT_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="CATEGORY" Type="tinyint" />
+    <Property Name="STATUS" Type="bit" />
+    <Property Name="DETAIL" Type="varchar" MaxLength="500" />
+    <Property Name="OBJECTIMAGE" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PENALTY_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MEMBER" Type="int" />
+    <Property Name="ACTION" Type="int" />
+    <Property Name="STARTDATE" Type="smalldatetime" />
+    <Property Name="ENDDATE" Type="smalldatetime" />
+    <Property Name="MONEY" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_ACTION_TABLE_BOOK_TABLE">
+    <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="0..1" />
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OBJECT_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ACTION_TABLE">
+        <PropertyRef Name="OBJECT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTION_TABLE_EMPLOYEE_TABLE">
+    <End Role="EMPLOYEE_TABLE" Type="Self.EMPLOYEE_TABLE" Multiplicity="0..1" />
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ACTION_TABLE">
+        <PropertyRef Name="EMPLOYEE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTION_TABLE_MEMBER_TABLE">
+    <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ACTION_TABLE">
+        <PropertyRef Name="MEMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BOOK_TABLE_CATEGORY_TABLE">
+    <End Role="CATEGORY_TABLE" Type="Self.CATEGORY_TABLE" Multiplicity="0..1" />
+    <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OBJECT_TABLE">
+        <PropertyRef Name="CATEGORY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PENALTY_TABLE_ACTION_TABLE">
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="0..1" />
+    <End Role="PENALTY_TABLE" Type="Self.PENALTY_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACTION_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PENALTY_TABLE">
+        <PropertyRef Name="ACTION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PENALTY_TABLE_MEMBER_TABLE">
+    <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
+    <End Role="PENALTY_TABLE" Type="Self.PENALTY_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PENALTY_TABLE">
+        <PropertyRef Name="MEMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_STOREModelStoreContainer">
+    <EntitySet Name="ACTION_TABLE" EntityType="Self.ACTION_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CASHBOX_TABLE" EntityType="Self.CASHBOX_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORY_TABLE" EntityType="Self.CATEGORY_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONTACT_TABLE" EntityType="Self.CONTACT_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE_TABLE" EntityType="Self.EMPLOYEE_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEMBER_TABLE" EntityType="Self.MEMBER_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MESSAGE_TABLE" EntityType="Self.MESSAGE_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OBJECT_TABLE" EntityType="Self.OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PENALTY_TABLE" EntityType="Self.PENALTY_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
+      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+      <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTION_TABLE_EMPLOYEE_TABLE" Association="Self.FK_ACTION_TABLE_EMPLOYEE_TABLE">
+      <End Role="EMPLOYEE_TABLE" EntitySet="EMPLOYEE_TABLE" />
+      <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTION_TABLE_MEMBER_TABLE" Association="Self.FK_ACTION_TABLE_MEMBER_TABLE">
+      <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
+      <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BOOK_TABLE_CATEGORY_TABLE" Association="Self.FK_BOOK_TABLE_CATEGORY_TABLE">
+      <End Role="CATEGORY_TABLE" EntitySet="CATEGORY_TABLE" />
+      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PENALTY_TABLE_ACTION_TABLE" Association="Self.FK_PENALTY_TABLE_ACTION_TABLE">
+      <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
+      <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PENALTY_TABLE_MEMBER_TABLE" Association="Self.FK_PENALTY_TABLE_MEMBER_TABLE">
+      <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
+      <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

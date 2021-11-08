@@ -1,0 +1,23 @@
+﻿@model ObjectManagementSystem.Models.Entity.EMPLOYEE_TABLE
+@{
+    ViewBag.Title = "GetEmployee";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Update Employee</title>
+</head>
+
+@using (Html.BeginForm("UpdateEmployee", "Employee", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(employee => employee.ID)
+        @Html.TextBoxFor(employee => employee.ID, new { @class = "form-control", @readonly = "readonly" })
+        <br />
+        <label>Employee Name</label>
+        @Html.TextBoxFor(employee => employee.EMPLOYEE, new { @class = "form-control", @required = "required", @maxlength = "25", @onkeypress = "return isNumericKey(event)" })
+    </div>
+    <div>
+        <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>
+    </div>
+}
+

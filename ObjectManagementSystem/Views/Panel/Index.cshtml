@@ -1,0 +1,76 @@
+﻿@model ObjectManagementSystem.Models.Entity.MEMBER_TABLE
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}
+
+<h3>User Panel</h3>
+
+@using (Html.BeginForm("Index", "Panel", FormMethod.Post, new { @autocomplete = "off" }))
+{
+    <table class="table table-bordered" style="table-layout: fixed; background-color: rgb(242,242,242) ">
+        <tr>
+            <td>
+                <b>Member ID:</b>
+            </td>
+            <td>
+                @Html.DisplayFor(x => x.ID)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Email:</b>
+            </td>
+            <td>
+                @Html.DisplayFor(x => x.EMAIL)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Username:</b>
+            </td>
+            <td>
+                @Html.DisplayFor(x => x.USERNAME)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Name:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.NAME)" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Name" required />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Surname:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.SURNAME)" name="SURNAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Surname" required />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Password:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.PASSWORD)" name="PASSWORD" maxlength="20" placeholder="Password" required />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Profile Photo:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.PHOTO)" name="PHOTO" maxlength="250" placeholder="Link" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Phone Number:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.TELNUMBER)" name="TELNUMBER" onInput="this.value = phoneFormat(this.value)" pattern=".{14,14}" required />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>School:</b> <input type="text" class="form-control" value="@Html.DisplayFor(x => x.SCHOOL)" name="SCHOOL" maxlength="30" placeholder="School Info" autocomplete="off" />
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-warning">Update Info</button>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/input.js"></script>

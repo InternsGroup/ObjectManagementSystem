@@ -1,0 +1,44 @@
+﻿@model ObjectManagementSystem.Models.Entity.ACTION_TABLE
+
+@{
+    ViewBag.Title = "Lend";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Lend Object</title>
+</head>
+
+<h2>Lend</h2>
+<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+
+    <div style="margin-top: 10px">
+        <label>Object Id</label>
+        @Html.TextBoxFor(lend => lend.OBJECT, new { @class = "form-control", @required = "required", @maxlength = "30" })
+    </div>
+    <div style="margin-top: 10px">
+        <label>Member Id</label>
+        @Html.TextBoxFor(lend => lend.MEMBER, new { @class = "form-control", @required = "required", @maxlength = "30" })
+    </div>
+    <div style="margin-top: 10px">
+        <label>Employee Id</label>
+        @Html.TextBoxFor(lend => lend.EMPLOYEE, new { @class = "form-control", @required = "required", @maxlength = "30" })
+    </div>
+    <div style="margin-top: 10px">
+        <label>Borrow Date</label>
+        <input type="text" class="form-control" name="BORROWDATE" value=@DateTime.Now.ToString("dd/MM/yyyy") />
+    </div>
+    <div style="margin-top: 10px">
+        <label>Return Date</label>
+        <input type="text" class="form-control" name="RETURNDATE" value=@DateTime.Now.AddDays(7).ToString("dd/MM/yyyy") />
+    </div>
+    <div style="margin-top:20px">
+        <button class="btn btn-group" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Lend Object</button>
+    </div>
+</form>
+
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">
+        @ViewBag.Message
+    </div>
+}

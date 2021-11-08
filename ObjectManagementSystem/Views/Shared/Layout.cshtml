@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Layout.css" rel="stylesheet" /><!--Layout.css sidebar ve kategori tablosu ayarlarini iceriyor-->
+</head>
+<body>
+    <span class="sidebar">
+        <a href="/Display/Index"><i class="glyphicon glyphicon-home"></i> &nbsp; Home Page</a>
+        <a href="/Category/Index/"><i class="glyphicon glyphicon-list"></i> &nbsp; Categories</a>
+        <a href="/Object/Index"><i class="glyphicon glyphicon-tasks"></i> &nbsp; Objects</a>
+        <a href="/Member/Index/"><i class="glyphicon glyphicon-user"></i> &nbsp; Members</a>
+        <a href="/Employee/Index/"><i class="glyphicon glyphicon-tower"></i> &nbsp; Employees</a>
+        <a href="/Lend/Lend/"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Lend Object</a>
+        <a href="/Lend/Index"><i class="glyphicon glyphicon-arrow-right"></i> &nbsp; Receive Object</a>
+        <a href="/Statistics/Index"><i class="glyphicon glyphicon-pencil"></i> &nbsp; Statistics</a>
+        <a href="#"><i class="glyphicon glyphicon-cog"></i> &nbsp; Settings</a>
+        <a href="#"><i class="glyphicon glyphicon-phone"></i> &nbsp; Help</a>
+        <a href="#"><i class="glyphicon glyphicon-remove-sign"></i> &nbsp; Exit</a>
+    </span>
+
+    <div class="main">
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/input.js"></script><!--input islemini kontrol eden js kodlari    -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</body>
+</html>

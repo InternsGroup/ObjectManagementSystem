@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_STOREModelStoreContainer" CdmEntityContainer="DB_STOREEntities">
+    <EntitySetMapping Name="ACTION_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.ACTION_TABLE">
+        <MappingFragment StoreEntitySet="ACTION_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OBJECT" ColumnName="OBJECT" />
+          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+          <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
+          <ScalarProperty Name="BORROWDATE" ColumnName="BORROWDATE" />
+          <ScalarProperty Name="RETURNDATE" ColumnName="RETURNDATE" />
+          <ScalarProperty Name="MEMBERRETURNDATE" ColumnName="MEMBERRETURNDATE" />
+          <ScalarProperty Name="ACTIONSTATUS" ColumnName="ACTIONSTATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CASHBOX_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.CASHBOX_TABLE">
+        <MappingFragment StoreEntitySet="CASHBOX_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MONTH" ColumnName="MONTH" />
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORY_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.CATEGORY_TABLE">
+        <MappingFragment StoreEntitySet="CATEGORY_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTACT_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.CONTACT_TABLE">
+        <MappingFragment StoreEntitySet="CONTACT_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="TOPIC" ColumnName="TOPIC" />
+          <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLOYEE_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.EMPLOYEE_TABLE">
+        <MappingFragment StoreEntitySet="EMPLOYEE_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEMBER_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.MEMBER_TABLE">
+        <MappingFragment StoreEntitySet="MEMBER_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="TELNUMBER" ColumnName="TELNUMBER" />
+          <ScalarProperty Name="SCHOOL" ColumnName="SCHOOL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MESSAGE_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.MESSAGE_TABLE">
+        <MappingFragment StoreEntitySet="MESSAGE_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SENDER" ColumnName="SENDER" />
+          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
+          <ScalarProperty Name="TOPIC" ColumnName="TOPIC" />
+          <ScalarProperty Name="MESSAGECONTENT" ColumnName="MESSAGECONTENT" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OBJECT_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.OBJECT_TABLE">
+        <MappingFragment StoreEntitySet="OBJECT_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+          <ScalarProperty Name="OBJECTIMAGE" ColumnName="OBJECTIMAGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PENALTY_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.PENALTY_TABLE">
+        <MappingFragment StoreEntitySet="PENALTY_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+          <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+          <ScalarProperty Name="MONEY" ColumnName="MONEY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DB_STOREModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
