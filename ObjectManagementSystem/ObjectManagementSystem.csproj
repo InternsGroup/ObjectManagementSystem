@@ -261,9 +261,9 @@
     <Content Include="web2\resimler\book4.jpg" />
     <Content Include="web2\resimler\book5.jpg" />
     <Content Include="web2\resimler\img1.jpg" />
-    <Content Include="Images\DisplayIndex\k2.jpg" />
-    <Content Include="Images\DisplayIndex\k4.jpg" />
-    <Content Include="Images\DisplayIndex\k5.jpg" />
+    <Content Include="web2\resimler\k2.jpg" />
+    <Content Include="web2\resimler\k4.jpg" />
+    <Content Include="web2\resimler\k5.jpg" />
     <Content Include="web2\w3layouts-License.txt" />
     <Content Include="web\.gitignore" />
     <Content Include="web\css\freelancer.css" />
@@ -337,7 +337,7 @@
     <Content Include="webregister\index.html" />
     <Content Include="webregister\w3layouts-License.txt" />
     <Content Include="Content\DisplayIndex\css\freelancer.min.css" />
-    <Content Include="Images\DisplayIndex\library.jpg" />
+    <Content Include="web2\resimler\library.jpg" />
     <Content Include="Content\DisplayIndex\js\contact_me.js" />
     <Content Include="Content\DisplayIndex\js\freelancer.min.js" />
     <Content Include="Content\DisplayIndex\js\jqBootstrapValidation.js" />
@@ -460,6 +460,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\DisplayIndex\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
