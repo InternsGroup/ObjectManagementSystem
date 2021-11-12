@@ -18,7 +18,7 @@ namespace ObjectManagementSystem.Controllers
             {
                 objects = objects.Where(item => item.NAME.Contains(searchInput));
             }
-            //var items = db.OBJECT_TABLE.ToList();
+
             return View(objects.ToList());
         }
 
@@ -71,7 +71,8 @@ namespace ObjectManagementSystem.Controllers
             obj.NAME = item.NAME;
             var category = db.CATEGORY_TABLE.Where(c => c.ID == item.CATEGORY_TABLE.ID).FirstOrDefault();
             obj.CATEGORY = category.ID;
-            obj.STATUS = true;
+            obj.DETAIL = item.DETAIL;
+            obj.OBJECTIMAGE = item.OBJECTIMAGE;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

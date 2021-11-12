@@ -20,6 +20,9 @@
     <label>Category</label>
     @Html.DropDownListFor(category => category.CATEGORY_TABLE.ID, (List<SelectListItem>)ViewBag.categoryItem, new { @class = "form-control" })
     <br />
+    <label>Object Image Link</label>
+    @Html.TextBoxFor(item => item.OBJECTIMAGE, new { @class = "form-control", @required = "required", @maxlength = "250", @placeholder = "Link" })
+    <br />
     <label>Detail</label>
     @Html.TextAreaFor(item => item.DETAIL, new { @class = "form-control", @required = "required", @maxlength = "500", @placeholder = "Detail", @id = "myTextArea" })
 </div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
@@ -20,6 +21,7 @@ namespace ObjectManagementSystem.Controllers
             ViewBag.Message = null;
             return View(values);
         }
+
         [HttpPost]
         public ActionResult Index(MEMBER_TABLE memberObj)
         {
@@ -34,6 +36,12 @@ namespace ObjectManagementSystem.Controllers
             ViewBag.Message = "Info successfully updated.";
             db.SaveChanges();
             return View(member);
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Display");
         }
     }
 }

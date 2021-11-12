@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ObjectManagementSystem",
-    "\\ObjectManagementSystem\\Views"
+    "\\ObjectManagementSystem"
   ],
-  "SelectedNode": "\\ObjectManagementSystem.sln",
+  "SelectedNode": "\\ObjectManagementSystem\\packages.config",
   "PreviewInSolutionExplorer": false
 }

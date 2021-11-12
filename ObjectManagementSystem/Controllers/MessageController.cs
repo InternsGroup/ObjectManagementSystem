@@ -24,6 +24,7 @@ namespace ObjectManagementSystem.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult NewMessage(MESSAGE_TABLE messageObj)
         {

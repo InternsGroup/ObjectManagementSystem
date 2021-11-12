@@ -13,7 +13,7 @@ namespace ObjectManagementSystem.Controllers
         DB_STOREEntities db = new DB_STOREEntities();
         public ActionResult Index()
         {
-            var loanedObjectsList = db.ACTION_TABLE.ToList();
+            var loanedObjectsList = db.ACTION_TABLE.Where(action => action.ACTIONSTATUS == false).ToList();
             return View(loanedObjectsList);
         }
 
@@ -54,6 +54,7 @@ namespace ObjectManagementSystem.Controllers
             else
             {
                 item.STATUS = false;
+                lendObj.ACTIONSTATUS = false;
                 db.SaveChanges();
             }
 
@@ -74,9 +75,8 @@ namespace ObjectManagementSystem.Controllers
             actionObj.MEMBERRETURNDATE = actionTableObj.MEMBERRETURNDATE;
             actionObj.ACTIONSTATUS = true;
             actionObj.OBJECT_TABLE.STATUS = true;
-
             //geri verilecek objeler listesinden kaldır
-            db.ACTION_TABLE.Remove(actionObj);
+            //db.ACTION_TABLE.Remove(actionObj);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

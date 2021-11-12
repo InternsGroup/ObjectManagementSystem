@@ -18,12 +18,12 @@
         @Html.DropDownListFor(category => category.CATEGORY_TABLE.ID, (List<SelectListItem>)ViewBag.categoryItem, new { @class = "form-control" })
     </div>
     <div style="margin-top: 10px">
-        <label>Detail</label>
-        @Html.TextAreaFor(item => item.DETAIL, new { @class = "form-control", @required = "required", @maxlength = "500", @placeholder = "Detail", @id = "myTextArea" })
-    </div>
-    <div style="margin-top: 10px">
         <label>Object Image Link</label>
         @Html.TextBoxFor(item => item.OBJECTIMAGE, new { @class = "form-control", @required = "required", @maxlength = "250", @placeholder = "Link" })
+    </div>
+    <div style="margin-top: 10px">
+        <label>Detail</label>
+        @Html.TextAreaFor(item => item.DETAIL, new { @class = "form-control", @required = "required", @maxlength = "500", @placeholder = "Detail", @id = "myTextArea" })
     </div>
     <div style="margin-top:20px">
         <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Object</button>
