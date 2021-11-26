@@ -28,6 +28,7 @@
 
     @foreach (var member in Model)
     {
+        int x = 0;
         <tr>
             <td>@member.ID</td>
             <td>@member.NAME</td>
@@ -36,7 +37,19 @@
             <td>@member.USERNAME</td>
             <td>@member.PASSWORD</td>
             <td>@member.TELNUMBER</td>
-            <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+            @foreach (var actionObj in member.ACTION_TABLE.ToList())
+            {
+                if (actionObj.MEMBER == member.ID)
+                {
+                    <td><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert(' Actually you can not delete this member:\n @member.NAME')">Delete</a></td>
+                    x = 1;
+                    break;
+                }
+            }
+            @if (x == 0)
+            {
+                <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+            }
             <td><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
         </tr>
     }

@@ -76,7 +76,7 @@ namespace ObjectManagementSystem.Controllers
             actionObj.ACTIONSTATUS = true;
             actionObj.OBJECT_TABLE.STATUS = true;
             //geri verilecek objeler listesinden kaldır
-            //db.ACTION_TABLE.Remove(actionObj);
+            db.ACTION_TABLE.Remove(actionObj);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
