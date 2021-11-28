@@ -1,0 +1,26 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+
+@{
+    ViewBag.Title = "MyItems";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>MyItems</h2>
+
+<table class="table table-striped;" style="position: center; background-color: lightgray; table-layout: auto;">
+    <tr>
+        <th>Item Id</th>
+        <th>Item Image</th>
+        <th>Item Return Date</th>
+    </tr>
+   
+    @foreach (var item in (ACTION_TABLE []) ViewBag.objList)
+    {
+        
+        <tr>
+            <td>@item.ID</td>
+            <td>@item.OBJECT_TABLE.OBJECTIMAGE</td>
+            <td>@item.RETURNDATE</td>
+        </tr>
+    }
+</table>

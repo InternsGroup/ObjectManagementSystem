@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,8 @@ namespace ObjectManagementSystem.Controllers
     public class PanelController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
+        int id = 0;
+
         // GET: Panel
         [HttpGet]
         [Authorize]
@@ -18,6 +21,7 @@ namespace ObjectManagementSystem.Controllers
         {
             var user = (string)Session["Username"];
             var values = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == user);
+            id = values.ID;
             ViewBag.Message = null;
             return View(values);
         }
@@ -43,5 +47,22 @@ namespace ObjectManagementSystem.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Display");
         }
+
+        
+        public ActionResult MyItems()
+        {
+            // olanları sergile = view'a gönder
+            List<ACTION_TABLE> objList = new List<ACTION_TABLE>();
+            foreach (var actionObj in db.ACTION_TABLE.ToList())
+            {
+                if (actionObj.MEMBER == id)
+                {
+                    objList.Add(actionObj);
+                }
+            }
+            ViewBag.objList = objList.ToArray();
+            return View();
+        }
+
     }
 }
