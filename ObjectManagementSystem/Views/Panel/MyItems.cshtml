@@ -1,5 +1,5 @@
 ﻿@using ObjectManagementSystem.Models.Entity;
-
+@model List<ACTION_TABLE>
 @{
     ViewBag.Title = "MyItems";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
@@ -13,14 +13,17 @@
         <th>Item Image</th>
         <th>Item Return Date</th>
     </tr>
-   
-    @foreach (var item in (ACTION_TABLE []) ViewBag.objList)
+
+    @foreach (var item in Model)
     {
-        
         <tr>
-            <td>@item.ID</td>
-            <td>@item.OBJECT_TABLE.OBJECTIMAGE</td>
-            <td>@item.RETURNDATE</td>
+            @if (item.MEMBER_TABLE.USERNAME == ViewBag.ID)
+            {
+                <td>@item.OBJECT_TABLE.ID</td>
+                <td></td>
+                <td></td>
+            }
+
         </tr>
     }
 </table>

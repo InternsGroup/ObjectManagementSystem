@@ -12,7 +12,7 @@ namespace ObjectManagementSystem.Controllers
     public class PanelController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
-        int id = 0;
+        int id = 5;
 
         // GET: Panel
         [HttpGet]
@@ -51,7 +51,9 @@ namespace ObjectManagementSystem.Controllers
         
         public ActionResult MyItems()
         {
+            var values = db.ACTION_TABLE.ToList();
             // olanları sergile = view'a gönder
+            /*
             List<ACTION_TABLE> objList = new List<ACTION_TABLE>();
             foreach (var actionObj in db.ACTION_TABLE.ToList())
             {
@@ -61,7 +63,9 @@ namespace ObjectManagementSystem.Controllers
                 }
             }
             ViewBag.objList = objList.ToArray();
-            return View();
+            */
+            ViewBag.ID = (string)Session["Username"];
+            return View(values);
         }
 
     }
