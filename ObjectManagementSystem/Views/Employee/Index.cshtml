@@ -21,10 +21,24 @@
 
     @foreach (var employee in Model)
     {
+        int x = 0;
         <tr>
             <td>@employee.ID</td>
             <td>@employee.EMPLOYEE</td>
-            <td><a href="/Employee/DeleteEmployee/@employee.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @employee.EMPLOYEE')" style="background-color:darkred">Delete</a></td>
+            @foreach (var actionObj in employee.ACTION_TABLE.ToList())
+            {
+                if (actionObj.EMPLOYEE == employee.ID)
+                {
+                    <td><a href="/Employee/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The employee cannot be deleted without arrange loaned objects.')">Delete</a></td>
+                    x = 1;
+                    break;
+                }
+            }
+            @if (x == 0)
+            {
+                <td><a href="/Employee/DeleteEmployee/@employee.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @employee.EMPLOYEE')" style="background-color:darkred">Delete</a></td>
+            }
+
             <td><a href="/Employee/GetEmployee/@employee.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
         </tr>
     }
