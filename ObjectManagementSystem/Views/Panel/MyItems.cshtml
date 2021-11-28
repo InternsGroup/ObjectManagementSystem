@@ -10,7 +10,8 @@
 <table class="table table-striped;" style="position: center; background-color: lightgray; table-layout: auto;">
     <tr>
         <th>Item Id</th>
-        <th>Item Image</th>
+        <th>Item Detailed Information</th>
+        <th>Item Borrow Date</th>
         <th>Item Return Date</th>
     </tr>
 
@@ -20,8 +21,9 @@
             @if (item.MEMBER_TABLE.USERNAME == ViewBag.ID)
             {
                 <td>@item.OBJECT_TABLE.ID</td>
-                <td></td>
-                <td></td>
+                <td>@item.OBJECT_TABLE.DETAIL</td>
+                <td>@item.BORROWDATE</td>
+                <td>@item.RETURNDATE</td>
             }
 
         </tr>
