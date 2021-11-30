@@ -24,6 +24,7 @@
         <th>Lend Date</th>
         <th>Return Date</th>
         <th>Return</th>
+        <th>Extend period</th>
     </tr>
     @foreach (var action in Model)
     {
@@ -35,6 +36,7 @@
             <td>@Convert.ToDateTime(action.BORROWDATE).ToString("dd/MM/yy") </td>
             <td>@Convert.ToDateTime(action.RETURNDATE).ToString("dd/MM/yy")</td>
             <td><a href="/Lend/ReturnObject/@action.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Return Object</a></td>
+            <td><a href="/Lend/ExtendPeriod/@action.ID" class="btn btn-info" style="background-color:darkseagreen;color:black" onclick="return confirm(' Are you sure you want to extend the loan period of the object by 7 days.')">Extend period</a></td>
         </tr>
     }
 </table>

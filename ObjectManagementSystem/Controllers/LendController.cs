@@ -80,5 +80,14 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult ExtendPeriod(int id)
+        {
+            var action = db.ACTION_TABLE.Find(id);
+            var time = action.RETURNDATE;
+            action.RETURNDATE = time.Value.AddDays(7);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
