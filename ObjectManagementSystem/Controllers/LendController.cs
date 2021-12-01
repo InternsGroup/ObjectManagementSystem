@@ -61,20 +61,21 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult LoanObject(int id,int userId)
+        public ActionResult LoanObject(int id)
         {
             var item = db.OBJECT_TABLE.Find(id);
             item.STATUS = false;
             ACTION_TABLE lendObj = new ACTION_TABLE();
             lendObj.OBJECT = id;
-            lendObj.MEMBER = userId;
-            lendObj.EMPLOYEE = 1;
+            lendObj.MEMBER = LogInController.user.ID;
+            lendObj.EMPLOYEE = 4;
             lendObj.BORROWDATE = DateTime.Now;
             lendObj.RETURNDATE = DateTime.Now.AddDays(7);
             lendObj.ACTIONSTATUS = false;
             lendObj.MEMBERRETURNDATE = null;
+            db.ACTION_TABLE.Add(lendObj);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Display");
         }
 
         public ActionResult ReturnObject(int id)

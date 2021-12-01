@@ -10,6 +10,7 @@ namespace ObjectManagementSystem.Controllers
 {
     public class LogInController : Controller
     {
+        public static MEMBER_TABLE user = new MEMBER_TABLE();
         DB_STOREEntities db = new DB_STOREEntities();
 
         [HttpGet]
@@ -28,7 +29,7 @@ namespace ObjectManagementSystem.Controllers
             {
                 FormsAuthentication.SetAuthCookie(userInfo.USERNAME, false);
                 Session["Username"] = userInfo.USERNAME.ToString();
-                Session["ID"] = userInfo.ID.ToString();
+                user.ID = userInfo.ID;
                 return RedirectToAction("Index", "Display");
             }
             else

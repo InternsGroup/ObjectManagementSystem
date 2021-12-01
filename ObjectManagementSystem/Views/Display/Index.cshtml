@@ -116,7 +116,8 @@
                 <!-- Portfolio Item 1 -->
                 @foreach (var item in Model)
                 {
-
+                    if (item.STATUS != false)
+                    {
                     <div class="col-md-6 col-lg-4">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal" data-style="width:200px;height:300px">
 
@@ -126,12 +127,13 @@
                             <br />
                             @if (this.User.Identity.IsAuthenticated)
                             {
-                                <a class="btn btn-primary btn-xl" onclick="return confirm('Are you sure you want to loan this book?')" href="/Lend/LoanObject/@item.ID&&@ViewBag.myId">
+                                <a class="btn btn-primary btn-xl" onclick="return confirm('Are you sure you want to loan this book?')" href="/Lend/LoanObject/@item.ID">
                                     Loan this Object
                                 </a>
                             }
                         </div>
                     </div>
+                    }
                 }
 
 
