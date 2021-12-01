@@ -28,6 +28,7 @@ namespace ObjectManagementSystem.Controllers
             {
                 FormsAuthentication.SetAuthCookie(userInfo.USERNAME, false);
                 Session["Username"] = userInfo.USERNAME.ToString();
+                Session["ID"] = userInfo.ID.ToString();
                 return RedirectToAction("Index", "Display");
             }
             else

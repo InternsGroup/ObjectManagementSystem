@@ -14,6 +14,10 @@ namespace ObjectManagementSystem.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["Username"] != null)
+            {
+                ViewBag.myId = (string)Session["ID"];
+            }
             var objects = db.OBJECT_TABLE.ToList();
             return View(objects);
         }
