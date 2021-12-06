@@ -28,7 +28,7 @@ window.setTimeout(function () {
     $(".alert").fadeTo(500, 0).slideUp(500, function () {
         $(this).remove();
     });
-}, 1500);
+}, 5000);
 
 // A function to format text to look like a phone number
 function phoneFormat(input) {//returns (###) ###-####

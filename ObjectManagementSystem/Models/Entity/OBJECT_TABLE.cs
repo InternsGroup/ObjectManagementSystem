@@ -18,6 +18,7 @@ namespace ObjectManagementSystem.Models.Entity
         public OBJECT_TABLE()
         {
             this.ACTION_TABLE = new HashSet<ACTION_TABLE>();
+            this.RESERVED_OBJECT_TABLE = new HashSet<RESERVED_OBJECT_TABLE>();
         }
     
         public int ID { get; set; }
@@ -26,9 +27,12 @@ namespace ObjectManagementSystem.Models.Entity
         public Nullable<bool> STATUS { get; set; }
         public string DETAIL { get; set; }
         public string OBJECTIMAGE { get; set; }
+        public Nullable<bool> RESERVATIONSTATUS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACTION_TABLE> ACTION_TABLE { get; set; }
         public virtual CATEGORY_TABLE CATEGORY_TABLE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RESERVED_OBJECT_TABLE> RESERVED_OBJECT_TABLE { get; set; }
     }
 }

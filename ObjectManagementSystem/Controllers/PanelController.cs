@@ -48,24 +48,35 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index", "Display");
         }
 
-        
-        public ActionResult MyItems()
+        public ActionResult LoanedItems()
         {
             var values = db.ACTION_TABLE.ToList();
-            // olanları sergile = view'a gönder
-            /*
-            List<ACTION_TABLE> objList = new List<ACTION_TABLE>();
-            foreach (var actionObj in db.ACTION_TABLE.ToList())
-            {
-                if (actionObj.MEMBER == id)
-                {
-                    objList.Add(actionObj);
-                }
-            }
-            ViewBag.objList = objList.ToArray();
-            */
             ViewBag.ID = (string)Session["Username"];
             return View(values);
+        }
+
+        public ActionResult ReservedItems()
+        {
+            var values = db.RESERVED_OBJECT_TABLE.ToList();
+            ViewBag.danger = TempData["message"];
+            ViewBag.ID = (string)Session["Username"];
+            return View(values);
+        }
+
+        public ActionResult CancelReservation(int id)
+        {
+            var reservation = db.RESERVED_OBJECT_TABLE.Find(id);
+            if (reservation != null)
+            {
+                reservation.OBJECT_TABLE.RESERVATIONSTATUS = true;
+                db.RESERVED_OBJECT_TABLE.Remove(reservation);
+                db.SaveChanges();
+            }
+            else
+            {
+                TempData["message"] = "This object is loaned to you. Please contact your admin to cancel borrow transaction.";
+            }
+            return RedirectToAction("ReservedItems");
         }
 
     }

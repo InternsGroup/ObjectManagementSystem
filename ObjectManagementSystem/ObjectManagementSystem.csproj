@@ -193,6 +193,9 @@
     <Compile Include="Models\Entity\PENALTY_TABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\RESERVED_OBJECT_TABLE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entity\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -357,7 +360,10 @@
     <Content Include="Views\Object\AddObject.cshtml" />
     <Content Include="Views\Object\GetObject.cshtml" />
     <Content Include="Views\Display\Index.cshtml" />
-    <Content Include="Views\Panel\MyItems.cshtml" />
+    <Content Include="Views\Panel\ReservedItems.cshtml" />
+    <Content Include="Views\Lend\ReservedObjects.cshtml" />
+    <Content Include="Views\Lend\GetReservedObject.cshtml" />
+    <Content Include="Views\Panel\LoanedItems.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

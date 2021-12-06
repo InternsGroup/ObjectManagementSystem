@@ -16,8 +16,11 @@ namespace ObjectManagementSystem.Controllers
         {
             if (Session["Username"] != null)
             {
-                ViewBag.myId = (string)Session["ID"];
+                ViewBag.myId = Session["ID"];
             }
+            ViewBag.reservedObjects = db.RESERVED_OBJECT_TABLE.ToList();
+            ViewBag.loanedObjects = db.ACTION_TABLE.ToList();
+            ViewBag.members = db.MEMBER_TABLE.ToList();
             var objects = db.OBJECT_TABLE.ToList();
             return View(objects);
         }

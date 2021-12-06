@@ -1,0 +1,42 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+@model List<RESERVED_OBJECT_TABLE>
+@{
+    ViewBag.Title = "ReservedObjects";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Reserved Objects</title>
+</head>
+
+<h2>List of Reserved Objects</h2>
+
+<div>
+    <h2 id="tableTitle" style="background-color: lightyellow;">Objects</h2>
+</div>
+
+<table class="table table-striped;" style="position:center; table-layout: auto;">
+    <tr>
+        <th>Reservation Id</th>
+        <th>Object Name</th>
+        <th>Member Name</th>
+        <th>Reservation Start Date</th>
+        <th>Reservation End Date</th>
+        <th>Lend Object</th>
+        <th>Reject Reservation</th>
+
+    </tr>
+    @foreach (var reservation in Model)
+    {
+        <tr>
+            <td>@reservation.ID</td>
+            <td>@reservation.OBJECT_TABLE.NAME</td>
+            <td>@reservation.MEMBER_TABLE.NAME &nbsp; @reservation.MEMBER_TABLE.SURNAME</td>
+            <td>@Convert.ToDateTime(reservation.BORROWDATE).ToString("dd/MM/yy") </td>
+            <td>@Convert.ToDateTime(reservation.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td><a href="/Lend/GetReservedObject/@reservation.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Lend Object</a></td>
+            <td><a href="/Lend/DeleteReservation/@reservation.ID" class="btn btn-danger" style="background-color:darkred" onclick="return confirm(' Are you sure you want to reject the reservation of this object?')">Reject</a></td>
+        </tr>
+    }
+</table>
+

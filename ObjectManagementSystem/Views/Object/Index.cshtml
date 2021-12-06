@@ -32,6 +32,7 @@
         <th>Object Category</th>
         <th>Detail</th>
         <th>Status</th>
+        <th>Res. Status</th>
         <th>Delete</th>
         <th>Update</th>
     </tr>
@@ -43,9 +44,10 @@
             <td>@item.CATEGORY_TABLE.NAME</td>
             <td id="tableDataOverFlow">@item.DETAIL</td>
             <td>@item.STATUS</td>
-            @if (item.STATUS == false)
+            <td>@item.RESERVATIONSTATUS</td>
+            @if (item.STATUS == false || item.RESERVATIONSTATUS == false)
             {
-                <td><a href="/Object/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert(' This object is actually loaned and can not be deleted:\n @item.NAME')">Delete</a></td>
+                <td><a href="/Object/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert(' This object is actually loaned or reserved and can not be deleted:\n @item.NAME')">Delete</a></td>
             }
             else
             {

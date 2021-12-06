@@ -19,6 +19,7 @@ namespace ObjectManagementSystem.Models.Entity
         {
             this.ACTION_TABLE = new HashSet<ACTION_TABLE>();
             this.PENALTY_TABLE = new HashSet<PENALTY_TABLE>();
+            this.RESERVED_OBJECT_TABLE = new HashSet<RESERVED_OBJECT_TABLE>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,7 @@ namespace ObjectManagementSystem.Models.Entity
         public virtual ICollection<ACTION_TABLE> ACTION_TABLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PENALTY_TABLE> PENALTY_TABLE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RESERVED_OBJECT_TABLE> RESERVED_OBJECT_TABLE { get; set; }
     }
 }

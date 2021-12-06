@@ -21,7 +21,10 @@
         <AssociationConnector Association="DB_STOREModel.FK_PENALTY_TABLE_ACTION_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_BOOK_TABLE_CATEGORY_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_PENALTY_TABLE_MEMBER_TABLE" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="DB_STOREModel.RESERVED_OBJECT_TABLE" Width="1.5" PointX="5.375" PointY="7.75" />
+        <AssociationConnector Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" />
+        <AssociationConnector Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

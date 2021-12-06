@@ -1,0 +1,41 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+@model List<RESERVED_OBJECT_TABLE>
+@{
+    ViewBag.Title = "ReservedItems";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<h2>Reserved Items</h2>
+
+<table class="table table-striped;" style="position: center; background-color: lightgray; table-layout: auto;">
+    <tr>
+        <th>Item Id</th>
+        <th>Item Name</th>
+        <th>Item Detail</th>
+        <th>Reservation Start</th>
+        <th>Reservation End</th>
+        <th>Cancel Reservation</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.MEMBER_TABLE.USERNAME == ViewBag.ID)
+            {
+                <td>@item.OBJECT_TABLE.ID</td>
+                <td>@item.OBJECT_TABLE.NAME</td>
+                <td id="tableDataOverFlow">@item.OBJECT_TABLE.DETAIL</td>
+                <td>@item.BORROWDATE</td>
+                <td>@item.RETURNDATE</td>
+                <td><a href="/Panel/CancelReservation/@item.ID" class="btn btn-danger" style="background-color:darkred" onclick="return confirm(' Are you sure you want to cancel the reservation of this object?')">Cancel</a></td>
+            }
+
+        </tr>
+    }
+</table>
+@if (@ViewBag.danger != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">
+        @ViewBag.danger
+    </div>
+}

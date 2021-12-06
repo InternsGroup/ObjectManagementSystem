@@ -1,0 +1,45 @@
+﻿@model ObjectManagementSystem.Models.Entity.RESERVED_OBJECT_TABLE
+@{
+    ViewBag.Title = "GetReservedObject";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Lend Reserved Object</title>
+</head>
+
+<h2>Lend Reserved Object</h2>
+
+@using (Html.BeginForm("LendReservedObject", "Lend", FormMethod.Post))
+{
+<div class="form-group">
+    <label>Action Id</label>
+    @Html.TextBoxFor(reservation => reservation.ID, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Object Name</label>
+    @Html.TextBoxFor(reservation => reservation.OBJECT_TABLE.NAME, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Member Name</label>
+    @Html.TextBoxFor(reservation => reservation.MEMBER_TABLE.NAME, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Member Surname</label>
+    @Html.TextBoxFor(reservation => reservation.MEMBER_TABLE.SURNAME, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Borrow Date</label>
+    @Html.TextBoxFor(reservation => reservation.BORROWDATE, "{0: dd.MM.yyyy}", new { @class = "form-control", @required = "required" })
+    <br />
+    <label>Return Date</label>
+    @Html.TextBoxFor(reservation => reservation.RETURNDATE, "{0: dd.MM.yyyy}", new { @class = "form-control", @required = "required" })
+
+    <div>
+        <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Lend Object</button>
+    </div>
+</div>
+}
+@if (ViewBag.Danger != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center;font-size:15px; position:static; margin-top: 10px">
+        @ViewBag.Danger
+    </div>
+}
+

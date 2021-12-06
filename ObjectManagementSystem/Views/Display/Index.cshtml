@@ -73,9 +73,6 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
 
-            <!-- Masthead Avatar Image -->
-            <img class="masthead-avatar mb-5" src="~/web/img/library.jpg" alt="">
-
             <!-- Masthead Heading -->
             <h1 class="masthead-heading text-uppercase mb-0">Welcome to our Store!</h1>
 
@@ -94,6 +91,13 @@
         </div>
     </header>
 
+    @if (Session["Danger"] != null)
+    {
+        <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center;font-size:15px; position:static; margin-top: 10px">
+            @Session["Danger"]
+        </div>
+        Session["Danger"] = null;
+    }
     <!-- Portfolio Section -->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
@@ -112,28 +116,174 @@
 
             <!-- Portfolio Grid Items -->
             <div class="row">
-
                 <!-- Portfolio Item 1 -->
                 @foreach (var item in Model)
                 {
-                    if (item.STATUS != false)
+                    if (item.STATUS == false && this.User.Identity.IsAuthenticated)
                     {
-                    <div class="col-md-6 col-lg-4">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal" data-style="width:200px;height:300px">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-itemmm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                <div class="portfolio-itemmm-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                    <div class="portfolio-itemmm-caption-content text-center text-white">
+                                        <i style="font-size:30px;color:red;">LOANED</i>
+                                    </div>
+                                </div>
+                                <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
+                                <!--odunc alması için buton-->
 
-                            <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
-                            <!--odunc alması için buton-->
-                            <br />
-                            <br />
-                            @if (this.User.Identity.IsAuthenticated)
-                            {
-                                <a class="btn btn-primary btn-xl" onclick="return confirm('Are you sure you want to loan this book?')" href="/Lend/LoanObject/@item.ID">
-                                    Loan this Object
-                                </a>
-                            }
+                            </div>
+                        </div>
+                    }
+                    else if (item.RESERVATIONSTATUS == false && this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-itemm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                <div class="portfolio-itemm-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                    <div class="portfolio-itemm-caption-content text-center text-white">
+                                        <i style="font-size:30px;color:black">RESERVED</i>
+                                    </div>
+                                </div>
+                                <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
+                                <!--odunc alması için buton-->
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                    <div class="portfolio-item-caption-content text-center text-white">
+                                        <i class="fas fa-plus fa-3x"></i>
+                                    </div>
+                                </div>
+                                <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
+                                <!--odunc alması için buton-->
+
+                            </div>
+                        </div>
+                    }
+                    <div class="portfolio-modal modal fade" id=@("deneme"+item.NAME) tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                </button>
+                                <div class="modal-body text-center">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-8">
+                                                <!-- Portfolio Modal - Title -->
+                                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">@item.NAME</h2>
+                                                <!-- Icon Divider -->
+                                                <div class="divider-custom">
+                                                    <div class="divider-custom-line"></div>
+                                                    <div class="divider-custom-icon">
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <div class="divider-custom-line"></div>
+                                                </div>
+                                                <!-- Portfolio Modal - Image -->
+                                                <img class="img-fluid rounded mb-5" src="@item.OBJECTIMAGE" alt="" style="float:left;">
+                                                <!-- Portfolio Modal - Text -->
+                                                <h2>Detail:</h2>
+                                                <div style="font-display:block;">
+                                                    <p style="font-size:14px;">@item.DETAIL</p>
+                                                </div>
+                                                <!--
+                                                <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                                    <i class="fas fa-times fa-fw"></i>
+                                                    Close Window
+                                                </button>
+                                                    -->
+                                                @if (item.RESERVATIONSTATUS != false)
+                                                {
+                                                    <div class="row justify-content-center">
+                                                        @if (this.User.Identity.IsAuthenticated)
+                                                        {
+                                                            <form method="post" action="/Lend/ReserveObject">
+                                                                <input class="form-control" style="margin-top:20px" type="text" value="@Session["ID"]" name="MEMBER" hidden />
+                                                                <input class="form-control" style="margin-top:20px" type="text" value="@item.ID" name="OBJECT" hidden />
+                                                                <label style="margin-top: 10px;font-size:14px"> &nbsp; Start Date of Reservation</label>
+                                                                <input style="font-size:12px" class="form-control" type="date" id="deneme" name="BORROWDATE" required />
+                                                                <label style="margin-top: 10px; font-size: 14px"> &nbsp; End Date of Reservation</label>
+                                                                <input style="font-size:12px" class="form-control" type="date" name="RETURNDATE" required />
+                                                                <br />
+                                                                <button class="btn btn-info" style="font-size:12px" onclick="return confirm('Are you sure you want to reserve this object?')">
+                                                                    Reserve this Object
+                                                                </button>
+                                                            </form>
+                                                        }
+                                                    </div>
+                                                }
+                                                else if (item.STATUS == false && this.User.Identity.IsAuthenticated)
+                                                {
+                                                    string name = null;
+                                                    string email = null;
+                                                    DateTime start = new DateTime();
+                                                    DateTime end = new DateTime();
+                                                    foreach (var i in ViewBag.loanedObjects)
+                                                    {
+                                                        if (i.OBJECT == item.ID)
+                                                        {
+                                                            foreach (var j in ViewBag.members)
+                                                            {
+                                                                if (i.MEMBER == j.ID)
+                                                                {
+                                                                    name = j.NAME + " " + j.SURNAME;
+                                                                    email = j.EMAIL;
+                                                                    start = i.BORROWDATE;
+                                                                    end = i.RETURNDATE;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        }
+                                                    }
+                                                    <h2>Info:</h2>
+                                                    <div style="display:inline-block;text-align:left">
+                                                        <p style="font-size:16px;"><b>Item loaned by:</b> @name <br /><b>Email:</b> @email<br /><b>Borrow date:</b> @start<br /><b>Return date:</b> @end</p>
+                                                    </div>
+                                                }
+                                                else if (this.User.Identity.IsAuthenticated)
+                                                {
+                                                    string name = null;
+                                                    string email = null;
+                                                    DateTime start = new DateTime();
+                                                    DateTime end = new DateTime();
+                                                    foreach (var i in ViewBag.reservedObjects)
+                                                    {
+                                                        if (i.OBJECT == item.ID)
+                                                        {
+                                                            foreach (var j in ViewBag.members)
+                                                            {
+                                                                if (i.MEMBER == j.ID)
+                                                                {
+                                                                    name = j.NAME + " " + j.SURNAME;
+                                                                    email = j.EMAIL;
+                                                                    start = i.BORROWDATE;
+                                                                    end = i.RETURNDATE;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        }
+                                                    }
+                                                    <h2>Info:</h2>
+                                                    <div style="display:inline-block;text-align:left">
+                                                        <p style="font-size:16px;"><b>Item reserved by:</b> @name <br /><b>Email:</b> @email<br /><b>Reservation start:</b> @start<br /><b>Reservation end:</b> @end</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    }
                 }
 
 
@@ -145,7 +295,6 @@
     </section>
 
     <!--Store Photos from TAU-->
-
 
     <section class="page-section portfolio" id="portfolio">
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Store Photos</h2>
@@ -390,4 +539,7 @@
 
     <!-- Custom scripts for this template -->
     <script src="~/Content/Display/js/freelancer.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/input.js"></script>
+</body>
 </html>

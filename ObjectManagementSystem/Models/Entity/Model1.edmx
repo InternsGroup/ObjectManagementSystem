@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_STOREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_STOREModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACTION_TABLE">
           <Key>
             <PropertyRef Name="ID" />
@@ -85,6 +85,7 @@
           <Property Name="STATUS" Type="bit" />
           <Property Name="DETAIL" Type="varchar" MaxLength="500" />
           <Property Name="OBJECTIMAGE" Type="varchar" MaxLength="250" />
+          <Property Name="RESERVATIONSTATUS" Type="bit" />
         </EntityType>
         <EntityType Name="PENALTY_TABLE">
           <Key>
@@ -96,6 +97,16 @@
           <Property Name="STARTDATE" Type="smalldatetime" />
           <Property Name="ENDDATE" Type="smalldatetime" />
           <Property Name="MONEY" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="RESERVED_OBJECT_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OBJECT" Type="int" />
+          <Property Name="MEMBER" Type="int" />
+          <Property Name="BORROWDATE" Type="smalldatetime" />
+          <Property Name="RETURNDATE" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -179,6 +190,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+          <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
+          <End Role="RESERVED_OBJECT_TABLE" Type="Self.RESERVED_OBJECT_TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER_TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESERVED_OBJECT_TABLE">
+              <PropertyRef Name="MEMBER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+          <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="0..1" />
+          <End Role="RESERVED_OBJECT_TABLE" Type="Self.RESERVED_OBJECT_TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBJECT_TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESERVED_OBJECT_TABLE">
+              <PropertyRef Name="OBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DB_STOREModelStoreContainer">
           <EntitySet Name="ACTION_TABLE" EntityType="Self.ACTION_TABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CASHBOX_TABLE" EntityType="Self.CASHBOX_TABLE" Schema="dbo" store:Type="Tables" />
@@ -189,6 +224,7 @@
           <EntitySet Name="MESSAGE_TABLE" EntityType="Self.MESSAGE_TABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OBJECT_TABLE" EntityType="Self.OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PENALTY_TABLE" EntityType="Self.PENALTY_TABLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="Self.RESERVED_OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
             <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
@@ -214,9 +250,16 @@
             <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
             <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
           </AssociationSet>
+          <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" Association="Self.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+            <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
+            <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" Association="Self.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+            <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+            <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_STOREModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -286,6 +329,7 @@
           <Property Name="SCHOOL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="ACTION_TABLE" />
           <NavigationProperty Name="PENALTY_TABLE" Relationship="Self.FK_PENALTY_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="PENALTY_TABLE" />
+          <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
         </EntityType>
         <EntityType Name="MESSAGE_TABLE">
           <Key>
@@ -310,6 +354,8 @@
           <Property Name="OBJECTIMAGE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_BOOK_TABLE" FromRole="OBJECT_TABLE" ToRole="ACTION_TABLE" />
           <NavigationProperty Name="CATEGORY_TABLE" Relationship="Self.FK_BOOK_TABLE_CATEGORY_TABLE" FromRole="OBJECT_TABLE" ToRole="CATEGORY_TABLE" />
+          <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="OBJECT_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
+          <Property Name="RESERVATIONSTATUS" Type="Boolean" />
         </EntityType>
         <EntityType Name="PENALTY_TABLE">
           <Key>
@@ -441,8 +487,53 @@
             <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
             <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="DB_STOREModel.RESERVED_OBJECT_TABLE" />
+          <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+            <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
+            <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+            <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+            <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="RESERVED_OBJECT_TABLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OBJECT" Type="Int32" />
+          <Property Name="MEMBER" Type="Int32" />
+          <Property Name="BORROWDATE" Type="DateTime" Precision="0" />
+          <Property Name="RETURNDATE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MEMBER_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="MEMBER_TABLE" />
+          <NavigationProperty Name="OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="OBJECT_TABLE" />
+        </EntityType>
+        <Association Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+          <End Type="DB_STOREModel.MEMBER_TABLE" Role="MEMBER_TABLE" Multiplicity="0..1" />
+          <End Type="DB_STOREModel.RESERVED_OBJECT_TABLE" Role="RESERVED_OBJECT_TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER_TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESERVED_OBJECT_TABLE">
+              <PropertyRef Name="MEMBER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+          <End Type="DB_STOREModel.OBJECT_TABLE" Role="OBJECT_TABLE" Multiplicity="0..1" />
+          <End Type="DB_STOREModel.RESERVED_OBJECT_TABLE" Role="RESERVED_OBJECT_TABLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBJECT_TABLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RESERVED_OBJECT_TABLE">
+              <PropertyRef Name="OBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -528,6 +619,7 @@
           <EntitySetMapping Name="OBJECT_TABLE">
             <EntityTypeMapping TypeName="DB_STOREModel.OBJECT_TABLE">
               <MappingFragment StoreEntitySet="OBJECT_TABLE">
+                <ScalarProperty Name="RESERVATIONSTATUS" ColumnName="RESERVATIONSTATUS" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
@@ -557,6 +649,17 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVED_OBJECT_TABLE">
+            <EntityTypeMapping TypeName="DB_STOREModel.RESERVED_OBJECT_TABLE">
+              <MappingFragment StoreEntitySet="RESERVED_OBJECT_TABLE">
+                <ScalarProperty Name="RETURNDATE" ColumnName="RETURNDATE" />
+                <ScalarProperty Name="BORROWDATE" ColumnName="BORROWDATE" />
+                <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+                <ScalarProperty Name="OBJECT" ColumnName="OBJECT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

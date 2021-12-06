@@ -35,5 +35,6 @@ namespace ObjectManagementSystem.Models.Entity
         public virtual DbSet<OBJECT_TABLE> OBJECT_TABLE { get; set; }
         public virtual DbSet<PENALTY_TABLE> PENALTY_TABLE { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<RESERVED_OBJECT_TABLE> RESERVED_OBJECT_TABLE { get; set; }
     }
 }

@@ -81,6 +81,7 @@
     <EntitySetMapping Name="OBJECT_TABLE">
       <EntityTypeMapping TypeName="DB_STOREModel.OBJECT_TABLE">
         <MappingFragment StoreEntitySet="OBJECT_TABLE">
+          <ScalarProperty Name="RESERVATIONSTATUS" ColumnName="RESERVATIONSTATUS" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
@@ -110,6 +111,17 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESERVED_OBJECT_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.RESERVED_OBJECT_TABLE">
+        <MappingFragment StoreEntitySet="RESERVED_OBJECT_TABLE">
+          <ScalarProperty Name="RETURNDATE" ColumnName="RETURNDATE" />
+          <ScalarProperty Name="BORROWDATE" ColumnName="BORROWDATE" />
+          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+          <ScalarProperty Name="OBJECT" ColumnName="OBJECT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,16 +1,17 @@
 ﻿@using ObjectManagementSystem.Models.Entity;
 @model List<ACTION_TABLE>
 @{
-    ViewBag.Title = "MyItems";
+    ViewBag.Title = "LoanedItems";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>MyItems</h2>
+<h2>Loaned Items</h2>
 
 <table class="table table-striped;" style="position: center; background-color: lightgray; table-layout: auto;">
     <tr>
         <th>Item Id</th>
-        <th>Item Detailed Information</th>
+        <th>Item Name</th>
+        <th>Item Detail</th>
         <th>Item Borrow Date</th>
         <th>Item Return Date</th>
     </tr>
@@ -21,7 +22,8 @@
             @if (item.MEMBER_TABLE.USERNAME == ViewBag.ID)
             {
                 <td>@item.OBJECT_TABLE.ID</td>
-                <td>@item.OBJECT_TABLE.DETAIL</td>
+                <td>@item.OBJECT_TABLE.NAME</td>
+                <td id="tableDataOverFlow">@item.OBJECT_TABLE.DETAIL</td>
                 <td>@item.BORROWDATE</td>
                 <td>@item.RETURNDATE</td>
             }
@@ -29,3 +31,4 @@
         </tr>
     }
 </table>
+
