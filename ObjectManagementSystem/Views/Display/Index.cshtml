@@ -32,7 +32,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/Display/Index">
+            <!--Anasayfa ikonu-->
+            <a class="navbar-brand js-scroll-trigger" style="font-size:24px" href="/Display/Index">
                 <span class="glyphicon glyphicon-home"></span>
             </a>
             <a class="navbar-brand js-scroll-trigger" href="#page-top">Object Management Site</a>
@@ -43,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown" style="padding:unset">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="padding:10px !important" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" style="padding:10px 10px 0px 0px !important" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             CATEGORIES
                         </a>
                         <div class="dropdown-menu" style="background-color: #1abc9c;" aria-labelledby="navbarDropdownMenuLink">
@@ -264,7 +265,7 @@
                                                 <i style="font-size:30px;color:red;">LOANED</i>
                                             </div>
                                         </div>
-                                        <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
+                                        <img src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" height="300">
                                         <!--odunc alması için buton-->
 
                                     </div>
@@ -279,8 +280,7 @@
                                                 <i style="font-size:30px;color:black">RESERVED</i>
                                             </div>
                                         </div>
-                                        <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
-                                        <!--odunc alması için buton-->
+                                        <img src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" width="200" height="300">
 
                                     </div>
                                 </div>
@@ -294,7 +294,7 @@
                                                 <i class="fas fa-plus fa-3x"></i>
                                             </div>
                                         </div>
-                                        <img src="@item.OBJECTIMAGE" alt="@item.NAME" width="200" height="300">
+                                        <img src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" width="200" height="300">
                                         <!--odunc alması için buton-->
 
                                     </div>
@@ -335,7 +335,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image -->
-                                    <img class="img-fluid rounded mb-5" src="@item.OBJECTIMAGE" alt="" style="float:left;">
+                                    <img class="img-fluid rounded mb-5" src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" style="float:left;">
                                     <!-- Portfolio Modal - Text -->
                                     <h2>Detail:</h2>
                                     <div style="font-display:block;">
@@ -452,7 +452,7 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1000px; height:600px;margin:auto">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1000px; height:600px;margin:auto;">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
