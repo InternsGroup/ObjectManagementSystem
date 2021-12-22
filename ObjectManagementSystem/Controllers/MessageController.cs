@@ -7,6 +7,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class MessageController : Controller
     {
         // GET: Message

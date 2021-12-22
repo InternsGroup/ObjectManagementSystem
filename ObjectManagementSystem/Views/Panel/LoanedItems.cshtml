@@ -24,8 +24,8 @@
                 <td>@item.OBJECT_TABLE.ID</td>
                 <td>@item.OBJECT_TABLE.NAME</td>
                 <td id="tableDataOverFlow">@item.OBJECT_TABLE.DETAIL</td>
-                <td>@item.BORROWDATE</td>
-                <td>@item.RETURNDATE</td>
+                <td>@Convert.ToDateTime(item.BORROWDATE).ToString("dd/MM/yyyy")</td>
+                <td>@Convert.ToDateTime(item.RETURNDATE).ToString("dd/MM/yyyy")</td>
             }
 
         </tr>

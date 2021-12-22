@@ -1,0 +1,42 @@
+﻿@using ObjectManagementSystem.Models.Entity;
+@model List<ADMIN_TABLE>
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Admin Settings</title>
+</head>
+
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">Admins</h2>
+</div>
+
+<table class="table table-striped;" style="position:center; background-color: lightgray; table-layout: auto;">
+    <tr style="background-color:gold">
+        <th>Admin Id</th>
+        <th>Admin Name</th>
+        <th>Admin Username</th>
+        <th>Authority</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var person in Model)
+    {
+        <tr>
+            <td>@person.ID</td>
+            <td>@person.NAME</td>
+            <td>@person.USERNAME</td>
+            <td>@person.AUTHORITY</td>
+            @if (person.NAME == "default")
+            {
+                <td><a href="/Settings/Delete/@person.ID" class="btn btn-danger disabled" style="background-color:darkred" onclick="return confirm(' Are you sure you want to delete Admin:\n @person.USERNAME')"><i class="glyphicon glyphicon-trash"> Delete</i></a></td>
+            }
+            else
+            {
+                <td><a href="/Settings/Delete/@person.ID" class="btn btn-danger" style="background-color:darkred" onclick="return confirm(' Are you sure you want to delete Admin:\n @person.USERNAME')"><i class="glyphicon glyphicon-trash"> Delete</i></a></td>
+            }
+            <td><a href="/Settings/GetAdmin/@person.ID" class="btn btn-info" style="background-color:darkseagreen;color:black"><i class="glyphicon glyphicon-pencil"> Edit</i></a></td>
+        </tr>
+    }
+</table>
+<a style="margin-bottom:15px" href="/Settings/AddAdmin/" class="btn btn-primary">Add New Admin</a>

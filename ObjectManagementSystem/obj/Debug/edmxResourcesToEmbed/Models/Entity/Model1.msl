@@ -15,6 +15,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ADMIN_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.ADMIN_TABLE">
+        <MappingFragment StoreEntitySet="ADMIN_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="AUTHORITY" ColumnName="AUTHORITY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CASHBOX_TABLE">
       <EntityTypeMapping TypeName="DB_STOREModel.CASHBOX_TABLE">
         <MappingFragment StoreEntitySet="CASHBOX_TABLE">
@@ -40,14 +51,6 @@
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="TOPIC" ColumnName="TOPIC" />
           <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EMPLOYEE_TABLE">
-      <EntityTypeMapping TypeName="DB_STOREModel.EMPLOYEE_TABLE">
-        <MappingFragment StoreEntitySet="EMPLOYEE_TABLE">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="EMPLOYEE" ColumnName="EMPLOYEE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -81,13 +84,13 @@
     <EntitySetMapping Name="OBJECT_TABLE">
       <EntityTypeMapping TypeName="DB_STOREModel.OBJECT_TABLE">
         <MappingFragment StoreEntitySet="OBJECT_TABLE">
-          <ScalarProperty Name="RESERVATIONSTATUS" ColumnName="RESERVATIONSTATUS" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="NAME" ColumnName="NAME" />
           <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
           <ScalarProperty Name="STATUS" ColumnName="STATUS" />
           <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
           <ScalarProperty Name="OBJECTIMAGE" ColumnName="OBJECTIMAGE" />
+          <ScalarProperty Name="RESERVATIONSTATUS" ColumnName="RESERVATIONSTATUS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -103,6 +106,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RESERVED_OBJECT_TABLE">
+      <EntityTypeMapping TypeName="DB_STOREModel.RESERVED_OBJECT_TABLE">
+        <MappingFragment StoreEntitySet="RESERVED_OBJECT_TABLE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OBJECT" ColumnName="OBJECT" />
+          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
+          <ScalarProperty Name="BORROWDATE" ColumnName="BORROWDATE" />
+          <ScalarProperty Name="RETURNDATE" ColumnName="RETURNDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="DB_STOREModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -111,17 +125,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RESERVED_OBJECT_TABLE">
-      <EntityTypeMapping TypeName="DB_STOREModel.RESERVED_OBJECT_TABLE">
-        <MappingFragment StoreEntitySet="RESERVED_OBJECT_TABLE">
-          <ScalarProperty Name="RETURNDATE" ColumnName="RETURNDATE" />
-          <ScalarProperty Name="BORROWDATE" ColumnName="BORROWDATE" />
-          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
-          <ScalarProperty Name="OBJECT" ColumnName="OBJECT" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

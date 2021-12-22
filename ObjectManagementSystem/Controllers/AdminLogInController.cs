@@ -8,7 +8,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
-    public class LogInController : Controller
+    public class AdminLogInController : Controller
     {
         public static MEMBER_TABLE user = new MEMBER_TABLE();
         DB_STOREEntities db = new DB_STOREEntities();
@@ -20,19 +20,16 @@ namespace ObjectManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(MEMBER_TABLE memberObj)
+        public ActionResult Index(ADMIN_TABLE adminObj)
         {
-            var username = memberObj.USERNAME;
-            var password = memberObj.PASSWORD;
-            var userInfo = db.MEMBER_TABLE.FirstOrDefault(x => x.PASSWORD == password && x.USERNAME == username);
+            var userInfo = db.ADMIN_TABLE.FirstOrDefault(x => x.PASSWORD == adminObj.PASSWORD && x.USERNAME == adminObj.USERNAME);
             if (userInfo != null)
             {
                 FormsAuthentication.SetAuthCookie(userInfo.USERNAME, false);
                 Session["Username"] = userInfo.USERNAME.ToString();
-                FormsAuthentication.SetAuthCookie(userInfo.ID.ToString(), false);
                 Session["ID"] = userInfo.ID.ToString();
                 user.ID = userInfo.ID;
-                return RedirectToAction("Index", "Display");
+                return RedirectToAction("Index", "Category");
             }
             else
             {

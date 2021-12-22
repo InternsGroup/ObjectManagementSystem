@@ -65,14 +65,19 @@
                     }
                     else
                     {
+                        if (!User.IsInRole("Admin") && !User.IsInRole("Employee"))
+                        {
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Panel/Index">My Profile</a>
                         </li>
-                        <!--Gecici olarak eklendi-->
-                        <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Category/Index">Admin Panel</a>
-                        </li>
-                        <!--                     -->
+                        }
+                        if(User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <!--Gecici olarak eklendi-->
+                            <li class="nav-item mx-0 mx-lg-1">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Category/Index">Admin Panel</a>
+                            </li>
+                        }
                         <li class="nav-item mx-0 mx-lg-1">
                             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Panel/LogOut">Logout</a>
                         </li>
@@ -379,7 +384,7 @@
                                     @if (item.RESERVATIONSTATUS != false)
                                     {
                                         <div class="row justify-content-center">
-                                            @if (this.User.Identity.IsAuthenticated)
+                                            @if (this.User.Identity.IsAuthenticated && !User.IsInRole("Admin") && !User.IsInRole("Employee"))
                                             {
                                                 <form method="post" action="/Lend/ReserveObject">
                                                     <input class="form-control" style="margin-top:20px" type="text" value="@Session["ID"]" name="MEMBER" hidden />
@@ -400,8 +405,8 @@
                                     {
                                         string name = null;
                                         string email = null;
-                                        DateTime start = new DateTime();
-                                        DateTime end = new DateTime();
+                                        string start = null;
+                                        string end = null;
                                         foreach (var i in ViewBag.loanedObjects)
                                         {
                                             if (i.OBJECT == item.ID)
@@ -412,8 +417,8 @@
                                                     {
                                                         name = j.NAME + " " + j.SURNAME;
                                                         email = j.EMAIL;
-                                                        start = i.BORROWDATE;
-                                                        end = i.RETURNDATE;
+                                                        start = Convert.ToDateTime(i.BORROWDATE).ToString("dd/MM/yyyy");
+                                                        end = Convert.ToDateTime(i.RETURNDATE).ToString("dd/MM/yyyy");
                                                         break;
                                                     }
                                                 }
@@ -429,8 +434,8 @@
                                     {
                                         string name = null;
                                         string email = null;
-                                        DateTime start = new DateTime();
-                                        DateTime end = new DateTime();
+                                        string start = null;
+                                        string end = null;
                                         foreach (var i in ViewBag.reservedObjects)
                                         {
                                             if (i.OBJECT == item.ID)
@@ -441,8 +446,8 @@
                                                     {
                                                         name = j.NAME + " " + j.SURNAME;
                                                         email = j.EMAIL;
-                                                        start = i.BORROWDATE;
-                                                        end = i.RETURNDATE;
+                                                        start = Convert.ToDateTime(i.BORROWDATE).ToString("dd/MM/yyyy");
+                                                        end = Convert.ToDateTime(i.RETURNDATE).ToString("dd/MM/yyyy");
                                                         break;
                                                     }
                                                 }

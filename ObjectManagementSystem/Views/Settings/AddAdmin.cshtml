@@ -1,0 +1,27 @@
+﻿@model ObjectManagementSystem.Models.Entity.ADMIN_TABLE
+@{
+    ViewBag.Title = "AddAdmin";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Add Admin</title>
+</head>
+
+<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+    <div>
+        <label style="margin-top: 10px"> &nbsp;Admin Name</label>
+        <input class="form-control" style="margin-top:10px" type="text" onkeypress="return isNumericKey(event)" name="NAME" maxlength="50" placeholder="Name" required />
+        <label style="margin-top: 10px"> &nbsp;Admin Username</label>
+        <input class="form-control" style="margin-top:10px" type="text" name="USERNAME" maxlength="20" placeholder="Username" required />
+        <label style="margin-top: 10px"> &nbsp;Admin Password</label>
+        <input class="form-control" style="margin-top:10px" type="text" name="PASSWORD" maxlength="20" placeholder="Password" required />
+        <label style="margin-top: 10px"> &nbsp;Admin Authority</label>
+        <select class="form-control" name="AUTHORITY">
+            <option>Admin</option>
+            <option>Employee</option>
+        </select>
+    </div>
+    <div style="margin-top:20px">
+        <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Admin</button>
+    </div>
+</form>

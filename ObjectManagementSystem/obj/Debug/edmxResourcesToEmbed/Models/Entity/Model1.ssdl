@@ -13,6 +13,16 @@
     <Property Name="MEMBERRETURNDATE" Type="smalldatetime" />
     <Property Name="ACTIONSTATUS" Type="bit" />
   </EntityType>
+  <EntityType Name="ADMIN_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="varchar" MaxLength="50" />
+    <Property Name="USERNAME" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="20" />
+    <Property Name="AUTHORITY" Type="varchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="CASHBOX_TABLE">
     <Key>
       <PropertyRef Name="ID" />
@@ -37,13 +47,6 @@
     <Property Name="EMAIL" Type="varchar" MaxLength="50" />
     <Property Name="TOPIC" Type="varchar" MaxLength="50" />
     <Property Name="MESSAGE" Type="varchar" MaxLength="1000" />
-  </EntityType>
-  <EntityType Name="EMPLOYEE_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EMPLOYEE" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="MEMBER_TABLE">
     <Key>
@@ -113,6 +116,18 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_ACTION_TABLE_ADMIN_TABLE">
+    <End Role="ADMIN_TABLE" Type="Self.ADMIN_TABLE" Multiplicity="0..1" />
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADMIN_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ACTION_TABLE">
+        <PropertyRef Name="EMPLOYEE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ACTION_TABLE_BOOK_TABLE">
     <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="0..1" />
     <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
@@ -122,18 +137,6 @@
       </Principal>
       <Dependent Role="ACTION_TABLE">
         <PropertyRef Name="OBJECT" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ACTION_TABLE_EMPLOYEE_TABLE">
-    <End Role="EMPLOYEE_TABLE" Type="Self.EMPLOYEE_TABLE" Multiplicity="0..1" />
-    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EMPLOYEE_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ACTION_TABLE">
-        <PropertyRef Name="EMPLOYEE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -211,22 +214,22 @@
   </Association>
   <EntityContainer Name="DB_STOREModelStoreContainer">
     <EntitySet Name="ACTION_TABLE" EntityType="Self.ACTION_TABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ADMIN_TABLE" EntityType="Self.ADMIN_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CASHBOX_TABLE" EntityType="Self.CASHBOX_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CATEGORY_TABLE" EntityType="Self.CATEGORY_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CONTACT_TABLE" EntityType="Self.CONTACT_TABLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EMPLOYEE_TABLE" EntityType="Self.EMPLOYEE_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MEMBER_TABLE" EntityType="Self.MEMBER_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MESSAGE_TABLE" EntityType="Self.MESSAGE_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OBJECT_TABLE" EntityType="Self.OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PENALTY_TABLE" EntityType="Self.PENALTY_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="Self.RESERVED_OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
-      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+    <AssociationSet Name="FK_ACTION_TABLE_ADMIN_TABLE" Association="Self.FK_ACTION_TABLE_ADMIN_TABLE">
+      <End Role="ADMIN_TABLE" EntitySet="ADMIN_TABLE" />
       <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
     </AssociationSet>
-    <AssociationSet Name="FK_ACTION_TABLE_EMPLOYEE_TABLE" Association="Self.FK_ACTION_TABLE_EMPLOYEE_TABLE">
-      <End Role="EMPLOYEE_TABLE" EntitySet="EMPLOYEE_TABLE" />
+    <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
+      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
       <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
     </AssociationSet>
     <AssociationSet Name="FK_ACTION_TABLE_MEMBER_TABLE" Association="Self.FK_ACTION_TABLE_MEMBER_TABLE">

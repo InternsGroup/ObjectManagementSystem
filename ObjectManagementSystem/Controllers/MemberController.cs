@@ -8,6 +8,7 @@ using PagedList;
 
 namespace ObjectManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class MemberController : Controller
     {
         // GET: Member

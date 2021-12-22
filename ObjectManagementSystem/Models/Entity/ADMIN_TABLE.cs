@@ -12,16 +12,19 @@ namespace ObjectManagementSystem.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class EMPLOYEE_TABLE
+    public partial class ADMIN_TABLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EMPLOYEE_TABLE()
+        public ADMIN_TABLE()
         {
             this.ACTION_TABLE = new HashSet<ACTION_TABLE>();
         }
     
         public byte ID { get; set; }
-        public string EMPLOYEE { get; set; }
+        public string NAME { get; set; }
+        public string USERNAME { get; set; }
+        public string PASSWORD { get; set; }
+        public string AUTHORITY { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACTION_TABLE> ACTION_TABLE { get; set; }

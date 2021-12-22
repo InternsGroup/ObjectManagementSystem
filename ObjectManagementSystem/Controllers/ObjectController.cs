@@ -7,6 +7,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class ObjectController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();

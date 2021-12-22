@@ -26,15 +26,15 @@ namespace ObjectManagementSystem.Models.Entity
         }
     
         public virtual DbSet<ACTION_TABLE> ACTION_TABLE { get; set; }
+        public virtual DbSet<ADMIN_TABLE> ADMIN_TABLE { get; set; }
         public virtual DbSet<CASHBOX_TABLE> CASHBOX_TABLE { get; set; }
         public virtual DbSet<CATEGORY_TABLE> CATEGORY_TABLE { get; set; }
         public virtual DbSet<CONTACT_TABLE> CONTACT_TABLE { get; set; }
-        public virtual DbSet<EMPLOYEE_TABLE> EMPLOYEE_TABLE { get; set; }
         public virtual DbSet<MEMBER_TABLE> MEMBER_TABLE { get; set; }
         public virtual DbSet<MESSAGE_TABLE> MESSAGE_TABLE { get; set; }
         public virtual DbSet<OBJECT_TABLE> OBJECT_TABLE { get; set; }
         public virtual DbSet<PENALTY_TABLE> PENALTY_TABLE { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<RESERVED_OBJECT_TABLE> RESERVED_OBJECT_TABLE { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

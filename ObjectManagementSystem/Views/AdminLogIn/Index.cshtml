@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -25,22 +24,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- custom style sheet -->
     <link href="~/Content/Display/css/all.min.css" rel="stylesheet" />
     <link href="~/Content/LogIn/css/fontawesome-all.css" rel="stylesheet" />
-    <link href="~/Content/LogIn/css/style.css" rel="stylesheet" />
+    <link href="~/Content/LogIn/css/style2.css" rel="stylesheet" />
     <!-- /custom style sheet -->
     <!-- google fonts-->
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <!-- /google fonts-->
     <link rel="shortcut icon" href="~/Images/tau.ico" />
-
 </head>
 
 
 <body>
-    <h1>TAU Store Login Form</h1>
+    <h1>Admin Login Form</h1>
     <div class="w3l-login-form">
         <h2>Login Here</h2>
-        @using (Html.BeginForm("Index", "LogIn", FormMethod.Post, new { @autocomplete = "off" }))
+        @using (Html.BeginForm("Index", "AdminLogIn", FormMethod.Post, new { @autocomplete = "off" }))
         {
             <div class=" w3l-form-group">
                 <label>Username:</label>
@@ -66,7 +64,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 @ViewBag.Message
             </div>
         }
-        <p class=" w3l-register-p">Don't have an account?<a href="~/Register/Index" class="register"> Register</a></p>
+        <p style="text-align:center"><label><a href="~/Display/Index" class="register"><b>Go to main page</b></a></label></p>
     </div>
     <footer>
         <p class="copyright-agileinfo"> &copy; 2018 Material Login Form. All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>

@@ -12,10 +12,21 @@
     <Property Name="RETURNDATE" Type="DateTime" Precision="0" />
     <Property Name="MEMBERRETURNDATE" Type="DateTime" Precision="0" />
     <Property Name="ACTIONSTATUS" Type="Boolean" />
+    <NavigationProperty Name="ADMIN_TABLE" Relationship="Self.FK_ACTION_TABLE_ADMIN_TABLE" FromRole="ACTION_TABLE" ToRole="ADMIN_TABLE" />
     <NavigationProperty Name="OBJECT_TABLE" Relationship="Self.FK_ACTION_TABLE_BOOK_TABLE" FromRole="ACTION_TABLE" ToRole="OBJECT_TABLE" />
-    <NavigationProperty Name="EMPLOYEE_TABLE" Relationship="Self.FK_ACTION_TABLE_EMPLOYEE_TABLE" FromRole="ACTION_TABLE" ToRole="EMPLOYEE_TABLE" />
     <NavigationProperty Name="MEMBER_TABLE" Relationship="Self.FK_ACTION_TABLE_MEMBER_TABLE" FromRole="ACTION_TABLE" ToRole="MEMBER_TABLE" />
     <NavigationProperty Name="PENALTY_TABLE" Relationship="Self.FK_PENALTY_TABLE_ACTION_TABLE" FromRole="ACTION_TABLE" ToRole="PENALTY_TABLE" />
+  </EntityType>
+  <EntityType Name="ADMIN_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AUTHORITY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_ADMIN_TABLE" FromRole="ADMIN_TABLE" ToRole="ACTION_TABLE" />
   </EntityType>
   <EntityType Name="CASHBOX_TABLE">
     <Key>
@@ -43,14 +54,6 @@
     <Property Name="TOPIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MESSAGE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="EMPLOYEE_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EMPLOYEE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_EMPLOYEE_TABLE" FromRole="EMPLOYEE_TABLE" ToRole="ACTION_TABLE" />
-  </EntityType>
   <EntityType Name="MEMBER_TABLE">
     <Key>
       <PropertyRef Name="ID" />
@@ -66,7 +69,7 @@
     <Property Name="SCHOOL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="ACTION_TABLE" />
     <NavigationProperty Name="PENALTY_TABLE" Relationship="Self.FK_PENALTY_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="PENALTY_TABLE" />
-    <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
+    <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="Self.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="MEMBER_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
   </EntityType>
   <EntityType Name="MESSAGE_TABLE">
     <Key>
@@ -89,10 +92,10 @@
     <Property Name="STATUS" Type="Boolean" />
     <Property Name="DETAIL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="OBJECTIMAGE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RESERVATIONSTATUS" Type="Boolean" />
     <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_ACTION_TABLE_BOOK_TABLE" FromRole="OBJECT_TABLE" ToRole="ACTION_TABLE" />
     <NavigationProperty Name="CATEGORY_TABLE" Relationship="Self.FK_BOOK_TABLE_CATEGORY_TABLE" FromRole="OBJECT_TABLE" ToRole="CATEGORY_TABLE" />
-    <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="OBJECT_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
-    <Property Name="RESERVATIONSTATUS" Type="Boolean" />
+    <NavigationProperty Name="RESERVED_OBJECT_TABLE" Relationship="Self.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="OBJECT_TABLE" ToRole="RESERVED_OBJECT_TABLE" />
   </EntityType>
   <EntityType Name="PENALTY_TABLE">
     <Key>
@@ -107,6 +110,18 @@
     <NavigationProperty Name="ACTION_TABLE" Relationship="Self.FK_PENALTY_TABLE_ACTION_TABLE" FromRole="PENALTY_TABLE" ToRole="ACTION_TABLE" />
     <NavigationProperty Name="MEMBER_TABLE" Relationship="Self.FK_PENALTY_TABLE_MEMBER_TABLE" FromRole="PENALTY_TABLE" ToRole="MEMBER_TABLE" />
   </EntityType>
+  <EntityType Name="RESERVED_OBJECT_TABLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OBJECT" Type="Int32" />
+    <Property Name="MEMBER" Type="Int32" />
+    <Property Name="BORROWDATE" Type="DateTime" Precision="0" />
+    <Property Name="RETURNDATE" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="MEMBER_TABLE" Relationship="Self.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="MEMBER_TABLE" />
+    <NavigationProperty Name="OBJECT_TABLE" Relationship="Self.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="OBJECT_TABLE" />
+  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -117,6 +132,18 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <Association Name="FK_ACTION_TABLE_ADMIN_TABLE">
+    <End Role="ADMIN_TABLE" Type="Self.ADMIN_TABLE" Multiplicity="0..1" />
+    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADMIN_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ACTION_TABLE">
+        <PropertyRef Name="EMPLOYEE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ACTION_TABLE_BOOK_TABLE">
     <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="0..1" />
     <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
@@ -126,18 +153,6 @@
       </Principal>
       <Dependent Role="ACTION_TABLE">
         <PropertyRef Name="OBJECT" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ACTION_TABLE_EMPLOYEE_TABLE">
-    <End Role="EMPLOYEE_TABLE" Type="Self.EMPLOYEE_TABLE" Multiplicity="0..1" />
-    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EMPLOYEE_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ACTION_TABLE">
-        <PropertyRef Name="EMPLOYEE" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -189,23 +204,48 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+    <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
+    <End Role="RESERVED_OBJECT_TABLE" Type="Self.RESERVED_OBJECT_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEMBER_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RESERVED_OBJECT_TABLE">
+        <PropertyRef Name="MEMBER" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+    <End Role="OBJECT_TABLE" Type="Self.OBJECT_TABLE" Multiplicity="0..1" />
+    <End Role="RESERVED_OBJECT_TABLE" Type="Self.RESERVED_OBJECT_TABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OBJECT_TABLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RESERVED_OBJECT_TABLE">
+        <PropertyRef Name="OBJECT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DB_STOREEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ACTION_TABLE" EntityType="Self.ACTION_TABLE" />
+    <EntitySet Name="ADMIN_TABLE" EntityType="Self.ADMIN_TABLE" />
     <EntitySet Name="CASHBOX_TABLE" EntityType="Self.CASHBOX_TABLE" />
     <EntitySet Name="CATEGORY_TABLE" EntityType="Self.CATEGORY_TABLE" />
     <EntitySet Name="CONTACT_TABLE" EntityType="Self.CONTACT_TABLE" />
-    <EntitySet Name="EMPLOYEE_TABLE" EntityType="Self.EMPLOYEE_TABLE" />
     <EntitySet Name="MEMBER_TABLE" EntityType="Self.MEMBER_TABLE" />
     <EntitySet Name="MESSAGE_TABLE" EntityType="Self.MESSAGE_TABLE" />
     <EntitySet Name="OBJECT_TABLE" EntityType="Self.OBJECT_TABLE" />
     <EntitySet Name="PENALTY_TABLE" EntityType="Self.PENALTY_TABLE" />
+    <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="Self.RESERVED_OBJECT_TABLE" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-    <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
-      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
+    <AssociationSet Name="FK_ACTION_TABLE_ADMIN_TABLE" Association="Self.FK_ACTION_TABLE_ADMIN_TABLE">
+      <End Role="ADMIN_TABLE" EntitySet="ADMIN_TABLE" />
       <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
     </AssociationSet>
-    <AssociationSet Name="FK_ACTION_TABLE_EMPLOYEE_TABLE" Association="Self.FK_ACTION_TABLE_EMPLOYEE_TABLE">
-      <End Role="EMPLOYEE_TABLE" EntitySet="EMPLOYEE_TABLE" />
+    <AssociationSet Name="FK_ACTION_TABLE_BOOK_TABLE" Association="Self.FK_ACTION_TABLE_BOOK_TABLE">
+      <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
       <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
     </AssociationSet>
     <AssociationSet Name="FK_ACTION_TABLE_MEMBER_TABLE" Association="Self.FK_ACTION_TABLE_MEMBER_TABLE">
@@ -224,50 +264,13 @@
       <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
       <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
     </AssociationSet>
-    <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="DB_STOREModel.RESERVED_OBJECT_TABLE" />
-    <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
+    <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" Association="Self.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
       <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
       <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
     </AssociationSet>
-    <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
+    <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" Association="Self.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
       <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
       <End Role="RESERVED_OBJECT_TABLE" EntitySet="RESERVED_OBJECT_TABLE" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="RESERVED_OBJECT_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OBJECT" Type="Int32" />
-    <Property Name="MEMBER" Type="Int32" />
-    <Property Name="BORROWDATE" Type="DateTime" Precision="0" />
-    <Property Name="RETURNDATE" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="MEMBER_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="MEMBER_TABLE" />
-    <NavigationProperty Name="OBJECT_TABLE" Relationship="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" FromRole="RESERVED_OBJECT_TABLE" ToRole="OBJECT_TABLE" />
-  </EntityType>
-  <Association Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
-    <End Type="DB_STOREModel.MEMBER_TABLE" Role="MEMBER_TABLE" Multiplicity="0..1" />
-    <End Type="DB_STOREModel.RESERVED_OBJECT_TABLE" Role="RESERVED_OBJECT_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MEMBER_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RESERVED_OBJECT_TABLE">
-        <PropertyRef Name="MEMBER" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE">
-    <End Type="DB_STOREModel.OBJECT_TABLE" Role="OBJECT_TABLE" Multiplicity="0..1" />
-    <End Type="DB_STOREModel.RESERVED_OBJECT_TABLE" Role="RESERVED_OBJECT_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OBJECT_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RESERVED_OBJECT_TABLE">
-        <PropertyRef Name="OBJECT" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

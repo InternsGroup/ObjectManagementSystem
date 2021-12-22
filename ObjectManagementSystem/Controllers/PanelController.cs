@@ -9,6 +9,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
+    [Authorize]
     public class PanelController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
@@ -16,7 +17,6 @@ namespace ObjectManagementSystem.Controllers
 
         // GET: Panel
         [HttpGet]
-        [Authorize]
         public ActionResult Index()
         {
             var user = (string)Session["Username"];
@@ -44,7 +44,13 @@ namespace ObjectManagementSystem.Controllers
 
         public ActionResult LogOut()
         {
+            int x = 0;
+            if (User.IsInRole("Admin") || User.IsInRole("Employee")){ x = 1; }
             FormsAuthentication.SignOut();
+            if(x==1)
+            {
+                return RedirectToAction("Index", "AdminLogin");
+            }
             return RedirectToAction("Index", "Display");
         }
 

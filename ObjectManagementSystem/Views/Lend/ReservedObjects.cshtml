@@ -31,7 +31,7 @@
         <tr>
             <td>@reservation.ID</td>
             <td>@reservation.OBJECT_TABLE.NAME</td>
-            <td>@reservation.MEMBER_TABLE.NAME &nbsp; @reservation.MEMBER_TABLE.SURNAME</td>
+            <td>@reservation.MEMBER_TABLE.NAME @reservation.MEMBER_TABLE.SURNAME</td>
             <td>@Convert.ToDateTime(reservation.BORROWDATE).ToString("dd/MM/yy") </td>
             <td>@Convert.ToDateTime(reservation.RETURNDATE).ToString("dd/MM/yy")</td>
             <td><a href="/Lend/GetReservedObject/@reservation.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Lend Object</a></td>

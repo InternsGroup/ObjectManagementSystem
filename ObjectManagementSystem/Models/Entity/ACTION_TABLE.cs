@@ -29,8 +29,8 @@ namespace ObjectManagementSystem.Models.Entity
         public Nullable<System.DateTime> MEMBERRETURNDATE { get; set; }
         public Nullable<bool> ACTIONSTATUS { get; set; }
     
+        public virtual ADMIN_TABLE ADMIN_TABLE { get; set; }
         public virtual OBJECT_TABLE OBJECT_TABLE { get; set; }
-        public virtual EMPLOYEE_TABLE EMPLOYEE_TABLE { get; set; }
         public virtual MEMBER_TABLE MEMBER_TABLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PENALTY_TABLE> PENALTY_TABLE { get; set; }

@@ -56,7 +56,10 @@ namespace ObjectManagementSystem.Controllers
                 {
                     //kategori ismini sayfaya gonderiyoruz cunku kategori secildikten sonra tempdata bir sonraki islemde
                     //kayboldugundan her anasayfada yapilan aratma veya goruntu degisikligi isleminde ismi tekrar gonderiyoruz
-                    ViewBag.categoryName = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == categoryId).NAME;
+                    if (categoryId != 0)
+                    {
+                        ViewBag.categoryName = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == categoryId).NAME;
+                    }
                 }catch(NullReferenceException e) { }
                 return View(objects.ToList());
             }

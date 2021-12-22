@@ -1,0 +1,29 @@
+﻿@model ObjectManagementSystem.Models.Entity.CONTACT_TABLE
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Form Detail</title>
+</head>
+<h4></h4>
+<a class="btn btn-info" style="margin-bottom:10px" href="/ContactForm/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
+
+<div class="form-group">
+    <label>Form Id</label>
+    @Html.TextBoxFor(form => form.ID, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Sender Name</label>
+    @Html.TextBoxFor(form => form.NAME, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Sender Email</label>
+    @Html.TextBoxFor(form => form.EMAIL, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Topic</label>
+    @Html.TextBoxFor(form => form.TOPIC, new { @class = "form-control", @readonly = "readonly" })
+    <br />
+    <label>Message</label>
+    @Html.TextAreaFor(form => form.MESSAGE, new { @class = "form-control", @readonly = "readonly", @id = "myTextArea" })
+    <br />
+</div>

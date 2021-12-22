@@ -7,6 +7,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Employee")]
     public class CategoryController : Controller
     {
         //db nesnesi ile veri tabanındaki tablolara ve property'lere ulasabiliriz

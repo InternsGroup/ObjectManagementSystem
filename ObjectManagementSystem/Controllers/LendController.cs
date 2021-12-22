@@ -7,31 +7,44 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
+
     public class LendController : Controller
     {
         public static RESERVED_OBJECT_TABLE myObj = new RESERVED_OBJECT_TABLE();
         // GET: Lend
         DB_STOREEntities db = new DB_STOREEntities();
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult Index()
         {
             var loanedObjectsList = db.ACTION_TABLE.Where(action => action.ACTIONSTATUS == false).ToList();
             return View(loanedObjectsList);
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         [HttpGet]
         public ActionResult Lend()
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         [HttpPost]
         public ActionResult Lend(ACTION_TABLE lendObj)
         {
+            int controlToday = 0;
+            int controlStartEnd = 0;
             db.ACTION_TABLE.Add(lendObj);
             var item = db.OBJECT_TABLE.Find(lendObj.OBJECT);
             var memberObj = db.MEMBER_TABLE.Find(lendObj.MEMBER);
-            var employeeObj = db.EMPLOYEE_TABLE.Find(lendObj.EMPLOYEE);
-
+            lendObj.EMPLOYEE = db.ADMIN_TABLE.Find(AdminLogInController.user.ID).ID;
+            try
+            {
+                controlToday = DateTime.Compare((DateTime)DateTime.Now.Date, (DateTime)lendObj.BORROWDATE);
+                controlStartEnd = DateTime.Compare((DateTime)lendObj.BORROWDATE, (DateTime)lendObj.RETURNDATE);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Danger = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
+                return View("Lend");
+            }
             if (item == null)
             {
                 ViewBag.Message = "Enter valid object ID.";
@@ -47,18 +60,25 @@ namespace ObjectManagementSystem.Controllers
                 ViewBag.Message = "Enter valid member ID.";
                 return View("Lend");
             }
-            else if (employeeObj == null)
-            {
-                ViewBag.Message = "Enter valid employee ID.";
-                return View("Lend");
-            }else if (item.RESERVATIONSTATUS == false)
+            else if (item.RESERVATIONSTATUS == false)
             {
                 ViewBag.Message = "Object is reserved by another member. Please control the reserved objects.";
+                return View("Lend");
+            }
+            else if (controlToday > 0)
+            {
+                ViewBag.Message = "Start date of borrow can not be earlier than today.";
+                return View("Lend");
+            }
+            else if (controlStartEnd >= 0)
+            {
+                ViewBag.Message = "End date of borrow can not be earlier than the start date or the same date.";
                 return View("Lend");
             }
             else
             {
                 item.STATUS = false;
+                item.RESERVATIONSTATUS = false;
                 lendObj.ACTIONSTATUS = false;
                 db.SaveChanges();
             }
@@ -78,13 +98,18 @@ namespace ObjectManagementSystem.Controllers
             if (controlStartEnd >= 0)
             {
                 Session["Danger"] = "End date of reservation can not be earlier than the start date or same.";
-                return RedirectToAction("Index","Display");
+                return RedirectToAction("Index", "Display");
+            }
+            if (db.OBJECT_TABLE.Find(reserveObj.OBJECT).RESERVATIONSTATUS == false)
+            {
+                Session["Danger"] = "Sorry but this object is already reserved by another member :(";
+                return RedirectToAction("Index", "Display");
             }
             var item = db.OBJECT_TABLE.FirstOrDefault(x => x.ID == reserveObj.OBJECT);
             item.RESERVATIONSTATUS = false;
             db.RESERVED_OBJECT_TABLE.Add(reserveObj);
             db.SaveChanges();
-            return RedirectToAction("Index","Display");
+            return RedirectToAction("Index", "Display");
         }
         /*
         public ActionResult LoanObject(int id)
@@ -104,14 +129,19 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index", "Display");
         }
         */
-
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult GetReservedObject(int id)
         {
             var reservedObj = db.RESERVED_OBJECT_TABLE.Find(id);
+            int controlToday = DateTime.Compare((DateTime)DateTime.Now.Date, (DateTime)reservedObj.BORROWDATE);
+            if (controlToday > 0)
+            {
+                reservedObj.BORROWDATE = DateTime.Now.Date;
+            }
             myObj = reservedObj;
             return View("GetReservedObject", reservedObj);
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult LendReservedObject(RESERVED_OBJECT_TABLE reservedObj)
         {
             try
@@ -128,7 +158,8 @@ namespace ObjectManagementSystem.Controllers
                     ViewBag.Danger = "End date of lend can not be earlier than the start date or same as of start date.";
                     return View("GetReservedObject", myObj);
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 ViewBag.Danger = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
                 return View("GetReservedObject", myObj);
@@ -137,7 +168,7 @@ namespace ObjectManagementSystem.Controllers
             ACTION_TABLE actionObj = new ACTION_TABLE();
             actionObj.OBJECT = resObj.OBJECT;
             actionObj.MEMBER = resObj.MEMBER;
-            actionObj.EMPLOYEE = 4;
+            actionObj.EMPLOYEE = db.ADMIN_TABLE.FirstOrDefault(p => p.NAME == "default").ID;
             actionObj.BORROWDATE = myObj.BORROWDATE;
             actionObj.RETURNDATE = myObj.RETURNDATE;
             actionObj.ACTIONSTATUS = false;
@@ -148,7 +179,7 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("ReservedObjects");
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult ReturnObject(int id)
         {
             var lendObj = db.ACTION_TABLE.Find(id);
@@ -156,7 +187,7 @@ namespace ObjectManagementSystem.Controllers
 
             return View("ReturnObject", lendObj);
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult UpdateReturnObject(ACTION_TABLE actionTableObj)
         {
             var actionObj = db.ACTION_TABLE.Find(actionTableObj.ID);
@@ -178,7 +209,7 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("ReservedObjects");
         }
-
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult ExtendPeriod(int id)
         {
             var action = db.ACTION_TABLE.Find(id);
