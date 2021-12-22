@@ -35,40 +35,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- section -->
     <section class="register">
         <div class="register-full">
-
             <div class="register-right">
+                <a href="/Display/Index" style="background-color:white;padding:2px 5px 2px 5px;"> <i class="fa fa-home"></i></a>
                 <div class="register-in">
                     <h2><span class="fa fa-pencil"></span> register here</h2>
                     <div class="register-form">
                         <form action="~/Register/Index" method="post" autocomplete="off">
                             <div class="fields-grid">
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" required>
+                                    <input type="text" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" value="@ViewBag.Name" required>
                                     <label>First Name</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="SURNAME" onkeypress="return isNumericKey(event)" maxlength="20" required>
+                                    <input type="text" name="SURNAME" onkeypress="return isNumericKey(event)" value="@ViewBag.Surname" maxlength="20" required>
                                     <label>Last Name</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    <input type="email" name="EMAIL" maxlength="50" required>
+                                    <input type="email" name="EMAIL" maxlength="50" value="@ViewBag.Email" required>
                                     <label>Email</label>
                                     <span></span>
+                                    @if (@ViewBag.EmailAlert != null)
+                                    {
+                                        <div class="alert alert-danger" role="alert" style="width: 50%; font-size: 12px;text-align:center; margin: auto; color: red;">
+                                            @ViewBag.EmailAlert
+                                        </div>
+                                    }
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="USERNAME" maxlength="20" required>
+                                    <input type="text" name="USERNAME" maxlength="20" value="@ViewBag.Username" required>
                                     <label>Username</label>
                                     <span></span>
+                                    @if (@ViewBag.UsernameAlert != null)
+                                    {
+                                        <div class="alert alert-danger" role="alert" style="width: 50%; font-size: 12px;text-align:center; margin: auto; color: red;">
+                                            @ViewBag.UsernameAlert
+                                        </div>
+                                    }
                                 </div>
                                 <div class="styled-input">
-                                    <input type="password" name="PASSWORD" maxlength="20" required>
+                                    <input type="password" name="PASSWORD" maxlength="20" value="@ViewBag.Password" required>
                                     <label>Password</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    <input type="text" name="TELNUMBER" onInput="this.value = phoneFormat(this.value)" pattern=".{14,14}" required>
+                                    <input type="text" name="TELNUMBER" onInput="this.value = phoneFormat(this.value)" pattern=".{14,14}" value="@ViewBag.Phone" required>
                                     <label>Phone Number</label>
                                     <span></span>
                                 </div>
