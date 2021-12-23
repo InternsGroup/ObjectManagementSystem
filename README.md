@@ -152,3 +152,23 @@ Kategori tablosu güzelleştirildi.
 
 * Objeler kategorilere ayrıldı. Menüye kategori kısmı eklendi ve istenen kategori seçilerek istenen biçimde gösterilebiliyor (Modal veya tablo halinde).
 * Anasayfa ikonu eklendi kullanıcı üstüne tıklayarak kategoriler bölümünden anasayfaya geçiş yapabiliyor. Tasarımlar düzenlendi.
+
+# # 15.12.2021
+
+* Site içinde bazı sayfalara yetkisi olmayanlar için erişim kısıtlaması getirildi
+* Admin için ayrı login sayfası oluşturuldu
+
+# # 18.12.2021
+
+* Anasayfada bulunan contact form için admin paneline yeni bölüm eklendi. Böylelikle gelen mesaj formlarını görevli görüntüleyebilecek ve silebilecek.
+* Veri tabanında EMPLOYEE_TABLE silinerek yerine iki farklı admin tipi olan ADMIN_TABLE eklendi ve ilişkileri düzenlendi. Admin tipleri olarak biri görevli(ödünç verme yetkisine sahip), diğeri ise normal tüm yetkinliklere sahip admin(ek olarak ayarlar bölümüne erişerek yeni görevli veya admin ekleyebiliyor)
+
+# # 20.12.2021
+
+* Admin paneline settings bölümü altında yeni admin, görevli ekleme ve güncelleme kısmı eklendi sadece Admin yetkisine sahip kişiler erişebiliyor.
+* LogIn ve Register işlemlerine uyarı sistemi eklendi.(LogIn için şifre veya kullanıcı ismi hatalıdır. || Register için kullanıcı ismi mevcuttur başka bir isim seçiniz. ve Email mevcuttur başka bir email seçiniz. gibi)
+
+# # 22.12.2021
+
+* Hatalı sayfa erişimlerinde 404 aradığınız sayfa mevcut değildir uyarısı ayarlandı. 
+* Erişim yetkisi olmadığı halde mevcut bir sayfaya erişmeye çalışan kişiler için kimlik doğrulama yönlendirmesi ayarlandı. Yani yetkisi yok ise login sayfasına yönlendirilecek.
