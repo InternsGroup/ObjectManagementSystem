@@ -166,7 +166,7 @@ Kategori tablosu güzelleştirildi.
 # # 20.12.2021
 
 * Admin paneline settings bölümü altında yeni admin, görevli ekleme ve güncelleme kısmı eklendi sadece Admin yetkisine sahip kişiler erişebiliyor.
-* LogIn ve Register işlemlerine uyarı sistemi eklendi.(LogIn için şifre veya kullanıcı ismi hatalıdır. || Register için kullanıcı ismi mevcuttur başka bir isim seçiniz. ve Email mevcuttur başka bir email seçiniz. gibi)
+* LogIn ve Register işlemlerine uyarı sistemi eklendi.(LogIn için "şifre veya kullanıcı ismi hatalıdır." || Register için "kullanıcı ismi mevcuttur başka bir isim seçiniz." "Email mevcuttur başka bir email seçiniz." gibi)
 
 # # 22.12.2021
 
