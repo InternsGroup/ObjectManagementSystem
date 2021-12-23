@@ -158,6 +158,10 @@ Kategori tablosu güzelleştirildi.
 * Site içinde bazı sayfalara yetkisi olmayanlar için erişim kısıtlaması getirildi
 * Admin için ayrı login sayfası oluşturuldu
 
+# # 17.12.2021
+
+* Tuba hocamız taleplerinin yazdığı onay formunu imzalayıp tarafımıza teslim etti
+
 # # 18.12.2021
 
 * Anasayfada bulunan contact form için admin paneline yeni bölüm eklendi. Böylelikle gelen mesaj formlarını görevli görüntüleyebilecek ve silebilecek.
