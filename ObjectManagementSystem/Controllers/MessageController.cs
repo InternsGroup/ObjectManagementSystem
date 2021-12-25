@@ -7,7 +7,7 @@ using ObjectManagementSystem.Models.Entity;
 
 namespace ObjectManagementSystem.Controllers
 {
-    [Authorize(Roles = "Admin,Employee")]
+    [Authorize]
     public class MessageController : Controller
     {
         // GET: Message
@@ -32,8 +32,16 @@ namespace ObjectManagementSystem.Controllers
             var userName = (string)Session["Username"].ToString();
             messageObj.SENDER = userName.ToString();
             messageObj.DATE = DateTime.Parse(DateTime.Now.ToShortDateString());
-            db.MESSAGE_TABLE.Add(messageObj);
-            db.SaveChanges();
+            var receiver = db.MESSAGE_TABLE.FirstOrDefault(x => x.RECEIVER == messageObj.RECEIVER);
+            if(receiver == null)
+            {
+                ViewBag.Message = "Invalid receiver username";
+            }
+            else
+            {
+                db.MESSAGE_TABLE.Add(messageObj);
+                db.SaveChanges();
+            }
             return View();
         }
     }

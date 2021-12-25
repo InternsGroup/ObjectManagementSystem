@@ -67,11 +67,11 @@
                     {
                         if (!User.IsInRole("Admin") && !User.IsInRole("Employee"))
                         {
-                        <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Panel/Index">My Profile</a>
-                        </li>
+                            <li class="nav-item mx-0 mx-lg-1">
+                                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Panel/Index">My Profile</a>
+                            </li>
                         }
-                        if(User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                         {
                             <!--Gecici olarak eklendi-->
                             <li class="nav-item mx-0 mx-lg-1">
@@ -390,9 +390,9 @@
                                                     <input class="form-control" style="margin-top:20px" type="text" value="@Session["ID"]" name="MEMBER" hidden />
                                                     <input class="form-control" style="margin-top:20px" type="text" value="@item.ID" name="OBJECT" hidden />
                                                     <label style="margin-top: 10px;font-size:14px"> &nbsp; Start Date of Reservation</label>
-                                                    <input style="font-size:12px" class="form-control" type="date" id="deneme" name="BORROWDATE" required />
+                                                    <input style="font-size:12px" class="form-control startDate" type="date" id="startDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" onchange="myFunction(this.value)" oncl name="BORROWDATE" required />
                                                     <label style="margin-top: 10px; font-size: 14px"> &nbsp; End Date of Reservation</label>
-                                                    <input style="font-size:12px" class="form-control" type="date" name="RETURNDATE" required />
+                                                    <input style="font-size:12px" class="form-control endDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" id="endDate" type="date" name="RETURNDATE" required />
                                                     <br />
                                                     <button class="btn btn-info" style="font-size:12px" onclick="return confirm('Are you sure you want to reserve this object?')">
                                                         Reserve this Object
@@ -714,5 +714,23 @@
     <script src="~/Content/Display/js/freelancer.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/input.js"></script>
+
+    <script>
+        function myFunction(x) {
+            var split = x.split('-');
+            var nextDay = new Date(parseInt(split[0]), parseInt(split[1] - 1), parseInt(split[2]) + 2);
+            nextDay = nextDay.toISOString().slice(0, 10);
+            var z = document.getElementsByClassName("startDate");
+            for (var i = 0; i < z.length; i++) {
+                z[i].value = x;
+            }
+            var y = document.getElementsByClassName("endDate");
+            for (var i = 0; i < y.length; i++) {
+                y[i].value = nextDay;
+                y[i].min = nextDay;
+            }
+        }
+    </script>
+
 </body>
 </html>

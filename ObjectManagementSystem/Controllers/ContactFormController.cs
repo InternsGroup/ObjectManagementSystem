@@ -10,6 +10,7 @@ namespace ObjectManagementSystem.Controllers
     [Authorize(Roles = "Admin,Employee")]
     public class ContactFormController : Controller
     {
+        
         DB_STOREEntities db = new DB_STOREEntities();
         public ActionResult Index()
         {

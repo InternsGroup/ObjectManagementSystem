@@ -22,6 +22,12 @@
         <button class="btn btn-warning">Send</button>
     </form>
 </div>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}
 
 
 
