@@ -327,6 +327,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.table2excel.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -376,6 +377,7 @@
     <Content Include="Views\ContactForm\Index.cshtml" />
     <Content Include="Views\ContactForm\Detail.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Member\GetExcelFile.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

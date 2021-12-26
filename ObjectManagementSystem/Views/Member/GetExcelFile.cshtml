@@ -1,0 +1,68 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<MEMBER_TABLE>
+@{
+    ViewBag.Title = "GetExcelFile";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<head>
+    <title>Members</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+</head>
+<table class="table table-striped table2excel" style="position: center; background-color: lightgray; table-layout: auto;" id="table2excel">
+    <tr style="background-color:greenyellow;">
+        <th>Member Id</th>
+        <th>Member Name</th>
+        <th>Member Surname</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Phone Number</th>
+        <th class="noExl">Delete</th>
+        <th class="noExl">Update</th>
+    </tr>
+
+    @foreach (var member in Model)
+    {
+        int x = 0;
+        <tr>
+            <td>@member.ID</td>
+            <td>@member.NAME</td>
+            <td>@member.SURNAME</td>
+            <td>@member.EMAIL</td>
+            <td>@member.USERNAME</td>
+            <td>@member.PASSWORD</td>
+            <td>@member.TELNUMBER</td>
+
+
+            @foreach (var actionObj in member.ACTION_TABLE.ToList())
+            {
+                if (actionObj.MEMBER == member.ID)
+                {
+                    <td class="noExl"><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The member cannot be deleted without returning all objects.')">Delete</a></td>
+                    x = 1;
+                    break;
+                }
+            }
+            @if (x == 0)
+            {
+                <td class="noExl"><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+            }
+            <td class="noExl"><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+<script>
+    $("#table2excel").table2excel({
+        // exclude CSS class
+        exclude: ".noExl",
+        name: "Worksheet Name",
+        filename: "memberTable",//do not include extension
+        fileext: ".xls" // file extension
+    });
+    window.addEventListener('load', function () {
+        window.location.href = '/Member/Index/';
+    })
+</script>

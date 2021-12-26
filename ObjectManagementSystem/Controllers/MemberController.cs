@@ -62,5 +62,11 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult GetExcelFile(int page = 1)
+        {
+            var values = db.MEMBER_TABLE.ToList().ToPagedList(page, 10);
+            return View(values);
+        }
     }
 }

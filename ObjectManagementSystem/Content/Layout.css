@@ -90,7 +90,7 @@ th {
 }
 
 #myTextArea {
-    resize:none;
+    resize: none;
     min-height: 150px;
     max-height: 150px
 }

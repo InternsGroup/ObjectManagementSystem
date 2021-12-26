@@ -32,7 +32,7 @@ namespace ObjectManagementSystem.Controllers
             var userName = (string)Session["Username"].ToString();
             messageObj.SENDER = userName.ToString();
             messageObj.DATE = DateTime.Parse(DateTime.Now.ToShortDateString());
-            var receiver = db.MESSAGE_TABLE.FirstOrDefault(x => x.RECEIVER == messageObj.RECEIVER);
+            var receiver = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == messageObj.RECEIVER);
             if(receiver == null)
             {
                 ViewBag.Message = "Invalid receiver username";

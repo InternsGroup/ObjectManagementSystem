@@ -9,11 +9,10 @@
 <head>
     <title>Members</title>
 </head>
-
 <div>
     <h2 id="tableTitle" style="background-color: lightyellow;">Members</h2>
 </div>
-<table class="table table-striped" style="position: center; background-color: lightgray; table-layout: auto;">
+<table class="table table-striped table2excel" style="position: center; background-color: lightgray; table-layout: auto;" id="table2excel">
     <tr style="background-color:greenyellow;">
         <th>Member Id</th>
         <th>Member Name</th>
@@ -37,25 +36,31 @@
             <td>@member.USERNAME</td>
             <td>@member.PASSWORD</td>
             <td>@member.TELNUMBER</td>
+
+
             @foreach (var actionObj in member.ACTION_TABLE.ToList())
             {
                 if (actionObj.MEMBER == member.ID)
                 {
-                    <td><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The member cannot be deleted without returning all objects.')">Delete</a></td>
+                    <td class="noExport"><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The member cannot be deleted without returning all objects.')">Delete</a></td>
                     x = 1;
                     break;
                 }
             }
             @if (x == 0)
             {
-                <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+                <td class="noExport"><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
             }
-            <td><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+            <td class="noExport"><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
         </tr>
     }
 </table>
+
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
-<a style="margin-bottom:15px" href="/Member/AddMember/" class="btn btn-primary">Add New Member</a>
+<a style="margin-bottom:15px;float:left" href="/Member/AddMember/" class="btn btn-primary">Add New Member</a>
+<a class="btn btn-warning" style="margin-left:15px" href="/Member/GetExcelFile">Export table</a>
+
+
 
 
 
