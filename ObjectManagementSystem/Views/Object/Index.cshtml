@@ -1,5 +1,7 @@
 ﻿@using ObjectManagementSystem.Models.Entity;
-@model List<OBJECT_TABLE>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<OBJECT_TABLE>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +15,7 @@
 {
     <div class="container">
         <div style="margin-top:15px; margin-bottom:15px; margin:auto; margin-top:15px; width:50%">
-            @Html.TextBox("searchInput", "", new { @class = "form-control", @style = "width:60%;float:left", @placeholder = "Search object name...", @id = "searchInput", @maxlength = "30" })
+            @Html.TextBox("search", "", new { @class = "form-control", @style = "width:60%;float:left", @placeholder = "Search object name or ID...", @id = "searchInput", @maxlength = "30" })
             <input class="btn btn-success" style="margin-left:15px; width:20%" type="submit" value="Search">
             <button class="btn btn-info" style="margin-left:7px" onclick="ClearFields();"><i class="glyphicon glyphicon-refresh"></i></button>
         </div>
@@ -23,8 +25,6 @@
 <div>
     <h2 id="tableTitle" style="background-color:lightyellow;">Objects</h2>
 </div>
-
-
 <table class="table table-striped;" style="position:center; background-color: lightgray; table-layout: auto;">
     <tr style="background-color:gold">
         <th>Object Id</th>
@@ -68,7 +68,9 @@
     }
 </table>
 <br />
-<a style="margin-bottom:15px" href="/Object/AddObject/" class="btn btn-primary">Add New Object</a>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+<a style="margin-bottom:15px;float:left" href="/Object/AddObject/" class="btn btn-primary">Add New Object</a>
+<a class="btn btn-warning" style="margin-left:15px;color:black" href="/Object/GetExcelFile">Export table to Excel</a>
 @if (Model.Count() == 0)
 {
     <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">

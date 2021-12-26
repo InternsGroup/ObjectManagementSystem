@@ -9,6 +9,18 @@
 <head>
     <title>Members</title>
 </head>
+
+@using (Html.BeginForm("Index", "Member", FormMethod.Get))
+{
+    <div class="container">
+        <div style="margin-top:15px; margin-bottom:15px; margin:auto; margin-top:15px; width:50%">
+            @Html.TextBox("search", "", new { @class = "form-control", @style = "width:60%;float:left", @placeholder = "Search member name or ID...", @id = "searchInput", @maxlength = "30" })
+            <input class="btn btn-success" style="margin-left:15px; width:20%" type="submit" value="Search">
+            <button class="btn btn-info" style="margin-left:7px" onclick="ClearFields();"><i class="glyphicon glyphicon-refresh"></i></button>
+        </div>
+    </div>
+}
+
 <div>
     <h2 id="tableTitle" style="background-color: lightyellow;">Members</h2>
 </div>
@@ -42,23 +54,29 @@
             {
                 if (actionObj.MEMBER == member.ID)
                 {
-                    <td class="noExport"><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The member cannot be deleted without returning all objects.')">Delete</a></td>
+                    <td><a href="/Member/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert('The member cannot be deleted without returning all objects.')">Delete</a></td>
                     x = 1;
                     break;
                 }
             }
             @if (x == 0)
             {
-                <td class="noExport"><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+                <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
             }
-            <td class="noExport"><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+            <td><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
         </tr>
     }
 </table>
 
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 <a style="margin-bottom:15px;float:left" href="/Member/AddMember/" class="btn btn-primary">Add New Member</a>
-<a class="btn btn-warning" style="margin-left:15px" href="/Member/GetExcelFile">Export table</a>
+<a class="btn btn-warning" style="margin-left:15px;color:black" href="/Member/GetExcelFile">Export table to Excel</a>
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto">
+        <b>No Members found.</b>
+    </div>
+}
 
 
 

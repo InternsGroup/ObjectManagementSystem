@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ObjectManagementSystem.Models.Entity;
+using PagedList;
 
 namespace ObjectManagementSystem.Controllers
 {
@@ -12,15 +13,18 @@ namespace ObjectManagementSystem.Controllers
     {
         DB_STOREEntities db = new DB_STOREEntities();
 
-        public ActionResult Index(string searchInput)
+        public ActionResult Index(int page = 1,string search="")
         {
             var objects = from allItems in db.OBJECT_TABLE select allItems;
-            if (!string.IsNullOrEmpty(searchInput))
+            if (!string.IsNullOrEmpty(search))
             {
-                objects = objects.Where(item => item.NAME.Contains(searchInput));
+                objects = objects.Where(item => item.NAME.Contains(search) || item.ID.ToString() == search);
+                var myList = objects.ToList().ToPagedList(page, 9);
+                return View(myList);
             }
+            var values = db.OBJECT_TABLE.ToList().ToPagedList(page, 9);
+            return View(values);
 
-            return View(objects.ToList());
         }
 
         [HttpGet]
@@ -76,6 +80,12 @@ namespace ObjectManagementSystem.Controllers
             obj.OBJECTIMAGE = item.OBJECTIMAGE;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult GetExcelFile()
+        {
+            var values = db.OBJECT_TABLE.ToList();
+            return View(values);
         }
     }
 }

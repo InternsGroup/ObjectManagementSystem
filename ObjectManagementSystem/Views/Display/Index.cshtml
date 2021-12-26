@@ -1,5 +1,7 @@
 ﻿@using ObjectManagementSystem.Models.Entity;
-@model List<OBJECT_TABLE>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<OBJECT_TABLE>
 
 @{
     Layout = null;
@@ -124,7 +126,7 @@
             <!-- Change view button -->
             <a href="/Display/ChangeView" class="btn btn-info" style="position:absolute;left:100px;font-size:12px">Change View</a>
             <!-- Search box -->
-            @using (Html.BeginForm("Index", "Display", FormMethod.Get, new { @class = "form-inline", @style = "position:absolute;right:100px" }))
+            @using (Html.BeginForm("Index", "Display", FormMethod.Get, new { @class = "form-inline", @style = "position:absolute;right:100px", @autocomplete = "off" }))
             {
                 @Html.TextBox("search", "", new { @class = "form-control mr-sm-2", @style = "font-size: 12px", @placeholder = "Search name...", @id = "searchInput", @maxlength = "30" })
                 <input class="btn btn-success" style="font-size: 12px" type="Submit" value="Search">
@@ -335,12 +337,11 @@
                                 </div>
                             }
                         }
-
-
-
                     </div>
                 }
             }
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
         </div>
     </section>
 

@@ -1,0 +1,71 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@model List<OBJECT_TABLE>
+@{
+    ViewBag.Title = "GetExcelFile";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Objects</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+</head>
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">Objects</h2>
+</div>
+<table class="table table-striped;" style="position:center; background-color: lightgray; table-layout: auto;" id="table2excel">
+    <tr style="background-color:gold">
+        <th>Object Id</th>
+        <th>Object Name</th>
+        <th>Object Category</th>
+        <th>Detail</th>
+        <th>Status</th>
+        <th class="noExl">Delete</th>
+        <th class="noExl">Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td id="tableDataOverFlow">@item.NAME</td>
+            <td>@item.CATEGORY_TABLE.NAME</td>
+            <td id="tableDataOverFlow">@item.DETAIL</td>
+            @if (item.RESERVATIONSTATUS == false && item.STATUS == true)
+            {
+                <td>RESERVED</td>
+
+            }
+            else if (item.STATUS == false)
+            {
+                <td>LOANED</td>
+            }
+            else
+            {
+                <td>AVAILABLE</td>
+            }
+            @if (item.STATUS == false || item.RESERVATIONSTATUS == false)
+            {
+                <td class="noExl"><a href="/Object/Index" class="btn btn-danger " style="background-color:darkred" onclick="return alert(' This object is actually loaned or reserved and can not be deleted:\n @item.NAME')">Delete</a></td>
+            }
+            else
+            {
+                <td class="noExl"><a href="/Object/DeleteObject/@item.ID" class="btn btn-danger " style="background-color:darkred" onclick="return confirm(' Are you sure you want to delete Object:\n @item.NAME')">Delete</a></td>
+            }
+            <td class="noExl"><a href="/Object/GetObject/@item.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
+        </tr>
+    }
+</table>
+
+<script>
+    $("#table2excel").table2excel({
+        // exclude CSS class
+        exclude: ".noExl",
+        name: "Worksheet Name",
+        filename: "objectTable",//do not include extension
+        fileext: ".xls" // file extension
+    });
+    window.addEventListener('load', function () {
+        window.location.href = '/Object/Index/';
+    })
+</script>
+

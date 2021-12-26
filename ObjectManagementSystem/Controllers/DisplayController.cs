@@ -4,16 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ObjectManagementSystem.Models.Entity;
+using PagedList;
 
 namespace ObjectManagementSystem.Controllers
 {
     public class DisplayController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
-        public static int viewStatus = 1;
-        public static int categoryId = 0;
+        public static int viewStatus = 1; // 1 resimli gorunum, -1 tablo gorunumu
+        public static int categoryId = 0; // 0 our objects bolumunu temsil eder
 
-        public ActionResult Index(string search)
+        public ActionResult Index(int page = 1, string search="")
         {
             //kullanicinin girisini kontrol ediyor
             if (Session["Username"] != null)
@@ -61,7 +62,7 @@ namespace ObjectManagementSystem.Controllers
                         ViewBag.categoryName = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == categoryId).NAME;
                     }
                 }catch(NullReferenceException e) { }
-                return View(objects.ToList());
+                return View(objects.ToList().ToPagedList(page,15));
             }
             else
             {
@@ -72,7 +73,7 @@ namespace ObjectManagementSystem.Controllers
             }
         }
 
-        public ActionResult ChangeView()
+        public ActionResult ChangeView(int page = 1)
         {
             //sayfada listelenen objeler viewStatus uzerinden tablo seklinde veya modal popup seklinde gosterir
             try
@@ -80,7 +81,7 @@ namespace ObjectManagementSystem.Controllers
                 if (categoryId != 0)
                 {
                     //sayfa kategori bolumunun birinde ise tempdata uzerinden hangi kategoride oldugunu indexe gondeririz
-                    TempData["objects"] = db.OBJECT_TABLE.Where(myObj => myObj.CATEGORY == categoryId).ToList();
+                    TempData["objects"] = db.OBJECT_TABLE.Where(myObj => myObj.CATEGORY == categoryId).ToList().ToPagedList(page,15);
                     TempData["category"] = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == categoryId).NAME;
                 }
             }
@@ -97,11 +98,11 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetCategory(int id)
+        public ActionResult GetCategory(int id, int page = 1)
         {
             //secilen kategorinin id si class duzeyinde degiskene kayit edilir ve index ona gore hareket eder
             categoryId = id;
-            TempData["objects"] = db.OBJECT_TABLE.Where(myObj => myObj.CATEGORY == id).ToList();
+            TempData["objects"] = db.OBJECT_TABLE.Where(myObj => myObj.CATEGORY == id).ToList().ToPagedList(page,15);
             TempData["category"] = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == id).NAME;
             return RedirectToAction("Index");
         }

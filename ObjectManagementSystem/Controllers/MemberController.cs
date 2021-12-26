@@ -13,10 +13,17 @@ namespace ObjectManagementSystem.Controllers
     {
         // GET: Member
         DB_STOREEntities db = new DB_STOREEntities();
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1,string search="")
         {
+            var objects = from allItems in db.MEMBER_TABLE select allItems;
+            if (!string.IsNullOrEmpty(search))
+            {
+                objects = objects.Where(item => item.NAME.Contains(search) || item.ID.ToString() == search);
+                var myList=objects.ToList().ToPagedList(page,9);
+                return View(myList);
+            }
             //var values = db.MEMBER_TABLE.ToList();
-            var values = db.MEMBER_TABLE.ToList().ToPagedList(page, 10);
+            var values = db.MEMBER_TABLE.ToList().ToPagedList(page, 9);
             return View(values);
         }
 
@@ -63,9 +70,9 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetExcelFile(int page = 1)
+        public ActionResult GetExcelFile()
         {
-            var values = db.MEMBER_TABLE.ToList().ToPagedList(page, 10);
+            var values = db.MEMBER_TABLE.ToList();
             return View(values);
         }
     }

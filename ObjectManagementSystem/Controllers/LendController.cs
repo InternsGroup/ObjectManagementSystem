@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ObjectManagementSystem.Models.Entity;
+using PagedList;
 
 namespace ObjectManagementSystem.Controllers
 {
@@ -14,10 +15,18 @@ namespace ObjectManagementSystem.Controllers
         // GET: Lend
         DB_STOREEntities db = new DB_STOREEntities();
         [Authorize(Roles = "Admin,Employee")]
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string search = "")
         {
-            var loanedObjectsList = db.ACTION_TABLE.Where(action => action.ACTIONSTATUS == false).ToList();
-            return View(loanedObjectsList);
+            var objects = from allItems in db.ACTION_TABLE where allItems.ACTIONSTATUS == false select allItems;
+            //var loanedObjectsList = db.ACTION_TABLE.Where(action => action.ACTIONSTATUS == false).ToList();
+            if (!string.IsNullOrEmpty(search))
+            {
+                objects = objects.Where(item => (item.MEMBER_TABLE.NAME+" "+item.MEMBER_TABLE.SURNAME).Contains(search) || item.OBJECT_TABLE.NAME.Contains(search));
+                var myList = objects.ToList().ToPagedList(page, 9);
+                return View(myList);
+            }
+            var values = objects.ToList().ToPagedList(page, 9);
+            return View(values);
         }
         [Authorize(Roles = "Admin,Employee")]
         [HttpGet]
@@ -169,8 +178,8 @@ namespace ObjectManagementSystem.Controllers
             actionObj.OBJECT = resObj.OBJECT;
             actionObj.MEMBER = resObj.MEMBER;
             actionObj.EMPLOYEE = db.ADMIN_TABLE.FirstOrDefault(p => p.NAME == "default").ID;
-            actionObj.BORROWDATE = myObj.BORROWDATE;
-            actionObj.RETURNDATE = myObj.RETURNDATE;
+            actionObj.BORROWDATE = reservedObj.BORROWDATE;
+            actionObj.RETURNDATE = reservedObj.RETURNDATE;
             actionObj.ACTIONSTATUS = false;
             db.ACTION_TABLE.Add(actionObj);
             db.RESERVED_OBJECT_TABLE.Remove(resObj);
