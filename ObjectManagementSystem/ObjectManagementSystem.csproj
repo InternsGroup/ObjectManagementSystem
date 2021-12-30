@@ -379,6 +379,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Member\GetExcelFile.cshtml" />
     <Content Include="Views\Object\GetExcelFile.cshtml" />
+    <Content Include="Views\Lend\GetExcelFile.cshtml" />
+    <Content Include="Views\Lend\GetExcelFile2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

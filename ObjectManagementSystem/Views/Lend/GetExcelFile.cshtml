@@ -1,0 +1,53 @@
+﻿@using ObjectManagementSystem.Models.Entity
+@model List<ACTION_TABLE>
+@{
+    ViewBag.Title = "GetExcelFile";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Objects</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+</head>
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">List of Loaned Objects</h2>
+</div>
+<table class="table table-striped;" style="position:center; table-layout: auto;" id="table2excel">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Object Name</th>
+        <th>Member Name</th>
+        <th>Employee ID</th>
+        <th>Lend Date</th>
+        <th>Return Date</th>
+        <th class="noExl">Return</th>
+        <th class="noExl">Extend period</th>
+    </tr>
+    @foreach (var action in Model)
+    {
+        <tr>
+            <td>@action.ID</td>
+            <td>@action.OBJECT_TABLE.NAME</td>
+            <td>@action.MEMBER_TABLE.NAME @action.MEMBER_TABLE.SURNAME</td>
+            <td>@action.EMPLOYEE </td>
+            <td>@Convert.ToDateTime(action.BORROWDATE).ToString("dd/MM/yy") </td>
+            <td>@Convert.ToDateTime(action.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td class="noExl"><a href="/Lend/ReturnObject/@action.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Return Object</a></td>
+            <td class="noExl"><a href="/Lend/ExtendPeriod/@action.ID" class="btn btn-info" style="background-color:powderblue;color:black" onclick="return confirm(' Are you sure you want to extend the loan period of the object by 7 days.')">Extend period</a></td>
+        </tr>
+    }
+</table>
+
+<script>
+    $("#table2excel").table2excel({
+        // exclude CSS class
+        exclude: ".noExl",
+        name: "table1",
+        filename: "loanedObjectsTable",//do not include extension
+        fileext: ".xls" // file extension
+    });
+    window.addEventListener('load', function () {
+        window.location.href = '/Lend/Index/';
+    })
+</script>

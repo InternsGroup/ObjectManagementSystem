@@ -31,18 +31,42 @@
         @Html.TextBoxFor(person => person.PASSWORD, new { @class = "form-control", @required = "required", @maxlength = "20", @placeholder = "Password" })
         <br />
         <label>Admin Authority</label>
-        <select class="form-control" name="AUTHORITY">
-            <option selected>@Html.DisplayFor(person => person.AUTHORITY) </option>
-            @if (Html.DisplayFor(x => x.AUTHORITY).ToString() == "Employee")
-            {
-                <option>Admin</option>
-            }
-            else
-            {
-                <option>Employee</option>
-            }
+        @if (Html.DisplayFor(person => person.NAME).ToString() == "default")
+        {
+            <select class="form-control" name="AUTHORITY" disabled>
+                <option selected>@Html.DisplayFor(person => person.AUTHORITY) </option>
+                @if (Html.DisplayFor(x => x.AUTHORITY).ToString() == "Employee")
+                {
+                    <option>Admin</option>
+                }
+                else
+                {
+                    <option>Employee</option>
+                }
 
-        </select>
+
+
+
+            </select>
+        }
+        else
+        {
+            <select class="form-control" name="AUTHORITY">
+                <option selected>@Html.DisplayFor(person => person.AUTHORITY) </option>
+                @if (Html.DisplayFor(x => x.AUTHORITY).ToString() == "Employee")
+                {
+                    <option>Admin</option>
+                }
+                else
+                {
+                    <option>Employee</option>
+                }
+
+
+
+
+            </select>
+        }
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>

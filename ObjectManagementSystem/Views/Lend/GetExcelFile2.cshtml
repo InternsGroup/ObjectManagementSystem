@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "GetExcelFile2";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<head>
+    <title>Objects</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+</head>
+<div>
+    <h2 id="tableTitle" style="background-color:lightyellow;">List of Reserved Objects</h2>
+</div>
+<table class="table table-striped;" style="position:center; table-layout: auto;" id="table2excel">
+    <tr>
+        <th>Reservation Id</th>
+        <th>Object Name</th>
+        <th>Member Name</th>
+        <th>Reservation Start Date</th>
+        <th>Reservation End Date</th>
+        <th class="noExl">Lend Object</th>
+        <th class="noExl">Reject Reservation</th>
+
+    </tr>
+    @foreach (var reservation in Model)
+    {
+        <tr>
+            <td>@reservation.ID</td>
+            <td>@reservation.OBJECT_TABLE.NAME</td>
+            <td>@reservation.MEMBER_TABLE.NAME @reservation.MEMBER_TABLE.SURNAME</td>
+            <td>@Convert.ToDateTime(reservation.BORROWDATE).ToString("dd/MM/yy") </td>
+            <td>@Convert.ToDateTime(reservation.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td class="noExl"><a href="/Lend/GetReservedObject/@reservation.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Lend Object</a></td>
+            <td class="noExl"><a href="/Lend/DeleteReservation/@reservation.ID" class="btn btn-danger" style="background-color:darkred" onclick="return confirm(' Are you sure you want to reject the reservation of this object?')">Reject</a></td>
+        </tr>
+    }
+</table>
+
+<script>
+    $("#table2excel").table2excel({
+        exclude: ".noExl", // exclude CSS class
+        name: "Worksheet Name",
+        filename: "reservedObjectTable",
+        fileext: ".xls"
+    });
+    window.addEventListener('load', function () {
+        window.location.href = '/Lend/ReservedObjects/';
+    })
+</script>

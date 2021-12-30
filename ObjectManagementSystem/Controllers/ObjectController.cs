@@ -13,7 +13,7 @@ namespace ObjectManagementSystem.Controllers
     {
         DB_STOREEntities db = new DB_STOREEntities();
 
-        public ActionResult Index(int page = 1,string search="")
+        public ActionResult Index(int page = 1, string search = "")
         {
             var objects = from allItems in db.OBJECT_TABLE select allItems;
             if (!string.IsNullOrEmpty(search))
@@ -44,7 +44,10 @@ namespace ObjectManagementSystem.Controllers
             //before post ı need to send id's of category and author
             var category = db.CATEGORY_TABLE.Where(c => c.ID == item.CATEGORY_TABLE.ID).FirstOrDefault();
             item.CATEGORY_TABLE = (CATEGORY_TABLE)category;
-
+            if (item.OBJECTIMAGE == null)
+            {
+                item.OBJECTIMAGE = "Empty";
+            }
             db.OBJECT_TABLE.Add(item);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -77,7 +80,14 @@ namespace ObjectManagementSystem.Controllers
             var category = db.CATEGORY_TABLE.Where(c => c.ID == item.CATEGORY_TABLE.ID).FirstOrDefault();
             obj.CATEGORY = category.ID;
             obj.DETAIL = item.DETAIL;
-            obj.OBJECTIMAGE = item.OBJECTIMAGE;
+            if (item.OBJECTIMAGE == null)
+            {
+                obj.OBJECTIMAGE = "Empty";
+            }
+            else
+            {
+                obj.OBJECTIMAGE = item.OBJECTIMAGE;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

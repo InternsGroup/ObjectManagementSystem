@@ -58,11 +58,10 @@
 
 <script>
     $("#table2excel").table2excel({
-        // exclude CSS class
-        exclude: ".noExl",
+        exclude: ".noExl", // exclude CSS class
         name: "Worksheet Name",
-        filename: "objectTable",//do not include extension
-        fileext: ".xls" // file extension
+        filename: "objectTable",
+        fileext: ".xls"
     });
     window.addEventListener('load', function () {
         window.location.href = '/Object/Index/';

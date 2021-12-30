@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ObjectManagementSystem.Models.Entity;
+using PagedList;
 
 namespace ObjectManagementSystem.Controllers
 {
@@ -12,9 +13,9 @@ namespace ObjectManagementSystem.Controllers
     {
         
         DB_STOREEntities db = new DB_STOREEntities();
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var forms = db.CONTACT_TABLE.ToList();
+            var forms = db.CONTACT_TABLE.ToList().ToPagedList(page,9);
             return View(forms);
         }
 

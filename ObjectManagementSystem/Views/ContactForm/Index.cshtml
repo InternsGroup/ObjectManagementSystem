@@ -1,5 +1,7 @@
 ﻿@using ObjectManagementSystem.Models.Entity
-@model List<CONTACT_TABLE>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<CONTACT_TABLE>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +15,7 @@
     <h2 id="tableTitle" style="background-color:lightyellow;">Contact Forms</h2>
 </div>
 
-<table class="table table-striped" style="position:center; background-color: lightgray">
+<table class="table table-striped" style="position:center; background-color: lightgray;margin-bottom:-5px">
     <tr>
         <th>Form Id</th>
         <th>Sender Name</th>
@@ -25,14 +27,15 @@
     </tr>
     @foreach (var form in Model)
     {
-<tr>
-    <td>@form.ID</td>
-    <td>@form.NAME</td>
-    <td>@form.EMAIL</td>
-    <td>@form.TOPIC</td>
-    <td id="tableDataOverFlow">@form.MESSAGE</td>
-    <td><a href="/ContactForm/Delete/@form.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete this form.')" style="background-color:darkred">Delete</a></td>
-    <td><a href="/ContactForm/Detail/@form.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Detail</a></td>
-</tr>
+        <tr>
+            <td>@form.ID</td>
+            <td>@form.NAME</td>
+            <td>@form.EMAIL</td>
+            <td>@form.TOPIC</td>
+            <td id="tableDataOverFlow">@form.MESSAGE</td>
+            <td><a href="/ContactForm/Delete/@form.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete this form.')" style="background-color:darkred">Delete</a></td>
+            <td><a href="/ContactForm/Detail/@form.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Detail</a></td>
+        </tr>
     }
 </table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

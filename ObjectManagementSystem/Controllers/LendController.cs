@@ -51,7 +51,7 @@ namespace ObjectManagementSystem.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Danger = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
+                ViewBag.Message = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
                 return View("Lend");
             }
             if (item == null)
@@ -120,24 +120,7 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Display");
         }
-        /*
-        public ActionResult LoanObject(int id)
-        {
-            var item = db.OBJECT_TABLE.Find(id);
-            item.STATUS = false;
-            ACTION_TABLE lendObj = new ACTION_TABLE();
-            lendObj.OBJECT = id;
-            lendObj.MEMBER = LogInController.user.ID;
-            lendObj.EMPLOYEE = 4;
-            lendObj.BORROWDATE = DateTime.Now;
-            lendObj.RETURNDATE = DateTime.Now.AddDays(7);
-            lendObj.ACTIONSTATUS = false;
-            lendObj.MEMBERRETURNDATE = null;
-            db.ACTION_TABLE.Add(lendObj);
-            db.SaveChanges();
-            return RedirectToAction("Index", "Display");
-        }
-        */
+
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult GetReservedObject(int id)
         {
@@ -150,6 +133,7 @@ namespace ObjectManagementSystem.Controllers
             myObj = reservedObj;
             return View("GetReservedObject", reservedObj);
         }
+
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult LendReservedObject(RESERVED_OBJECT_TABLE reservedObj)
         {
@@ -188,6 +172,7 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("ReservedObjects");
         }
+
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult ReturnObject(int id)
         {
@@ -196,6 +181,7 @@ namespace ObjectManagementSystem.Controllers
 
             return View("ReturnObject", lendObj);
         }
+
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult UpdateReturnObject(ACTION_TABLE actionTableObj)
         {
@@ -210,6 +196,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin,Employee")]
         public ActionResult DeleteReservation(int id)
         {
             var reservation = db.RESERVED_OBJECT_TABLE.Find(id);
@@ -218,6 +205,7 @@ namespace ObjectManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("ReservedObjects");
         }
+
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult ExtendPeriod(int id)
         {
@@ -228,10 +216,33 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ReservedObjects()
+        [Authorize(Roles = "Admin,Employee")]
+        public ActionResult ReservedObjects(int page = 1, string search = "")
         {
-            var reservedObjectsList = db.RESERVED_OBJECT_TABLE.ToList();
-            return View(reservedObjectsList);
+            var objects = from allItems in db.RESERVED_OBJECT_TABLE select allItems;
+            if (!string.IsNullOrEmpty(search))
+            {
+                objects = objects.Where(item => (item.MEMBER_TABLE.NAME + " " + item.MEMBER_TABLE.SURNAME).Contains(search) || item.OBJECT_TABLE.NAME.Contains(search));
+                var myList = objects.ToList().ToPagedList(page, 9);
+                return View(myList);
+            }
+            var values = objects.ToList().ToPagedList(page, 9);
+            return View(values);
+        }
+
+        [Authorize(Roles = "Admin,Employee")]
+        public ActionResult GetExcelFile()
+        {
+            var values = db.ACTION_TABLE.ToList();
+            return View(values);
+        }
+
+        [Authorize(Roles = "Admin,Employee")]
+        public ActionResult GetExcelFile2()
+        {
+            var values = db.RESERVED_OBJECT_TABLE.ToList();
+
+            return View(values);
         }
     }
 }
