@@ -6,7 +6,7 @@ Okulumuz bünyesinde öğrencilerin kullanımına sunulmuş teknik alet ve eşya
 
 Projemizin müşterisi olan Tuba Çonka Yıldız Hocamızın istekleri ve talepleri doğrultusunda gerekli güncellemeler ve optimizasyonlar yapılmaktadır.
 
-Projemizin geliştirme süreçlerini içeren "Sprintplan", gereksinim analizini gösteren "Anforderungsanalyse", müşteri taleplerini ve onayını gösteren "Kundenanfragen" ve projemizim kapsamlı dokümantasyonunu özetleyen "Projektdokumentation" dosyalarımıza "Documents" klasörü altında ulaşabilirsiniz.
+Projemizin geliştirme süreçlerini içeren "Sprintplan", gereksinim analizini gösteren "Anforderungsanalyse", müşteri taleplerini ve onayını gösteren "Kundenanfragen" ve projemizin kapsamlı dokümantasyonunu özetleyen "Projektdokumentation" dosyalarımıza "Documents" klasörü altında ulaşabilirsiniz.
 
 <b>Proje müşterisi:</b> Tuba Çonka Yıldız
 
