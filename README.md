@@ -1,5 +1,22 @@
 # ObjectManagementSystem
 
+<b>Projemizin ismi:</b> ObjectManagementSystem
+
+Okulumuz bünyesinde öğrencilerin kullanımına sunulmuş teknik alet ve eşyaların online olarak rezerve edilmesi, okula gelinerek ödünç alınması ve geri teslim edilme sürecinin takip edilmesini kolaylaştıran bir web sitesi projesi tasarlamaktayız.
+
+Projemizin müşterisi olan Tuba Çonka Yıldız Hocamızın istekleri ve talepleri doğrultusunda gerekli güncellemeler ve optimizasyonlar yapılmaktadır.
+
+Projemizin geliştirme süreçlerini içeren "Sprintplan", gereksinim analizini gösteren "Anforderungsanalyse", müşteri taleplerini ve onayını gösteren "Kundenanfragen" ve projemizim kapsamlı dokümantasyonunu özetleyen "Projektdokumentation" dosyalarımıza "Documents" klasörü altında ulaşabilirsiniz.
+
+<b>Proje müşterisi:</b> Tuba Çonka Yıldız
+
+<b>Proje başlangıç tarihi:</b> 04.10.2021
+
+<b>Proje bitiş tarihi:</b> 06.01.2022
+
+
+# Rapor Kayıtları
+
 # # 08.10.2021
 
 * Database için tablolar ve ilişkileri oluşturuldu.
