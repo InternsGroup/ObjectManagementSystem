@@ -193,3 +193,34 @@ Kategori tablosu güzelleştirildi.
 
 * Hatalı sayfa erişimlerinde 404 aradığınız sayfa mevcut değildir uyarısı ayarlandı. 
 * Erişim yetkisi olmadığı halde mevcut bir sayfaya erişmeye çalışan kişiler için kimlik doğrulama yönlendirmesi ayarlandı. Yani yetkisi yok ise login sayfasına yönlendirilecek.
+
+# # 24.12.2021
+
+* Rezervasyon işleminde tarih seçme işlemi güncellendi. Başlangıç tarihi minimum "Bugün", bitiş tarihi minimum 1 gün sonra seçilebilir.
+* My profile kısmında mevcut olmayan kişilere mesaj gönderme işleminde uyarı eklendi, hata giderildi mesaj gönderme ve mesajlarım bölümüne erişim açıldı 
+
+# # 26.12.2021
+
+* Admin panelinde bulunan tabloları excel formatına çevirme özelliği eklendi
+* Anasayfa için max. gösterilecek obje sayısı ayarlandı, obje, üye, ve ödünç alınan objeler için arama çubuğu eklendi ve güncellendi
+
+# # 28.12.2021
+
+* Ödünç alınan objeler ve rezerve edilen objelere de arama çubuğu eklendi, pagedlist ayarları yapıldı
+
+# # 30.12.2021
+
+* Kodlara yorum eklendi, açıklamalar eklendi
+
+# # 31.12.2021
+
+* Projemizin müşterisi Tuba Hocamız ile görüşme yapıldı, istediği talep ve özellikler uygulamalı olarak gösterilerek projenin son hali hakkında bilgi verildi
+
+# # 03.12.2021
+
+* Projenin özet dokümantasyonu ve kullanım kılavuzu hazırlandı son haline getirildi
+* Grup içi son değerlendirmeler yapıldı ve görüşüldü
+
+# # 06.01.2022
+
+* Proje tanıtım sunumu yapılarak Önder Tombuş hocamıza teslim edildi.
