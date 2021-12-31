@@ -10,12 +10,15 @@ namespace ObjectManagementSystem.Controllers
     public class RegisterController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
+
+        // kayit olma sayfasini yukleyen metod
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        // kayit olma islemini gerceklestiren metod
         [HttpPost]
         public ActionResult Index(MEMBER_TABLE userObj)
         {
@@ -27,6 +30,7 @@ namespace ObjectManagementSystem.Controllers
             ViewBag.Username = userObj.USERNAME;
             ViewBag.Password = userObj.PASSWORD;
             ViewBag.Phone = userObj.TELNUMBER;
+            // eger kullanici adi veya email baskasi tarafindan kullaniliyor ise uyari gonderir
             if (userName != null)
             {
                 ViewBag.UsernameAlert = "This username is already in use. Please choose another username.";

@@ -13,12 +13,15 @@ namespace ObjectManagementSystem.Controllers
     {
         
         DB_STOREEntities db = new DB_STOREEntities();
+
+        // pagedlist seklinde tablo donen iletisim formu mesajlarinin yuklendigi metod
         public ActionResult Index(int page = 1)
         {
             var forms = db.CONTACT_TABLE.ToList().ToPagedList(page,9);
             return View(forms);
         }
 
+        // tablodan secilen nesnenin silinmesini saglayan metod
         public ActionResult Delete(int id)
         {
             var form = db.CONTACT_TABLE.Find(id);
@@ -27,6 +30,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // iletisim formunun mesajini detayli gorebilmek icin detail butonuna ait metod
         public ActionResult Detail(int id)
         {
             var form = db.CONTACT_TABLE.Find(id);

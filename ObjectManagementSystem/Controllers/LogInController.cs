@@ -13,18 +13,21 @@ namespace ObjectManagementSystem.Controllers
         public static MEMBER_TABLE user = new MEMBER_TABLE();
         DB_STOREEntities db = new DB_STOREEntities();
 
+        // login sayfasini yukleyen metod
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        // login islemini gerceklestiren metod
         [HttpPost]
         public ActionResult Index(MEMBER_TABLE memberObj)
         {
             var username = memberObj.USERNAME;
             var password = memberObj.PASSWORD;
             var userInfo = db.MEMBER_TABLE.FirstOrDefault(x => x.PASSWORD == password && x.USERNAME == username);
+            // girilen bilgiler dogru ise giris basarili olur 
             if (userInfo != null)
             {
                 FormsAuthentication.SetAuthCookie(userInfo.USERNAME, false);
@@ -36,6 +39,7 @@ namespace ObjectManagementSystem.Controllers
             }
             else
             {
+                // yanlis ise hata gonderir
                 ViewBag.Message = "Invalid username or password.";
                 return View();
             }

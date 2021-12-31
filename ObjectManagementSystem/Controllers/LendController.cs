@@ -12,28 +12,34 @@ namespace ObjectManagementSystem.Controllers
     public class LendController : Controller
     {
         public static RESERVED_OBJECT_TABLE myObj = new RESERVED_OBJECT_TABLE();
-        // GET: Lend
         DB_STOREEntities db = new DB_STOREEntities();
+
+        // odunc alinmis objeleri sayfaya yukleyen metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult Index(int page = 1, string search = "")
         {
             var objects = from allItems in db.ACTION_TABLE where allItems.ACTIONSTATUS == false select allItems;
-            //var loanedObjectsList = db.ACTION_TABLE.Where(action => action.ACTIONSTATUS == false).ToList();
+            // eger arama cubugunda birsey aratilirsa if calisir ve aratilan inputu iceren objeler sayfaya gonderilir
             if (!string.IsNullOrEmpty(search))
             {
                 objects = objects.Where(item => (item.MEMBER_TABLE.NAME+" "+item.MEMBER_TABLE.SURNAME).Contains(search) || item.OBJECT_TABLE.NAME.Contains(search));
                 var myList = objects.ToList().ToPagedList(page, 9);
                 return View(myList);
             }
+            // normal sayfa yukleniyorsa direkt odunc alinmis objeler listelenir
             var values = objects.ToList().ToPagedList(page, 9);
             return View(values);
         }
+
+        // elden obje odunc verme sayfasini yukler
         [Authorize(Roles = "Admin,Employee")]
         [HttpGet]
         public ActionResult Lend()
         {
             return View();
         }
+
+        //elden obje odunc verme islemini gerceklestiren metod
         [Authorize(Roles = "Admin,Employee")]
         [HttpPost]
         public ActionResult Lend(ACTION_TABLE lendObj)
@@ -44,12 +50,15 @@ namespace ObjectManagementSystem.Controllers
             var item = db.OBJECT_TABLE.Find(lendObj.OBJECT);
             var memberObj = db.MEMBER_TABLE.Find(lendObj.MEMBER);
             lendObj.EMPLOYEE = db.ADMIN_TABLE.Find(AdminLogInController.user.ID).ID;
+            // tarih formatlari yanlis ise catch calisir hata gonderir
             try
             {
+                // eger odunc alma baslangic tarihi bugunden onceyse hata gonderir
                 controlToday = DateTime.Compare((DateTime)DateTime.Now.Date, (DateTime)lendObj.BORROWDATE);
+                // eger odunc teslim tarihi baslangic tarihinden onceyse veya aynı gun ise hata gonderir
                 controlStartEnd = DateTime.Compare((DateTime)lendObj.BORROWDATE, (DateTime)lendObj.RETURNDATE);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.Message = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
                 return View("Lend");
@@ -95,6 +104,8 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // kullanicinin rezerve islemini calistiran metod
+        [Authorize]
         public ActionResult ReserveObject(RESERVED_OBJECT_TABLE reserveObj)
         {
             int controlToday = DateTime.Compare((DateTime)DateTime.Now.Date, (DateTime)reserveObj.BORROWDATE);
@@ -121,6 +132,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index", "Display");
         }
 
+        // rezerve edilmis objeyi odunc verme sayfasina yonlendiren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult GetReservedObject(int id)
         {
@@ -134,6 +146,7 @@ namespace ObjectManagementSystem.Controllers
             return View("GetReservedObject", reservedObj);
         }
 
+        // rezerve edilmis obje icin odunc verme islemini gerceklestiren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult LendReservedObject(RESERVED_OBJECT_TABLE reservedObj)
         {
@@ -152,7 +165,7 @@ namespace ObjectManagementSystem.Controllers
                     return View("GetReservedObject", myObj);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.Danger = "Invalid datetime!!! Control your datetime input format! (dd.mm.yyyy)";
                 return View("GetReservedObject", myObj);
@@ -173,6 +186,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("ReservedObjects");
         }
 
+        // odunc alinmis objeler icin geri teslim etme sayfasine yonlendiren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult ReturnObject(int id)
         {
@@ -182,6 +196,7 @@ namespace ObjectManagementSystem.Controllers
             return View("ReturnObject", lendObj);
         }
 
+        // odunc alinmis objeler icin geri teslim etme islemini gerceklestiren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult UpdateReturnObject(ACTION_TABLE actionTableObj)
         {
@@ -190,12 +205,13 @@ namespace ObjectManagementSystem.Controllers
             actionObj.ACTIONSTATUS = true;
             actionObj.OBJECT_TABLE.STATUS = true;
             actionObj.OBJECT_TABLE.RESERVATIONSTATUS = true;
-            //geri verilecek objeler listesinden kaldır
+            // geri verilecek objeler listesinden kaldır
             db.ACTION_TABLE.Remove(actionObj);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        // rezerve edilen objenin odunc verilmesini reddetme islemini gerceklestiren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult DeleteReservation(int id)
         {
@@ -206,6 +222,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("ReservedObjects");
         }
 
+        // odunc verilmis objenin odunc tarihini 7 gunluk uzatan metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult ExtendPeriod(int id)
         {
@@ -216,10 +233,12 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // rezerve edilmis objeleri tablo halinde listeleyen metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult ReservedObjects(int page = 1, string search = "")
         {
             var objects = from allItems in db.RESERVED_OBJECT_TABLE select allItems;
+            // arama cubugunda aratilan bir input var ise if calisir
             if (!string.IsNullOrEmpty(search))
             {
                 objects = objects.Where(item => (item.MEMBER_TABLE.NAME + " " + item.MEMBER_TABLE.SURNAME).Contains(search) || item.OBJECT_TABLE.NAME.Contains(search));
@@ -230,6 +249,7 @@ namespace ObjectManagementSystem.Controllers
             return View(values);
         }
 
+        // odunc alinmis objelerin tablosunu excel tablosuna ceviren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult GetExcelFile()
         {
@@ -237,6 +257,7 @@ namespace ObjectManagementSystem.Controllers
             return View(values);
         }
 
+        // rezerve edilmis objelerin tablosunu excel tablosuna ceviren metod
         [Authorize(Roles = "Admin,Employee")]
         public ActionResult GetExcelFile2()
         {

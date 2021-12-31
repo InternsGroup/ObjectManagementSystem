@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace ObjectManagementSystem.Controllers
 {
+    //html error kodlari icin custom uyari sayfalari olusturduk
     public class ErrorController : Controller
     {
-
         public ActionResult Page400()
         {
             Response.StatusCode = 400;

@@ -13,6 +13,8 @@ namespace ObjectManagementSystem.Controllers
     {
         // GET: Member
         DB_STOREEntities db = new DB_STOREEntities();
+
+        // uyeler tablosunu sayfaya yukleyen metod
         public ActionResult Index(int page = 1,string search="")
         {
             var objects = from allItems in db.MEMBER_TABLE select allItems;
@@ -22,17 +24,18 @@ namespace ObjectManagementSystem.Controllers
                 var myList=objects.ToList().ToPagedList(page,9);
                 return View(myList);
             }
-            //var values = db.MEMBER_TABLE.ToList();
             var values = db.MEMBER_TABLE.ToList().ToPagedList(page, 9);
             return View(values);
         }
 
+        // uye ekleme sayfasina yonlendiren metod
         [HttpGet]
         public ActionResult AddMember()
         {
             return View();
         }
 
+        // uye ekleme islemini gerceklestiren metod
         [HttpPost]
         public ActionResult AddMember(MEMBER_TABLE memberObj)
         {
@@ -41,6 +44,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // tablodan uye silme islemini gerceklestiren metod
         public ActionResult DeleteMember(int id)
         {
             var member = db.MEMBER_TABLE.Find(id);
@@ -49,12 +53,14 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // uye guncelleme sayfasini yukleyen metod
         public ActionResult GetMember(int id)
         {
             var member = db.MEMBER_TABLE.Find(id);
             return View("GetMember", member);
         }
 
+        // uye guncelleme islemini gerceklestiren metod
         public ActionResult UpdateMember(MEMBER_TABLE memberObj)
         {
             var member = db.MEMBER_TABLE.Find(memberObj.ID);
@@ -70,6 +76,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // uyeler tablosunu excel tablosune ceviren metod
         public ActionResult GetExcelFile()
         {
             var values = db.MEMBER_TABLE.ToList();

@@ -7,27 +7,35 @@
 
 <head>
     <title>My Messages</title>
+    <style>
+        #tableDataOverFlow {
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <h3>My Messages</h3>
+<!--Kullanici paneli gelen mesajlar tablosu baslangic-->
 <table class="table table-bordered" style="table-layout: fixed; background-color:rgb(242,242,242)">
     <tr>
         <th>Sender</th>
         <th>Topic</th>
         <th>Content</th>
         <th>Date</th>
+        <th>Detail</th>
     </tr>
     @foreach (var message in Model)
     {
-        <tr>
-            <td>@message.SENDER</td>
-            <td>@message.TOPIC</td>
-            <td>@message.MESSAGECONTENT</td>
-            <td>@message.DATE</td>
-        </tr>
+<tr>
+    <td>@message.SENDER</td>
+    <td>@message.TOPIC</td>
+    <td id="tableDataOverFlow">@message.MESSAGECONTENT</td>
+    <td>@Convert.ToDateTime(message.DATE).ToString("dd/MM/yyyy")</td>
+    <td><a href="/Message/Detail/@message.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Detail</a></td>
+</tr>
     }
 </table>
-
-
-
-
+<!--Kullanici paneli gelen mesajlar tablosu bitis-->

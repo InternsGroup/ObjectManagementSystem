@@ -13,9 +13,11 @@ namespace ObjectManagementSystem.Controllers
     {
         DB_STOREEntities db = new DB_STOREEntities();
 
+        // objeler tablosunu yukleyen metod
         public ActionResult Index(int page = 1, string search = "")
         {
             var objects = from allItems in db.OBJECT_TABLE select allItems;
+            // arama cubugu inputu bos degil ise if calisir
             if (!string.IsNullOrEmpty(search))
             {
                 objects = objects.Where(item => item.NAME.Contains(search) || item.ID.ToString() == search);
@@ -27,23 +29,26 @@ namespace ObjectManagementSystem.Controllers
 
         }
 
+        // obje ekleme sayfasini yukleyen metod
         [HttpGet]
         public ActionResult AddObject()
         {
-            //get category from its table and send to page with viewbag
+            //kategorileri secilebilen liste halinde alip viewbag uzerinden sayfaya gonderiyoruz
             var categoryList = db.CATEGORY_TABLE.ToList();
             List<SelectListItem> categoryItem = (List<SelectListItem>)(from category in categoryList select new SelectListItem { Text = category.NAME, Value = category.ID.ToString() }).ToList();
             ViewBag.categoryItem = categoryItem;
-
             return View();
         }
 
+        // obje ekleme islemini gerceklestiren metod
         [HttpPost]
         public ActionResult AddObject(OBJECT_TABLE item)
         {
-            //before post ı need to send id's of category and author
+            // kategori id sini aliyoruz ve obje kategorisine esitliyoruz
             var category = db.CATEGORY_TABLE.Where(c => c.ID == item.CATEGORY_TABLE.ID).FirstOrDefault();
             item.CATEGORY_TABLE = (CATEGORY_TABLE)category;
+            // eger objenin resmi icin link bos birakilirsa default resmi gostermesi icin "Empty" ibaresi gonderilir
+            // baska bir string olabilir sadece null olmamasi lazim
             if (item.OBJECTIMAGE == null)
             {
                 item.OBJECTIMAGE = "Empty";

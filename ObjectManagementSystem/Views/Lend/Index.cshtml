@@ -10,6 +10,7 @@
     <title>Loaned Objects</title>
 </head>
 <a class="btn btn-warning" style="color: black; float: left;margin-top:15px;" href="/Lend/GetExcelFile">Export table to Excel</a>
+<!--Odunc alinmis objeler icin arama cubugu baslangic-->
 @using (Html.BeginForm("Index", "Lend", FormMethod.Get))
 {
     <div class="container">
@@ -20,9 +21,12 @@
         </div>
     </div>
 }
+<!--Odunc alinmis objeler icin arama cubugu bitis-->
+<!--Odunc alinmis objeler tablosu baslangic-->
 <div>
     <h2 id="tableTitle" style="background-color: lightyellow;">List of Loaned Objects</h2>
 </div>
+
 <table class="table table-striped;" style="position: center; table-layout: auto; margin-bottom: -5px">
     <tr>
         <th>Transaction Id</th>
@@ -48,6 +52,7 @@
         </tr>
     }
 </table>
+<!--Odunc alinmis objeler tablosu bitis-->
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 @if (Model.Count() == 0)

@@ -17,21 +17,21 @@
 </head>
 <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar-->
+        <!--Kullanici paneli yan menu baslangic-->
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">TAU Store</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Display/Index">Home Page </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Panel/Index">My Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Message/Index">My Messages</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Message/NewMessage">New Message</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Panel/ReservedItems">Reserved Items</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Panel/LoanedItems">Loaned Items</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Message/Index">My Messages</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="~/Message/NewMessage">New Message</a>
             </div>
         </div>
-        <!-- Page content wrapper-->
+        <!--Kullanici paneli yan menu bitis-->
         <div id="page-content-wrapper">
-            <!-- Top navigation-->
+            <!--Kullanici paneli ust menu baslangic-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
                     <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
@@ -44,17 +44,16 @@
                     </div>
                 </div>
             </nav>
-            <!-- Page content-->
+            <!--Kullanici paneli ust menu bitis-->
             <div class="container-fluid">
                 @RenderBody()
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JS-->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
     <script src="~/Scripts/LayoutPanel.js"></script>
-    <script src="~/Scripts/input.js"></script><!--input islemini kontrol eden js kodlari    -->
+    <script src="~/Scripts/input.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 </body>
 </html>

@@ -31,13 +31,14 @@
 
 <body id="page-top">
 
-    <!-- Navigation -->
+    <!--Ust menu baslangic-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <!--Anasayfa ikonu-->
+            <!--Anasayfa ikonu baslangic-->
             <a class="navbar-brand js-scroll-trigger" style="font-size:24px" href="/Display/GoToMain">
                 <span class="glyphicon glyphicon-home"></span>
             </a>
+            <!--Anasayfa ikonu bitis-->
             <a class="navbar-brand js-scroll-trigger" href="#page-top">Object Management Site</a>
             <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -75,7 +76,6 @@
                         }
                         if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                         {
-                            <!--Gecici olarak eklendi-->
                             <li class="nav-item mx-0 mx-lg-1">
                                 <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="~/Category/Index">Admin Panel</a>
                             </li>
@@ -88,8 +88,8 @@
             </div>
         </div>
     </nav>
-
-    <!-- Masthead -->
+    <!--Ust menu bitis-->
+    <!--Sayfa bilgisi baslangic-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
 
@@ -110,7 +110,8 @@
 
         </div>
     </header>
-
+    <!--Sayfa bilgisi bitis-->
+    <!--Rezerve islemi alert baslangic-->
     @if (Session["Danger"] != null)
     {
         <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center;font-size:15px; position:static; margin-top: 10px">
@@ -118,14 +119,15 @@
         </div>
         Session["Danger"] = null;
     }
-    <!-- Portfolio Section -->
+    <!--Rezerve islemi alert bitis-->
+    <!--Objeler bolumu baslangic-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
 
-            <!-- Portfolio Section Heading -->
-            <!-- Change view button -->
+            <!--Change view button baslangic-->
             <a href="/Display/ChangeView" class="btn btn-info" style="position:absolute;left:100px;font-size:12px">Change View</a>
-            <!-- Search box -->
+            <!--Change view button bitis-->
+            <!--Arama cubugu baslangic-->
             @using (Html.BeginForm("Index", "Display", FormMethod.Get, new { @class = "form-inline", @style = "position:absolute;right:100px", @autocomplete = "off" }))
             {
                 @Html.TextBox("search", "", new { @class = "form-control mr-sm-2", @style = "font-size: 12px", @placeholder = "Search name...", @id = "searchInput", @maxlength = "30" })
@@ -141,8 +143,8 @@
                     <span>Our Objects</span>
                 }
             </h2>
-
-            <!-- Icon Divider -->
+            <!--Arama cubugu bitis-->
+            <!--Icon Divider baslangic-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon">
@@ -150,8 +152,8 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-
-            <!-- Portfolio Grid Items -->
+            <!--Icon Divider bitis-->
+            <!--Obje modal popup ve tablo yapisi baslangic-->
             @if (ViewBag.viewStatus == -1)
             {
                 if (Model.Count == 0)
@@ -341,10 +343,11 @@
                 }
             }
             @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
-
+            <!--Obje modal popup ve tablo yapisi bitis-->
         </div>
     </section>
-
+    <!--Objeler bolumu bitis-->
+    <!--Objeler modal yapisi icerik baslangic-->
     @foreach (var item in Model)
     {
         <div class="portfolio-modal modal fade" id=@("deneme" + item.NAME) tabindex="-1" role="dialog" aria-hidden="true">
@@ -468,8 +471,8 @@
             </div>
         </div>
     }
-    <!--Store Photos from TAU-->
-
+    <!--Objeler modal yapisi icerik bitis-->
+    <!--Fotograflar bolumu baslangic-->
     <section class="page-section portfolio" id="portfolio">
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Store Photos</h2>
         <meta charset="utf-8">
@@ -531,7 +534,7 @@
         </div>
 
     </section>
-
+    <!--Fotograflar bolumu bitis-->
     <!-- Custom fonts for this theme -->
     <link href="~/Content/Display/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -541,7 +544,7 @@
     <link href="~/Content/Display/css/freelancer.min.css" rel="stylesheet" />
 
 
-    <!-- About Section -->
+    <!--Hakkımızda bolumu baslangic-->
     <section class="page-section bg-primary text-white mb-0" id="about">
         <div class="container">
 
@@ -573,8 +576,8 @@
 
         </div>
     </section>
-
-    <!-- Contact Section -->
+    <!--Hakkımızda bolumu bitis-->
+    <!--Iletisim formu baslangic-->
     <section class="page-section" id="contact">
         <div class="container">
 
@@ -593,8 +596,6 @@
             <!-- Contact Section Form -->
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-
                     @using (Html.BeginForm("Index", "Display", FormMethod.Post))
                     {
                         <form name="sentMessage" id="contactForm" novalidate="novalidate">
@@ -639,8 +640,8 @@
 
         </div>
     </section>
-
-    <!-- Footer -->
+    <!--Iletisim formu bitis-->
+    <!--Footer bolumu baslangic-->
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
@@ -683,39 +684,30 @@
             </div>
         </div>
     </footer>
-
-    <!-- Copyright Section -->
+    <!--Footer bolumu bitis-->
+    <!--Copyright bolumu baslangic-->
     <section class="copyright py-4 text-center text-white">
         <div class="container">
             <small>Copyright &copy; Your Website 2019</small>
         </div>
     </section>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <!--Copyright bolumu bitis-->
+    <!-- Scroll to Top Button baslangic-->
     <div class="scroll-to-top d-lg-none position-fixed ">
         <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
-
-    <!-- Portfolio Modals -->
-    <!-- Portfolio Modal 1 -->
-    <!-- Bootstrap core JavaScript -->
+    <!-- Scroll to Top Button bitis-->
+    <!--JavaScript kodlari baslangic-->
     <script src="~/Content/Display/js/jquery.min.js"></script>
     <script src="~/Content/Display/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
     <script src="~/Content/Display/js/jquery.easing.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
     <script src="~/Content/Display/js/jqBootstrapValidation.js"></script>
     <script src="~/Content/Display/js/contact_me.js"></script>
-
-    <!-- Custom scripts for this template -->
     <script src="~/Content/Display/js/freelancer.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/input.js"></script>
-
     <script>
         function myFunction(x) {
             var split = x.split('-');
@@ -732,6 +724,6 @@
             }
         }
     </script>
-
+    <!--JavaScript kodlari bitis-->
 </body>
 </html>

@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/Layout.css" rel="stylesheet" /><!--Layout.css sidebar ve kategori tablosu ayarlarini iceriyor-->
+    <link href="~/Content/Layout.css" rel="stylesheet" />
     <link rel="shortcut icon" href="~/Images/tau.ico" />
 </head>
 <body>
+    <!--Admin paneli yan menu baslangic-->
     <span class="sidebar">
         <a href="/Display/Index"><i class="glyphicon glyphicon-home"></i> &nbsp; Home Page</a>
         <a href="/Category/Index/"><i class="glyphicon glyphicon-list"></i> &nbsp; Categories</a>
@@ -27,11 +28,11 @@
         <a href="/ContactForm/Index"><i class="glyphicon glyphicon-info-sign"></i> &nbsp; Contacts</a>
         <a href="/Panel/LogOut"><i class="glyphicon glyphicon-remove-sign"></i> &nbsp; Exit</a>
     </span>
-
+    <!--Admin paneli yan menu bitis-->
     <div class="main">
         @RenderBody()
     </div>
-    <script src="~/Scripts/input.js"></script><!--input islemini kontrol eden js kodlari    -->
+    <script src="~/Scripts/input.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 </body>

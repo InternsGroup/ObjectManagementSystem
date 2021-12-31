@@ -11,6 +11,7 @@
     <title>Objects</title>
 </head>
 <a class="btn btn-warning" style="color:black;float:left;margin-top:15px" href="/Object/GetExcelFile">Export table to Excel</a>
+<!--Objeler icin arama cubugu baslangic-->
 @using (Html.BeginForm("Index", "Object", FormMethod.Get))
 {
     <div class="container">
@@ -21,7 +22,8 @@
         </div>
     </div>
 }
-
+<!--Objeler icin arama cubugu bitis-->
+<!--Objeler tablosu baslangic-->
 <div>
     <h2 id="tableTitle" style="background-color:lightyellow;">Objects</h2>
 </div>
@@ -68,6 +70,7 @@
     }
 </table>
 <br />
+<!--Objeler tablosu bitis-->
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 <a style="margin-bottom:15px;float:left" href="/Object/AddObject/" class="btn btn-primary">Add New Object</a>
 @if (Model.Count() == 0)

@@ -38,6 +38,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <h1>Admin Login Form</h1>
     <div class="w3l-login-form">
         <h2>Login Here</h2>
+        <!--Login formu baslangic-->
         @using (Html.BeginForm("Index", "AdminLogIn", FormMethod.Post, new { @autocomplete = "off" }))
         {
             <div class=" w3l-form-group">
@@ -57,6 +58,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <button type="submit">Login</button>
         }
+
         @if (@ViewBag.Message != null)
         {
             <div class="alert alert-danger" role="alert" style="width:50%;text-align:center;margin:auto;color:red;">
@@ -65,6 +67,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         }
         <p style="text-align:center"><label><a href="~/Display/Index" class="register"><b>Go to main page</b></a></label></p>
+        <!--Login formu bitis-->
     </div>
     <footer>
         <p class="copyright-agileinfo"> &copy; 2018 Material Login Form. All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>

@@ -7,8 +7,10 @@
 <head>
     <title>New Message</title>
 </head>
+
 <h3>New Message</h3>
 <div class="container">
+    <!--Kullanici paneli yeni mesaj gonderme formu baslangic-->
     <form class="form-group" method="post">
         <b>Receiver Username</b>
         <input type="text" name="RECEIVER" maxlength="20" required>
@@ -17,10 +19,11 @@
         <input type="text" name="TOPIC" maxlength="50" required>
 
         <b>Message Content</b>
-        <textarea name="MESSAGECONTENT" style="height:200px" required></textarea>
+        <textarea name="MESSAGECONTENT" style="height:200px" maxlength="500" required></textarea>
 
         <button class="btn btn-warning">Send</button>
     </form>
+    <!--Kullanici paneli yeni mesaj gonderme formu bitis-->
 </div>
 @if (@ViewBag.Message != null)
 {

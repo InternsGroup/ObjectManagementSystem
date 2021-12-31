@@ -6,7 +6,7 @@
 <head>
     <title>Update Member</title>
 </head>
-
+<!--Uye bilgisi guncelleme formu baslangic-->
 @using (Html.BeginForm("UpdateMember", "Member", FormMethod.Post))
 {
     <div class="form-group">
@@ -36,10 +36,9 @@
         <br />
         <label>Member School</label>
         @Html.TextBoxFor(member => member.SCHOOL, new { @class = "form-control", @type = "text", @maxlength = "100", @placeholder = "School Info", @required = "required" })
-
-
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>
     </div>
 }
+<!--Uye bilgisi guncelleme formu bitis-->

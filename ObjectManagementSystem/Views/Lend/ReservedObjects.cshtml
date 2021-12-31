@@ -10,8 +10,8 @@
 <head>
     <title>Reserved Objects</title>
 </head>
-
 <a class="btn btn-warning" style="color: black; float: left;margin-top:15px;" href="/Lend/GetExcelFile2">Export table to Excel</a>
+<!--Rezerve edilmis objeler icin arama cubugu baslangic-->
 @using (Html.BeginForm("ReservedObjects", "Lend", FormMethod.Get))
 {
     <div class="container">
@@ -22,6 +22,8 @@
         </div>
     </div>
 }
+<!--Rezerve edilmis objeler icin arama cubugu bitis-->
+<!--Rezerve edilmis objeler tablosu baslangic-->
 <div>
     <h2 id="tableTitle" style="background-color: lightyellow;">List of Reserved Objects</h2>
 </div>
@@ -50,5 +52,6 @@
         </tr>
     }
 </table>
+<!--Rezerve edilmis objeler tablosu bitis-->
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("ReservedObjects", new { page }))
 

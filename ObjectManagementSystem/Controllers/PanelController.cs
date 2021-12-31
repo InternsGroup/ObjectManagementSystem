@@ -13,9 +13,9 @@ namespace ObjectManagementSystem.Controllers
     public class PanelController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
-        int id = 5;
+        int id = 0;
 
-        // GET: Panel
+        // kullanici panelini yukleyen metod
         [HttpGet]
         public ActionResult Index()
         {
@@ -26,6 +26,7 @@ namespace ObjectManagementSystem.Controllers
             return View(values);
         }
 
+        // kullanici panelinde bilgi guncelleme islemini gerceklestiren metod
         [HttpPost]
         public ActionResult Index(MEMBER_TABLE memberObj)
         {
@@ -42,6 +43,7 @@ namespace ObjectManagementSystem.Controllers
             return View(member);
         }
 
+        // oturum sonlandirma islemini gerceklestiren metod
         public ActionResult LogOut()
         {
             int x = 0;
@@ -54,6 +56,7 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index", "Display");
         }
 
+        // kullanicinin odunc aldigi objeleri gosteren metod
         public ActionResult LoanedItems()
         {
             var values = db.ACTION_TABLE.ToList();
@@ -61,6 +64,7 @@ namespace ObjectManagementSystem.Controllers
             return View(values);
         }
 
+        // kullanicinin rezerve ettigi objeleri gosteren metod
         public ActionResult ReservedItems()
         {
             var values = db.RESERVED_OBJECT_TABLE.ToList();
@@ -69,6 +73,7 @@ namespace ObjectManagementSystem.Controllers
             return View(values);
         }
 
+        // rezerve edilen objenin rezerve islemini iptal ederek tekrar erisilebilir olmasini saglayan metod
         public ActionResult CancelReservation(int id)
         {
             var reservation = db.RESERVED_OBJECT_TABLE.Find(id);

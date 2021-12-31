@@ -10,6 +10,7 @@
     <title>Members</title>
 </head>
 <a class="btn btn-warning" style="color:black;float:left;margin-top:15px" href="/Member/GetExcelFile">Export table to Excel</a>
+<!--Uyeler icin arama cubugu baslangic-->
 @using (Html.BeginForm("Index", "Member", FormMethod.Get))
 {
     <div class="container">
@@ -20,7 +21,8 @@
         </div>
     </div>
 }
-
+<!--Uyeler icin arama cubugu bitis-->
+<!--Uyeler tablosu baslangic-->
 <div>
     <h2 id="tableTitle" style="background-color: lightyellow;">Members</h2>
 </div>
@@ -67,7 +69,7 @@
         </tr>
     }
 </table>
-
+<!--Uyeler tablosu bitis-->
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 <a style="margin-bottom:15px;float:left" href="/Member/AddMember/" class="btn btn-primary">Add New Member</a>
 @if (Model.Count() == 0)

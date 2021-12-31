@@ -381,6 +381,7 @@
     <Content Include="Views\Object\GetExcelFile.cshtml" />
     <Content Include="Views\Lend\GetExcelFile.cshtml" />
     <Content Include="Views\Lend\GetExcelFile2.cshtml" />
+    <Content Include="Views\Message\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -11,6 +11,8 @@ namespace ObjectManagementSystem.Controllers
     public class SettingsController : Controller
     {
         DB_STOREEntities db = new DB_STOREEntities();
+
+        // sistemde kayitli adminleri tablo halinde listeleyen metod
         public ActionResult Index()
         {
             var objects = from allItems in db.ADMIN_TABLE select allItems;
@@ -18,6 +20,7 @@ namespace ObjectManagementSystem.Controllers
             return View(objects.ToList());
         }
 
+        // tablodan secilen admini silme islemini gerceklestiren metod
         public ActionResult Delete(int id)
         {
             var person = db.ADMIN_TABLE.Find(id);
@@ -26,12 +29,14 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // secilen adminin bilgisini guncelleme sayfasina yonlendiren metod
         public ActionResult GetAdmin(int id)
         {
             var person = db.ADMIN_TABLE.Find(id);
             return View("GetAdmin", person);
         }
 
+        // admin bilgilerini guncelleme islemini gerceklestiren metod
         public ActionResult UpdateAdmin(ADMIN_TABLE admin)
         {
             var person = db.ADMIN_TABLE.Find(admin.ID);
@@ -42,12 +47,14 @@ namespace ObjectManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        // admin ekleme sayfasini yukleyen metod
         [HttpGet]
         public ActionResult AddAdmin()
         {
             return View();
         }
 
+        // admin ekleme islemini gerceklestiren metod
         [HttpPost]
         public ActionResult AddAdmin(ADMIN_TABLE adminObj)
         {

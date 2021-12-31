@@ -1,0 +1,30 @@
+﻿@model ObjectManagementSystem.Models.Entity.MESSAGE_TABLE
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+<head>
+    <title>Message Detail</title>
+    <style>
+        #myTextArea {
+            resize: none;
+            min-height: 150px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+<h4></h4>
+<!--Mesaj detay goruntuleme formu baslangic-->
+<div class="message-group">
+    <label><b>Sender</b></label>
+    @Html.TextBoxFor(message => message.SENDER, new { @class = "message-control", @readonly = "readonly" })
+    <br />
+    <label><b>Topic</b></label>
+    @Html.TextBoxFor(message => message.TOPIC, new { @class = "message-control", @readonly = "readonly" })
+    <br />
+    <label><b>Content</b></label>
+    @Html.TextAreaFor(message => message.MESSAGECONTENT, new { @class = "message-control", @readonly = "readonly", @id = "myTextArea" })
+    <br />
+</div>
+<!--Mesaj detay goruntuleme formu bitis-->
