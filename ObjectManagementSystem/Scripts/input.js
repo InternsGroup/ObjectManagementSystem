@@ -39,3 +39,8 @@ function phoneFormat(input) {//returns (###) ###-####
     if (size > 6) { input = input.slice(0, 9) + "-" + input.slice(9) }
     return input;
 }
+
+function trim(input) {
+    input = input.trim();
+    return input;
+}

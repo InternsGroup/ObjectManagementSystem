@@ -6,6 +6,8 @@
 <head>
     <title>Update Category</title>
 </head>
+<h4></h4>
+<a class="btn btn-info" style="margin-bottom:10px" href="/Category/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
 <!--Kategori guncelleme formu baslangic-->
 @using (Html.BeginForm("UpdateCategory", "Category", FormMethod.Post))
 {
@@ -15,10 +17,16 @@
         @Html.TextBoxFor(category => category.ID, new { @class = "form-control", @readonly = "readonly" })
         <br />
         <label>Category Name</label>
-        @Html.TextBoxFor(category => category.NAME, new { @class = "form-control", @required = "required", @maxlength = "25", @onkeypress = "return isNumericKey(event)" })
+        @Html.TextBoxFor(category => category.NAME, new { @class = "form-control", @required = "required", @maxlength = "25", @onkeypress = "return isNumericKey(event)", @onchange = "this.value = trim(this.value)" })
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>
     </div>
 }
 <!--Kategori guncelleme formu bitis-->
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}

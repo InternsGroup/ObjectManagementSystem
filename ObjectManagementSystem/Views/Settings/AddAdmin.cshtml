@@ -6,15 +6,17 @@
 <head>
     <title>Add Admin</title>
 </head>
+<h4></h4>
+<a class="btn btn-info" href="/Settings/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
 <!--Yeni admin ekleme formu baslangic-->
-<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+<form class="form-group" method="post" style="text-decoration:double">
     <div>
         <label style="margin-top: 10px"> &nbsp;Admin Name</label>
-        <input class="form-control" style="margin-top:10px" type="text" onkeypress="return isNumericKey(event)" name="NAME" maxlength="50" placeholder="Name" required />
+        <input class="form-control" style="margin-top:10px" type="text" onkeypress="return isNumericKey(event)" onchange="this.value = trim(this.value)" name="NAME" maxlength="50" placeholder="Name" required />
         <label style="margin-top: 10px"> &nbsp;Admin Username</label>
-        <input class="form-control" style="margin-top:10px" type="text" name="USERNAME" maxlength="20" placeholder="Username" required />
+        <input class="form-control" style="margin-top:10px" type="text" name="USERNAME" maxlength="20" oninput="this.value = trim(this.value)" placeholder="Username" required />
         <label style="margin-top: 10px"> &nbsp;Admin Password</label>
-        <input class="form-control" style="margin-top:10px" type="text" name="PASSWORD" maxlength="20" placeholder="Password" required />
+        <input class="form-control" style="margin-top:10px" type="text" name="PASSWORD" maxlength="20" oninput="this.value = trim(this.value)" placeholder="Password" required />
         <label style="margin-top: 10px"> &nbsp;Admin Authority</label>
         <select class="form-control" name="AUTHORITY">
             <option>Admin</option>
@@ -26,3 +28,9 @@
     </div>
 </form>
 <!--Yeni admin ekleme formu bitis-->
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}

@@ -39,6 +39,25 @@ namespace ObjectManagementSystem.Controllers
         [HttpPost]
         public ActionResult AddMember(MEMBER_TABLE memberObj)
         {
+            ViewBag.Name = memberObj.NAME;
+            ViewBag.Surname = memberObj.SURNAME;
+            ViewBag.Email = memberObj.EMAIL.Trim();
+            ViewBag.Username = memberObj.USERNAME;
+            ViewBag.Password = memberObj.PASSWORD;
+            ViewBag.Phone = memberObj.TELNUMBER;
+            ViewBag.School = memberObj.SCHOOL;
+            var userName = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == memberObj.USERNAME);
+            var email = db.MEMBER_TABLE.FirstOrDefault(x => x.EMAIL == memberObj.EMAIL.Trim());
+            if (userName != null)
+            {
+                ViewBag.Message = "This username is already in use.";
+                return View("AddMember");
+            }
+            if (email != null)
+            {
+                ViewBag.Message = "This email is already in use.";
+                return View("AddMember");
+            }
             db.MEMBER_TABLE.Add(memberObj);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -64,9 +83,21 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult UpdateMember(MEMBER_TABLE memberObj)
         {
             var member = db.MEMBER_TABLE.Find(memberObj.ID);
+            var userName = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == memberObj.USERNAME.Trim());
+            var email = db.MEMBER_TABLE.FirstOrDefault(x => x.EMAIL == memberObj.EMAIL.Trim());
+            if (userName != null && userName.ID != member.ID)
+            {
+                ViewBag.Message = "This username is already in use.";
+                return View("GetMember",member);
+            }
+            if (email != null && email.ID != member.ID)
+            {
+                ViewBag.Message = "This email is already in use.";
+                return View("GetMember", member);
+            }
             member.NAME = memberObj.NAME;
             member.SURNAME = memberObj.SURNAME;
-            member.EMAIL = memberObj.EMAIL;
+            member.EMAIL = memberObj.EMAIL.Trim();
             member.USERNAME = memberObj.USERNAME;
             member.PASSWORD = memberObj.PASSWORD;
             member.TELNUMBER = memberObj.TELNUMBER;

@@ -6,6 +6,8 @@
 <head>
     <title>Update Admin</title>
 </head>
+<h4></h4>
+<a class="btn btn-info" style="margin-bottom:10px" href="/Settings/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
 <!--Admin bilgisi guncelleme formu baslangic-->
 @using (Html.BeginForm("UpdateAdmin", "Settings", FormMethod.Post))
 {
@@ -21,14 +23,14 @@
         }
         else
         {
-            @Html.TextBoxFor(person => person.NAME, new { @class = "form-control", @required = "required", @maxlength = "50", @placeholder = "Name", @onkeypress = "return isNumericKey(event)", @readonly = "readonly" })
+            @Html.TextBoxFor(person => person.NAME, new { @class = "form-control", @required = "required", @maxlength = "50", @placeholder = "Name", @onkeypress = "return isNumericKey(event)", @onchange = "this.value = trim(this.value)" })
         }
         <br />
         <label>Admin Username</label>
-        @Html.TextBoxFor(person => person.USERNAME, new { @class = "form-control", @required = "required", @maxlength = "20", @placeholder = "Username" })
+        @Html.TextBoxFor(person => person.USERNAME, new { @class = "form-control", @required = "required", @maxlength = "20", @placeholder = "Username", @oninput = "this.value = trim(this.value)" })
         <br />
         <label>Admin Password</label>
-        @Html.TextBoxFor(person => person.PASSWORD, new { @class = "form-control", @required = "required", @maxlength = "20", @placeholder = "Password" })
+        @Html.TextBoxFor(person => person.PASSWORD, new { @class = "form-control", @required = "required", @maxlength = "20", @placeholder = "Password", @oninput = "this.value = trim(this.value)" })
         <br />
         <label>Admin Authority</label>
         @if (Html.DisplayFor(person => person.NAME).ToString() == "default")
@@ -70,6 +72,20 @@
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>
+    </div>
+
+    if (Html.DisplayFor(x => x.USERNAME).ToString() == Session["Username"].ToString())
+    {
+        <div class="alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px; border-radius:15px;font-size:16px">
+            <b>Warning!!!</b><br /> You are currently logged into the admin panel with this account information. If you update the username or authority, your session will be terminated and you have to login again with the new information.
+        </div>
+
+    }
+}
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
     </div>
 }
 <!--Admin bilgisi guncelleme formu bitis-->

@@ -26,7 +26,7 @@ namespace ObjectManagementSystem.Controllers
             var email = db.MEMBER_TABLE.FirstOrDefault(x => x.EMAIL == userObj.EMAIL);
             ViewBag.Name = userObj.NAME;
             ViewBag.Surname = userObj.SURNAME;
-            ViewBag.Email = userObj.EMAIL;
+            ViewBag.Email = userObj.EMAIL.Trim();
             ViewBag.Username = userObj.USERNAME;
             ViewBag.Password = userObj.PASSWORD;
             ViewBag.Phone = userObj.TELNUMBER;

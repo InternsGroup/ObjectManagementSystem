@@ -6,25 +6,31 @@
 <head>
     <title>Add Member</title>
 </head>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}
+<h4></h4>
+<a class="btn btn-info" style="margin-bottom:10px" href="/Member/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
 <!--Yeni uye ekleme formu baslangic-->
-<form class="form-group" method="post" style="margin-top:20px; text-decoration:double">
+<form class="form-group" method="post" style="text-decoration:double">
     <div>
-        <label style="margin-top: 10px"> &nbsp;Member Name</label>
-        <input class="form-control" onkeypress="return isNumericKey(event)" type="text" name="NAME" maxlength="20" placeholder="Name" required />
-        <label style="margin-top: 10px"> &nbsp;Member Surname</label>
-        <input class="form-control" onkeypress="return isNumericKey(event)" type="text" name="SURNAME" maxlength="20" placeholder="Surname" required />
-        <label style="margin-top: 10px"> &nbsp;Member Email</label>
-        <input class="form-control" type="email" name="EMAIL" maxlength="50" placeholder="Email" required />
-        <label style="margin-top: 10px"> &nbsp;Member Username</label>
-        <input class="form-control" type="text" name="USERNAME" maxlength="20" placeholder="Username" required />
-        <label style="margin-top: 10px"> &nbsp;Member Password</label>
-        <input class="form-control" type="text" name="PASSWORD" maxlength="20" placeholder="Password" required />
-        <label style="margin-top: 10px"> &nbsp;Member Photo</label>
-        <input class="form-control" type="text" placeholder="Link" maxlength="250">
-        <label style="margin-top: 10px"> &nbsp;Member Phone Number</label>
-        <input class="form-control" onInput="this.value = phoneFormat(this.value)" type="text" name="TELNUMBER" placeholder="(123) 456 7890" pattern=".{14,14}" required />
-        <label style="margin-top: 10px"> &nbsp;Member School</label>
-        <input class="form-control" type="text" name="SCHOOL" maxlength="30" placeholder="School Info" required />
+        <label>Member Name</label>
+        <input class="form-control" onkeypress="return isNumericKey(event)" onchange="this.value = trim(this.value)" type="text" name="NAME" maxlength="20" placeholder="Name" value="@ViewBag.Name" required />
+        <label style="margin-top: 10px">Member Surname</label>
+        <input class="form-control" onkeypress="return isNumericKey(event)" oninput="this.value = trim(this.value)" type="text" name="SURNAME" maxlength="20" placeholder="Surname" value="@ViewBag.Surname" required />
+        <label style="margin-top: 10px">Member Email</label>
+        <input class="form-control" type="email" name="EMAIL" maxlength="50" placeholder="Email" value="@ViewBag.Email" required />
+        <label style="margin-top: 10px">Member Username</label>
+        <input class="form-control" type="text" name="USERNAME" maxlength="20" oninput="this.value = trim(this.value)" placeholder="Username" value="@ViewBag.Username" required />
+        <label style="margin-top: 10px">Member Password</label>
+        <input class="form-control" type="text" name="PASSWORD" minlength="6"  maxlength="20" oninput="this.value = trim(this.value)" placeholder="Password" value="@ViewBag.Password" required />
+        <label style="margin-top: 10px">Member Phone Number</label>
+        <input class="form-control" onInput="this.value = phoneFormat(this.value)" type="text" name="TELNUMBER" placeholder="(123) 456 7890" pattern=".{14,14}" value="@ViewBag.Phone" required />
+        <label style="margin-top: 10px">Member School</label>
+        <input class="form-control" type="text" name="SCHOOL" maxlength="30" placeholder="School Info" onchange="this.value = trim(this.value)" value="@ViewBag.School" required />
     </div>
     <div style="margin-top:20px">
         <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Member</button>

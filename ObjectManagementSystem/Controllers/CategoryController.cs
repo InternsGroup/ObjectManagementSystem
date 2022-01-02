@@ -19,6 +19,8 @@ namespace ObjectManagementSystem.Controllers
         {
             // veri tabanindan kategori objelerini alip listeye koyar ve sayfaya gonderir
             var values = db.CATEGORY_TABLE.ToList();
+            var allObjects = db.OBJECT_TABLE.ToList();
+            ViewBag.allobjects = allObjects;
             return View(values);
 
         }
@@ -35,6 +37,12 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult AddCategory(CATEGORY_TABLE categoryObj)
         {
             // post isleminden gelen categoryObj objesi veri tabaninda CATEGORY_TABLE'a ekleniyor
+            var categoryName = db.CATEGORY_TABLE.FirstOrDefault(x => x.NAME == categoryObj.NAME.Trim());
+            if (categoryName != null)
+            {
+                ViewBag.Message = "This category is already existing.";
+                return View("AddCategory");
+            }
             db.CATEGORY_TABLE.Add(categoryObj);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -61,6 +69,12 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult UpdateCategory(CATEGORY_TABLE categoryObj)
         {
             var category = db.CATEGORY_TABLE.Find(categoryObj.ID);
+            var categoryName = db.CATEGORY_TABLE.FirstOrDefault(x => x.NAME == categoryObj.NAME.Trim());
+            if (categoryName != null && categoryName.ID != category.ID)
+            {
+                ViewBag.Message = "This category is already existing.";
+                return View("GetCategory",categoryObj);
+            }
             category.NAME = categoryObj.NAME;
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -297,13 +297,13 @@
                             if (item.STATUS == false && this.User.Identity.IsAuthenticated)
                             {
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="portfolio-itemmm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                    <div class="portfolio-itemmm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width: 200px; height: 300px; max-width: 200px; max-height: 300px ">
                                         <div class="portfolio-itemmm-caption d-flex align-items-center justify-content-center h-100 w-100">
                                             <div class="portfolio-itemmm-caption-content text-center text-white">
                                                 <i style="font-size:30px;color:red;">LOANED</i>
                                             </div>
                                         </div>
-                                        <img src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" height="300">
+                                        <img src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" width="200" height="300">
                                         <!--odunc alması için buton-->
 
                                     </div>
@@ -312,7 +312,7 @@
                             else if (item.RESERVATIONSTATUS == false && this.User.Identity.IsAuthenticated)
                             {
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="portfolio-itemm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                    <div class="portfolio-itemm mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width: 200px; height: 300px; max-width: 200px; max-height: 300px">
                                         <div class="portfolio-itemm-caption d-flex align-items-center justify-content-center h-100 w-100">
                                             <div class="portfolio-itemm-caption-content text-center text-white">
                                                 <i style="font-size:30px;color:black">RESERVED</i>
@@ -326,7 +326,7 @@
                             else
                             {
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width:200px;height:300px">
+                                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target=@("#deneme" + item.NAME) style="width: 200px; height: 300px; max-width: 200px; max-height: 300px">
                                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                             <div class="portfolio-item-caption-content text-center text-white">
                                                 <i class="fas fa-plus fa-3x"></i>
@@ -373,7 +373,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image -->
-                                    <img class="img-fluid rounded mb-5" src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" style="float:left;">
+                                    <img class="img-fluid rounded mb-5" src="@item.OBJECTIMAGE" alt="No image." onerror="this.src='https://i.hizliresim.com/9dl1li5.png'" style="float: left; width: 200px; height: 300px; max-width:200px; max-height:300px">
                                     <!-- Portfolio Modal - Text -->
                                     <h2>Detail:</h2>
                                     <div style="font-display:block;">

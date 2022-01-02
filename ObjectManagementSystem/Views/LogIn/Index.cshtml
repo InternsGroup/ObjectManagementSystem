@@ -47,18 +47,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <label>Username:</label>
                 <div class="group">
                     <i class="fas fa-user"></i>
-                    <input type="text" class="form-control" placeholder="Username" name="USERNAME" maxlength="20" required="required" />
+                    <input type="text" class="form-control" placeholder="Username" name="USERNAME" maxlength="20"  oninput="this.value = trim(this.value)" required="required" />
                 </div>
             </div>
             <div class=" w3l-form-group">
                 <label>Password:</label>
                 <div class="group">
                     <i class="fas fa-unlock"></i>
-                    <input type="password" class="form-control" placeholder="Password" name="PASSWORD" maxlength="20" required="required" />
+                    <input type="password" class="form-control" placeholder="Password" name="PASSWORD" maxlength="20"  oninput="this.value = trim(this.value)" required="required" />
                 </div>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" style="border-radius:0px">Login</button>
         }
         @if (@ViewBag.Message != null)
         {

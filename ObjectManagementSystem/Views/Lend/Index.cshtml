@@ -45,8 +45,8 @@
             <td>@action.OBJECT_TABLE.NAME</td>
             <td>@action.MEMBER_TABLE.NAME @action.MEMBER_TABLE.SURNAME</td>
             <td>@action.EMPLOYEE </td>
-            <td>@Convert.ToDateTime(action.BORROWDATE).ToString("dd/MM/yy") </td>
-            <td>@Convert.ToDateTime(action.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td>@Convert.ToDateTime(action.BORROWDATE).ToString("dd/MM/yyyy") </td>
+            <td>@Convert.ToDateTime(action.RETURNDATE).ToString("dd/MM/yyyy")</td>
             <td><a href="/Lend/ReturnObject/@action.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Return Object</a></td>
             <td><a href="/Lend/ExtendPeriod/@action.ID" class="btn btn-info" style="background-color:powderblue;color:black" onclick="return confirm(' Are you sure you want to extend the loan period of the object by 7 days.')">Extend period</a></td>
         </tr>

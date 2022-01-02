@@ -1,4 +1,4 @@
-﻿@model ObjectManagementSystem.Models.Entity.MEMBER_TABLE
+﻿    @model ObjectManagementSystem.Models.Entity.MEMBER_TABLE
 @{
     ViewBag.Title = "GetMember";
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -6,6 +6,14 @@
 <head>
     <title>Update Member</title>
 </head>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-danger" role="alert" style="width:50%;margin:auto; text-align:center; position:relative; margin-top: 10px">
+        @ViewBag.Message
+    </div>
+}
+<h4></h4>
+<a class="btn btn-info" style="margin-bottom:10px" href="/Member/Index"><i class="glyphicon glyphicon-menu-left"></i>Back</a>
 <!--Uye bilgisi guncelleme formu baslangic-->
 @using (Html.BeginForm("UpdateMember", "Member", FormMethod.Post))
 {
@@ -14,28 +22,25 @@
         @Html.TextBoxFor(member => member.ID, new { @class = "form-control", @readonly = "readonly" })
         <br />
         <label>Member Name</label>
-        @Html.TextBoxFor(member => member.NAME, new { @class = "form-control", @onkeypress = "return isNumericKey(event)", @type = "text", @maxlength = "30", @placeholder = "Name", @required = "required" })
+        @Html.TextBoxFor(member => member.NAME, new { @class = "form-control", @onkeypress = "return isNumericKey(event)", @type = "text", @maxlength = "30", @placeholder = "Name", @required = "required", @onchange = "this.value = trim(this.value)" })
         <br />
         <label>Member Surname</label>
-        @Html.TextBoxFor(member => member.SURNAME, new { @class = "form-control", @onkeypress = "return isNumericKey(event)", @type = "text", @maxlength = "30", @placeholder = "Surname", @required = "required" })
+        @Html.TextBoxFor(member => member.SURNAME, new { @class = "form-control", @onkeypress = "return isNumericKey(event)", @type = "text", @maxlength = "30", @placeholder = "Surname", @required = "required", @oninput = "this.value = trim(this.value)" })
         <br />
         <label>Member Email</label>
         @Html.TextBoxFor(member => member.EMAIL, new { @class = "form-control", @type = "email", @maxlength = "50", @placeholder = "Email", @required = "required" })
         <br />
         <label>Member Username</label>
-        @Html.TextBoxFor(member => member.USERNAME, new { @class = "form-control", @type = "text", @maxlength = "20", @placeholder = "Username", @required = "required" })
+        @Html.TextBoxFor(member => member.USERNAME, new { @class = "form-control", @type = "text", @maxlength = "20", @placeholder = "Username", @required = "required", @oninput = "this.value = trim(this.value)" })
         <br />
         <label>Member Password</label>
-        @Html.TextBoxFor(member => member.PASSWORD, new { @class = "form-control", @type = "text", @maxlength = "20", @placeholder = "Password", @required = "required" })
-        <br />
-        <label>Member Photo</label>
-        @Html.TextBoxFor(member => member.PHOTO, new { @class = "form-control", @type = "text", @placeholder = "Link", @maxlength = "500" })
+        @Html.TextBoxFor(member => member.PASSWORD, new { @class = "form-control", @type = "text", @maxlength = "20", @minlength = "6", @placeholder = "Password", @required = "required", @oninput = "this.value = trim(this.value)" })
         <br />
         <label>Member Phone Number</label>
         @Html.TextBoxFor(member => member.TELNUMBER, new { @class = "form-control", @onInput = "this.value = phoneFormat(this.value)", @type = "text", @placeholder = "(123) 456 7890", @pattern = ".{14,14}", @required = "required" })
         <br />
         <label>Member School</label>
-        @Html.TextBoxFor(member => member.SCHOOL, new { @class = "form-control", @type = "text", @maxlength = "100", @placeholder = "School Info", @required = "required" })
+        @Html.TextBoxFor(member => member.SCHOOL, new { @class = "form-control", @type = "text", @maxlength = "100", @placeholder = "School Info", @required = "required", @onchange = "this.value = trim(this.value)" })
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>

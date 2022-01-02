@@ -45,8 +45,8 @@
             <td>@reservation.ID</td>
             <td>@reservation.OBJECT_TABLE.NAME</td>
             <td>@reservation.MEMBER_TABLE.NAME @reservation.MEMBER_TABLE.SURNAME</td>
-            <td>@Convert.ToDateTime(reservation.BORROWDATE).ToString("dd/MM/yy") </td>
-            <td>@Convert.ToDateTime(reservation.RETURNDATE).ToString("dd/MM/yy")</td>
+            <td>@Convert.ToDateTime(reservation.BORROWDATE).ToString("dd/MM/yyyy") </td>
+            <td>@Convert.ToDateTime(reservation.RETURNDATE).ToString("dd/MM/yyyy")</td>
             <td><a href="/Lend/GetReservedObject/@reservation.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Lend Object</a></td>
             <td><a href="/Lend/DeleteReservation/@reservation.ID" class="btn btn-danger" style="background-color:darkred" onclick="return confirm(' Are you sure you want to reject the reservation of this object?')">Reject</a></td>
         </tr>

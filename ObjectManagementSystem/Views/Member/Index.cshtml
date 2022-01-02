@@ -44,11 +44,11 @@
         int x = 0;
         <tr>
             <td>@member.ID</td>
-            <td>@member.NAME</td>
-            <td>@member.SURNAME</td>
-            <td>@member.EMAIL</td>
-            <td>@member.USERNAME</td>
-            <td>@member.PASSWORD</td>
+            <td id="tableDataOverFlow">@member.NAME</td>
+            <td id="tableDataOverFlow">@member.SURNAME</td>
+            <td id="tableDataOverFlow">@member.EMAIL</td>
+            <td id="tableDataOverFlow">@member.USERNAME</td>
+            <td id="tableDataOverFlow">@member.PASSWORD</td>
             <td>@member.TELNUMBER</td>
 
 
@@ -63,7 +63,7 @@
             }
             @if (x == 0)
             {
-                <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Employee:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
+                <td><a href="/Member/DeleteMember/@member.ID" class="btn btn-danger" onclick="return confirm(' Are you sure you want to delete Member:\n @member.NAME @member.SURNAME')" style="background-color:darkred">Delete</a></td>
             }
             <td><a href="/Member/GetMember/@member.ID" class="btn btn-info" style="background-color:darkseagreen;color:black">Update</a></td>
         </tr>

@@ -13,7 +13,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="en">
 
 <head>
-    <title>Register Store System</title>
+    <title>TAU Store Register Form</title>
     <!-- custom-theme -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -44,12 +44,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <form action="~/Register/Index" method="post" autocomplete="off">
                             <div class="fields-grid">
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" value="@ViewBag.Name" required>
+                                    <input type="text" name="NAME" onkeypress="return isNumericKey(event)" onchange="this.value = trim(this.value)" maxlength="20" value="@ViewBag.Name" required>
                                     <label>First Name</label>
                                     <span></span>
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="SURNAME" onkeypress="return isNumericKey(event)" value="@ViewBag.Surname" maxlength="20" required>
+                                    <input type="text" name="SURNAME" onkeypress="return isNumericKey(event)" oninput="this.value = trim(this.value)" value="@ViewBag.Surname" maxlength="20" required>
                                     <label>Last Name</label>
                                     <span></span>
                                 </div>
@@ -65,7 +65,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     }
                                 </div>
                                 <div class="styled-input agile-styled-input-top">
-                                    <input type="text" name="USERNAME" maxlength="20" value="@ViewBag.Username" required>
+                                    <input type="text" name="USERNAME" maxlength="20" oninput="this.value = trim(this.value)" value="@ViewBag.Username" required>
                                     <label>Username</label>
                                     <span></span>
                                     @if (@ViewBag.UsernameAlert != null)
@@ -76,7 +76,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     }
                                 </div>
                                 <div class="styled-input">
-                                    <input type="password" name="PASSWORD" maxlength="20" value="@ViewBag.Password" required>
+                                    <input type="password" name="PASSWORD" minlength="6" maxlength="20" oninput="this.value = trim(this.value)" value="@ViewBag.Password" required>
                                     <label>Password</label>
                                     <span></span>
                                 </div>
