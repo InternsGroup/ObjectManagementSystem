@@ -216,11 +216,11 @@ Kategori tablosu güzelleştirildi.
 
 * Projemizin müşterisi Tuba Hocamız ile görüşme yapıldı, istediği talep ve özellikler uygulamalı olarak gösterilerek projenin son hali hakkında bilgi verildi
 
-# # 03.12.2021
+# # 02.12.2021
 
 * Projenin özet dokümantasyonu ve kullanım kılavuzu hazırlandı son haline getirildi
 * Grup içi son değerlendirmeler yapıldı ve görüşüldü
 
 # # 06.01.2022
 
-* Proje tanıtım sunumu yapılarak Önder Tombuş hocamıza teslim edildi.
+* Projenin tanıtım sunumu yapılarak Önder Tombuş hocamıza teslim edilecek
