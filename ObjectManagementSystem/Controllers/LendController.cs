@@ -174,7 +174,7 @@ namespace ObjectManagementSystem.Controllers
             ACTION_TABLE actionObj = new ACTION_TABLE();
             actionObj.OBJECT = resObj.OBJECT;
             actionObj.MEMBER = resObj.MEMBER;
-            actionObj.EMPLOYEE = db.ADMIN_TABLE.FirstOrDefault(p => p.NAME == "default").ID;
+            actionObj.EMPLOYEE = db.ADMIN_TABLE.Find(AdminLogInController.user.ID).ID;
             actionObj.BORROWDATE = reservedObj.BORROWDATE;
             actionObj.RETURNDATE = reservedObj.RETURNDATE;
             actionObj.ACTIONSTATUS = false;

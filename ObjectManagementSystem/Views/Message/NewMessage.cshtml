@@ -13,13 +13,13 @@
     <!--Kullanici paneli yeni mesaj gonderme formu baslangic-->
     <form class="form-group" method="post">
         <b>Receiver Username</b>
-        <input type="text" name="RECEIVER" maxlength="20" required>
+        <input type="text" name="RECEIVER" maxlength="20" oninput = "this.value = trim(this.value)" required>
 
         <b>Topic</b>
-        <input type="text" name="TOPIC" maxlength="50" required>
+        <input type="text" name="TOPIC" maxlength="50" onchange = "this.value = trim(this.value)" required>
 
         <b>Message Content</b>
-        <textarea name="MESSAGECONTENT" style="height:200px" maxlength="500" required></textarea>
+        <textarea name="MESSAGECONTENT" style="height:200px" maxlength="500" onchange = "this.value = trim(this.value)" required></textarea>
 
         <button class="btn btn-warning">Send</button>
     </form>

@@ -62,7 +62,7 @@ namespace ObjectManagementSystem.Controllers
                         ViewBag.categoryName = db.CATEGORY_TABLE.FirstOrDefault(myObj => myObj.ID == categoryId).NAME;
                     }
                 }catch (NullReferenceException) { }
-                return View(objects.ToList().ToPagedList(page,15));
+                return View(objects.ToList().Reverse<OBJECT_TABLE>().ToPagedList(page,15));
             }
             else
             {

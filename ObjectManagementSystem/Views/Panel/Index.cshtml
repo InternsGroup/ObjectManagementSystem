@@ -41,17 +41,17 @@
         </tr>
         <tr>
             <td colspan="2">
-                <b>Name:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.NAME)" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Name" required />
+                <b>Name:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.NAME)" name="NAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Name" onchange = "this.value = trim(this.value)" required />
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <b>Surname:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.SURNAME)" name="SURNAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Surname" required />
+                <b>Surname:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.SURNAME)" name="SURNAME" onkeypress="return isNumericKey(event)" maxlength="20" placeholder="Surname" oninput = "this.value = trim(this.value)" required />
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <b>Password:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.PASSWORD)" name="PASSWORD" maxlength="20" placeholder="Password" required />
+                <b>Password:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.PASSWORD)" name="PASSWORD" minlength="6" maxlength="20" placeholder="Password" oninput = "this.value = trim(this.value)" required />
             </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <b>School:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.SCHOOL)" name="SCHOOL" maxlength="30" placeholder="School Info" autocomplete="off" />
+                <b>School:</b> <input type="text" style="margin-bottom:0px" class="form-control" value="@Html.DisplayFor(x => x.SCHOOL)" name="SCHOOL" maxlength="30" onchange = "this.value = trim(this.value)" placeholder="School Info" autocomplete="off" />
             </td>
         </tr>
     </table>

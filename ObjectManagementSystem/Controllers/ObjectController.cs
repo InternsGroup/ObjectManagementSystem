@@ -24,7 +24,7 @@ namespace ObjectManagementSystem.Controllers
                 var myList = objects.ToList().ToPagedList(page, 9);
                 return View(myList);
             }
-            var values = db.OBJECT_TABLE.ToList().ToPagedList(page, 9);
+            var values = db.OBJECT_TABLE.ToList().Reverse<OBJECT_TABLE>().ToPagedList(page, 9);
             return View(values);
 
         }
