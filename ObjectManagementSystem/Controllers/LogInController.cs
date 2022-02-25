@@ -25,7 +25,7 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult Index(MEMBER_TABLE memberObj)
         {
             var username = memberObj.USERNAME;
-            var password = memberObj.PASSWORD;
+            var password = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             var userInfo = db.MEMBER_TABLE.FirstOrDefault(x => x.PASSWORD == password && x.USERNAME == username);
             // girilen bilgiler dogru ise giris basarili olur 
             if (userInfo != null)

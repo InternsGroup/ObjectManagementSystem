@@ -21,6 +21,7 @@ namespace ObjectManagementSystem.Controllers
         {
             var user = (string)Session["Username"];
             var values = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == user);
+            values.PASSWORD = RegisterController.DecodeFrom64(values.PASSWORD);
             id = values.ID;
             ViewBag.Message = null;
             return View(values);
@@ -34,12 +35,13 @@ namespace ObjectManagementSystem.Controllers
             var member = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == user);
             member.NAME = memberObj.NAME;
             member.SURNAME = memberObj.SURNAME;
-            member.PASSWORD = memberObj.PASSWORD;
+            member.PASSWORD = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             member.PHOTO = memberObj.PHOTO;
             member.TELNUMBER = memberObj.TELNUMBER;
             member.SCHOOL = memberObj.SCHOOL;
             ViewBag.Message = "Info successfully updated.";
             db.SaveChanges();
+            member.PASSWORD = RegisterController.DecodeFrom64(member.PASSWORD);
             return View(member);
         }
 

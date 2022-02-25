@@ -43,7 +43,7 @@ namespace ObjectManagementSystem.Controllers
             ViewBag.Surname = memberObj.SURNAME;
             ViewBag.Email = memberObj.EMAIL.Trim();
             ViewBag.Username = memberObj.USERNAME;
-            ViewBag.Password = memberObj.PASSWORD;
+            ViewBag.Password = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             ViewBag.Phone = memberObj.TELNUMBER;
             ViewBag.School = memberObj.SCHOOL;
             var userName = db.MEMBER_TABLE.FirstOrDefault(x => x.USERNAME == memberObj.USERNAME);
@@ -76,6 +76,7 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult GetMember(int id)
         {
             var member = db.MEMBER_TABLE.Find(id);
+            member.PASSWORD = RegisterController.DecodeFrom64(member.PASSWORD);
             return View("GetMember", member);
         }
 
@@ -99,7 +100,7 @@ namespace ObjectManagementSystem.Controllers
             member.SURNAME = memberObj.SURNAME;
             member.EMAIL = memberObj.EMAIL.Trim();
             member.USERNAME = memberObj.USERNAME;
-            member.PASSWORD = memberObj.PASSWORD;
+            member.PASSWORD = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             member.TELNUMBER = memberObj.TELNUMBER;
             member.PHOTO = memberObj.PHOTO;
             member.SCHOOL = memberObj.SCHOOL;

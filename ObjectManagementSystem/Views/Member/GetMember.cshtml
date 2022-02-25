@@ -40,7 +40,7 @@
         @Html.TextBoxFor(member => member.TELNUMBER, new { @class = "form-control", @onInput = "this.value = phoneFormat(this.value)", @type = "text", @placeholder = "(123) 456 7890", @pattern = ".{14,14}", @required = "required" })
         <br />
         <label>Member School</label>
-        @Html.TextBoxFor(member => member.SCHOOL, new { @class = "form-control", @type = "text", @maxlength = "100", @placeholder = "School Info", @required = "required", @onchange = "this.value = trim(this.value)" })
+        @Html.TextBoxFor(member => member.SCHOOL, new { @class = "form-control", @type = "text", @maxlength = "100", @placeholder = "School Info", @onchange = "this.value = trim(this.value)" })
     </div>
     <div>
         <button id="defaultBtn" style="background-color:darkseagreen; color:black; margin-top:15px" class="btn btn-info">Update</button>

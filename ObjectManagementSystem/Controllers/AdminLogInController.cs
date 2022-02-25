@@ -26,8 +26,9 @@ namespace ObjectManagementSystem.Controllers
         [HttpPost]
         public ActionResult Index(ADMIN_TABLE adminObj)
         {
-            // veri tabaninda girilen username ve password karsiligi varsa userInfo objesine esitlenir 
-            var userInfo = db.ADMIN_TABLE.FirstOrDefault(x => x.PASSWORD == adminObj.PASSWORD && x.USERNAME == adminObj.USERNAME);
+            // veri tabaninda girilen username ve password karsiligi varsa userInfo objesine esitlenir
+            var password = RegisterController.EncodePasswordToBase64(adminObj.PASSWORD);
+            var userInfo = db.ADMIN_TABLE.FirstOrDefault(x => x.PASSWORD == password && x.USERNAME == adminObj.USERNAME);
             if (userInfo != null)
             {
                 FormsAuthentication.SetAuthCookie(userInfo.USERNAME, false);

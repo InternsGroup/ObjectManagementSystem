@@ -145,7 +145,6 @@
     <Compile Include="Controllers\LendController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ObjectController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -355,8 +354,6 @@
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\GetMember.cshtml" />
     <Content Include="Views\Member\AddMember.cshtml" />
-    <Content Include="Views\Message\Index.cshtml" />
-    <Content Include="Views\Message\NewMessage.cshtml" />
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Panel\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
@@ -381,7 +378,6 @@
     <Content Include="Views\Object\GetExcelFile.cshtml" />
     <Content Include="Views\Lend\GetExcelFile.cshtml" />
     <Content Include="Views\Lend\GetExcelFile2.cshtml" />
-    <Content Include="Views\Message\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

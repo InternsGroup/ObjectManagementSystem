@@ -34,6 +34,7 @@ namespace ObjectManagementSystem.Controllers
         public ActionResult GetAdmin(int id)
         {
             var person = db.ADMIN_TABLE.Find(id);
+            person.PASSWORD = RegisterController.DecodeFrom64(person.PASSWORD);
             return View("GetAdmin", person);
         }
 
@@ -55,7 +56,7 @@ namespace ObjectManagementSystem.Controllers
                 return View("GetAdmin",person);
             }
             person.NAME = admin.NAME;
-            person.PASSWORD = admin.PASSWORD;
+            person.PASSWORD = RegisterController.EncodePasswordToBase64(admin.PASSWORD);
 
             if (admin.NAME == "default")
             {
