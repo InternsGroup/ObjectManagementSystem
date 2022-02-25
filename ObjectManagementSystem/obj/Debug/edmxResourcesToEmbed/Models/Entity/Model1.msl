@@ -26,15 +26,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CASHBOX_TABLE">
-      <EntityTypeMapping TypeName="DB_STOREModel.CASHBOX_TABLE">
-        <MappingFragment StoreEntitySet="CASHBOX_TABLE">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="MONTH" ColumnName="MONTH" />
-          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CATEGORY_TABLE">
       <EntityTypeMapping TypeName="DB_STOREModel.CATEGORY_TABLE">
         <MappingFragment StoreEntitySet="CATEGORY_TABLE">
@@ -63,21 +54,8 @@
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
           <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
-          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
           <ScalarProperty Name="TELNUMBER" ColumnName="TELNUMBER" />
           <ScalarProperty Name="SCHOOL" ColumnName="SCHOOL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MESSAGE_TABLE">
-      <EntityTypeMapping TypeName="DB_STOREModel.MESSAGE_TABLE">
-        <MappingFragment StoreEntitySet="MESSAGE_TABLE">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="SENDER" ColumnName="SENDER" />
-          <ScalarProperty Name="RECEIVER" ColumnName="RECEIVER" />
-          <ScalarProperty Name="TOPIC" ColumnName="TOPIC" />
-          <ScalarProperty Name="MESSAGECONTENT" ColumnName="MESSAGECONTENT" />
-          <ScalarProperty Name="DATE" ColumnName="DATE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -91,18 +69,6 @@
           <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
           <ScalarProperty Name="OBJECTIMAGE" ColumnName="OBJECTIMAGE" />
           <ScalarProperty Name="RESERVATIONSTATUS" ColumnName="RESERVATIONSTATUS" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PENALTY_TABLE">
-      <EntityTypeMapping TypeName="DB_STOREModel.PENALTY_TABLE">
-        <MappingFragment StoreEntitySet="PENALTY_TABLE">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="MEMBER" ColumnName="MEMBER" />
-          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
-          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
-          <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
-          <ScalarProperty Name="MONEY" ColumnName="MONEY" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

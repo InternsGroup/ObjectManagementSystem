@@ -50,14 +50,17 @@ namespace ObjectManagementSystem.Controllers
             var email = db.MEMBER_TABLE.FirstOrDefault(x => x.EMAIL == memberObj.EMAIL.Trim());
             if (userName != null)
             {
+                ViewBag.Password = RegisterController.DecodeFrom64(ViewBag.Password);
                 ViewBag.Message = "This username is already in use.";
                 return View("AddMember");
             }
             if (email != null)
             {
+                ViewBag.Password = RegisterController.DecodeFrom64(ViewBag.Password);
                 ViewBag.Message = "This email is already in use.";
                 return View("AddMember");
             }
+            memberObj.PASSWORD = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             db.MEMBER_TABLE.Add(memberObj);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -102,7 +105,6 @@ namespace ObjectManagementSystem.Controllers
             member.USERNAME = memberObj.USERNAME;
             member.PASSWORD = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
             member.TELNUMBER = memberObj.TELNUMBER;
-            member.PHOTO = memberObj.PHOTO;
             member.SCHOOL = memberObj.SCHOOL;
             db.SaveChanges();
             return RedirectToAction("Index");

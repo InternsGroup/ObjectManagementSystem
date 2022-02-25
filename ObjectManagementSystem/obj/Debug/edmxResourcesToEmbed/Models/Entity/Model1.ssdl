@@ -23,14 +23,6 @@
     <Property Name="PASSWORD" Type="varchar" MaxLength="20" />
     <Property Name="AUTHORITY" Type="varchar" MaxLength="20" />
   </EntityType>
-  <EntityType Name="CASHBOX_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MONTH" Type="varchar" MaxLength="20" />
-    <Property Name="AMOUNT" Type="decimal" Precision="18" Scale="2" />
-  </EntityType>
   <EntityType Name="CATEGORY_TABLE">
     <Key>
       <PropertyRef Name="ID" />
@@ -58,20 +50,8 @@
     <Property Name="EMAIL" Type="varchar" MaxLength="50" />
     <Property Name="USERNAME" Type="varchar" MaxLength="20" />
     <Property Name="PASSWORD" Type="varchar" MaxLength="20" />
-    <Property Name="PHOTO" Type="varchar" MaxLength="250" />
     <Property Name="TELNUMBER" Type="varchar" MaxLength="20" />
     <Property Name="SCHOOL" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="MESSAGE_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SENDER" Type="varchar" MaxLength="50" />
-    <Property Name="RECEIVER" Type="varchar" MaxLength="50" />
-    <Property Name="TOPIC" Type="varchar" MaxLength="50" />
-    <Property Name="MESSAGECONTENT" Type="varchar" MaxLength="500" />
-    <Property Name="DATE" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="OBJECT_TABLE">
     <Key>
@@ -84,17 +64,6 @@
     <Property Name="DETAIL" Type="varchar" MaxLength="500" />
     <Property Name="OBJECTIMAGE" Type="varchar" MaxLength="250" />
     <Property Name="RESERVATIONSTATUS" Type="bit" />
-  </EntityType>
-  <EntityType Name="PENALTY_TABLE">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MEMBER" Type="int" />
-    <Property Name="ACTION" Type="int" />
-    <Property Name="STARTDATE" Type="smalldatetime" />
-    <Property Name="ENDDATE" Type="smalldatetime" />
-    <Property Name="MONEY" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="RESERVED_OBJECT_TABLE">
     <Key>
@@ -164,30 +133,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PENALTY_TABLE_ACTION_TABLE">
-    <End Role="ACTION_TABLE" Type="Self.ACTION_TABLE" Multiplicity="0..1" />
-    <End Role="PENALTY_TABLE" Type="Self.PENALTY_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACTION_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PENALTY_TABLE">
-        <PropertyRef Name="ACTION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PENALTY_TABLE_MEMBER_TABLE">
-    <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
-    <End Role="PENALTY_TABLE" Type="Self.PENALTY_TABLE" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MEMBER_TABLE">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PENALTY_TABLE">
-        <PropertyRef Name="MEMBER" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
     <End Role="MEMBER_TABLE" Type="Self.MEMBER_TABLE" Multiplicity="0..1" />
     <End Role="RESERVED_OBJECT_TABLE" Type="Self.RESERVED_OBJECT_TABLE" Multiplicity="*" />
@@ -215,13 +160,10 @@
   <EntityContainer Name="DB_STOREModelStoreContainer">
     <EntitySet Name="ACTION_TABLE" EntityType="Self.ACTION_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ADMIN_TABLE" EntityType="Self.ADMIN_TABLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CASHBOX_TABLE" EntityType="Self.CASHBOX_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CATEGORY_TABLE" EntityType="Self.CATEGORY_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CONTACT_TABLE" EntityType="Self.CONTACT_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MEMBER_TABLE" EntityType="Self.MEMBER_TABLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="MESSAGE_TABLE" EntityType="Self.MESSAGE_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OBJECT_TABLE" EntityType="Self.OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PENALTY_TABLE" EntityType="Self.PENALTY_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RESERVED_OBJECT_TABLE" EntityType="Self.RESERVED_OBJECT_TABLE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ACTION_TABLE_ADMIN_TABLE" Association="Self.FK_ACTION_TABLE_ADMIN_TABLE">
@@ -239,14 +181,6 @@
     <AssociationSet Name="FK_BOOK_TABLE_CATEGORY_TABLE" Association="Self.FK_BOOK_TABLE_CATEGORY_TABLE">
       <End Role="CATEGORY_TABLE" EntitySet="CATEGORY_TABLE" />
       <End Role="OBJECT_TABLE" EntitySet="OBJECT_TABLE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PENALTY_TABLE_ACTION_TABLE" Association="Self.FK_PENALTY_TABLE_ACTION_TABLE">
-      <End Role="ACTION_TABLE" EntitySet="ACTION_TABLE" />
-      <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PENALTY_TABLE_MEMBER_TABLE" Association="Self.FK_PENALTY_TABLE_MEMBER_TABLE">
-      <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />
-      <End Role="PENALTY_TABLE" EntitySet="PENALTY_TABLE" />
     </AssociationSet>
     <AssociationSet Name="FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" Association="Self.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE">
       <End Role="MEMBER_TABLE" EntitySet="MEMBER_TABLE" />

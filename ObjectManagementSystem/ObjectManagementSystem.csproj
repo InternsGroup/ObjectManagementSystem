@@ -159,9 +159,6 @@
     <Compile Include="Models\Entity\ADMIN_TABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity\CASHBOX_TABLE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Entity\CATEGORY_TABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -169,9 +166,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\MEMBER_TABLE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\MESSAGE_TABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Model1.Context.cs">
@@ -190,9 +184,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\OBJECT_TABLE.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity\PENALTY_TABLE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\RESERVED_OBJECT_TABLE.cs">

@@ -18,7 +18,6 @@ namespace ObjectManagementSystem.Models.Entity
         public MEMBER_TABLE()
         {
             this.ACTION_TABLE = new HashSet<ACTION_TABLE>();
-            this.PENALTY_TABLE = new HashSet<PENALTY_TABLE>();
             this.RESERVED_OBJECT_TABLE = new HashSet<RESERVED_OBJECT_TABLE>();
         }
     
@@ -28,14 +27,11 @@ namespace ObjectManagementSystem.Models.Entity
         public string EMAIL { get; set; }
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
-        public string PHOTO { get; set; }
         public string TELNUMBER { get; set; }
         public string SCHOOL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACTION_TABLE> ACTION_TABLE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PENALTY_TABLE> PENALTY_TABLE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RESERVED_OBJECT_TABLE> RESERVED_OBJECT_TABLE { get; set; }
     }

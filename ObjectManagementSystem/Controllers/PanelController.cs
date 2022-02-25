@@ -36,7 +36,6 @@ namespace ObjectManagementSystem.Controllers
             member.NAME = memberObj.NAME;
             member.SURNAME = memberObj.SURNAME;
             member.PASSWORD = RegisterController.EncodePasswordToBase64(memberObj.PASSWORD);
-            member.PHOTO = memberObj.PHOTO;
             member.TELNUMBER = memberObj.TELNUMBER;
             member.SCHOOL = memberObj.SCHOOL;
             ViewBag.Message = "Info successfully updated.";

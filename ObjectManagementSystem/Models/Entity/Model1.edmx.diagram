@@ -4,24 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="226428e696544d028aec8c464b43ba64" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_STOREModel.ACTION_TABLE" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.ADMIN_TABLE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.CASHBOX_TABLE" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.CATEGORY_TABLE" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.CONTACT_TABLE" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.MEMBER_TABLE" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.MESSAGE_TABLE" Width="1.5" PointX="7.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.OBJECT_TABLE" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.PENALTY_TABLE" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.RESERVED_OBJECT_TABLE" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_STOREModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="11.125" IsExpanded="true" />
+      <Diagram DiagramId="75931e640b784ce388d2b6b036158363" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_STOREModel.ACTION_TABLE" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.ADMIN_TABLE" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.CATEGORY_TABLE" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.CONTACT_TABLE" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.MEMBER_TABLE" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.OBJECT_TABLE" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.RESERVED_OBJECT_TABLE" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_STOREModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.125" IsExpanded="true" />
         <AssociationConnector Association="DB_STOREModel.FK_ACTION_TABLE_ADMIN_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_ACTION_TABLE_BOOK_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_ACTION_TABLE_MEMBER_TABLE" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_STOREModel.FK_PENALTY_TABLE_ACTION_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_BOOK_TABLE_CATEGORY_TABLE" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_STOREModel.FK_PENALTY_TABLE_MEMBER_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_MEMBER_TABLE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_STOREModel.FK_RESERVED_OBJECT_TABLE_OBJECT_TABLE" ManuallyRouted="false" />
       </Diagram>

@@ -30,7 +30,7 @@
         <label style="margin-top: 10px">Member Phone Number</label>
         <input class="form-control" onInput="this.value = phoneFormat(this.value)" type="text" name="TELNUMBER" placeholder="(123) 456 7890" pattern=".{14,14}" value="@ViewBag.Phone" required />
         <label style="margin-top: 10px">Member School</label>
-        <input class="form-control" type="text" name="SCHOOL" maxlength="30" placeholder="School Info" onchange="this.value = trim(this.value)" value="@ViewBag.School" required />
+        <input class="form-control" type="text" name="SCHOOL" maxlength="30" placeholder="School Info" onchange="this.value = trim(this.value)" value="@ViewBag.School" />
     </div>
     <div style="margin-top:20px">
         <button id="defaultBtn" class="btn btn-danger" style="background-color: darkseagreen; margin-bottom: 15px; color:black">Add Member</button>
